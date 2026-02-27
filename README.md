@@ -29,18 +29,3 @@ travel-commerce/
 ```
 페이지 내부 UI/로직은 각 담당자가 구현합니다. 현재는 placeholder 상태입니다.
 
-## Product 필드 고정
-```
-Product 필드:
-- id
-- title
-- imagePath
-- satisfaction
-- reviewCount
-- bookings
-- duration
-- languages
-- pricePerPerson
-- regionId
-- itinerary
-```
