@@ -53,10 +53,10 @@ export default function MyPage() {
             <div className="Divider" />
             <article className="Product_Row">
               <div className="Product_Info">
-                <img src="/images/Rectangle 150353.png" alt="경복궁" className="Product_Image" />
+                <img src="/images/Gyeongbokgung.png" alt="경복궁" className="Product_Image" />
                 <div className="Product_Text">
                   <h3 className="Product_Title">경복궁</h3>
-                  <p className="People_Count">2월 20일 (화)</p>
+                  <p className="People_Date">2월 20일 (화)</p>
                   <p className="People_Count">2명</p>
                 </div>
               </div>

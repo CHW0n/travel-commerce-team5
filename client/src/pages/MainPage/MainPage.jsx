@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./MainPage.css";
 
 const tourCards = Array.from({ length: 16 }, (_, index) => ({
@@ -42,9 +43,9 @@ export default function MainPage() {
               <img src="/icon/ohtrip-logo-icon2.png" alt="5TRIP" className="logo_img" />
             </span>
           </a>
-          <button type="button" className="MyPage_Btn">
+          <Link to="/mypage" className="MyPage_Btn" aria-label="마이페이지로 이동">
             <span className="MyPage_Btn_Text">마이페이지</span>
-          </button>
+          </Link>
         </div>
       </header>
 
