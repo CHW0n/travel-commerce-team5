@@ -1,19 +1,26 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./ProductDetailPage.css";
 
 const today = new Date();
 const days = ["일", "월", "화", "수", "목", "금", "토"];
-const dates = Array.from({ length: 6 }, (_, i) => {
+const dates = Array.from({ length: 10 }, (_, i) => {
   const date = new Date(today);
-  date.setDate(today.getDate() + i); // 오늘부터 +5일까지
+  date.setDate(today.getDate() + i);
   return date;
 });
+
 
 export default function ProductDetailPage() {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(null);
   const [guests, setGuests] = useState(1);
+  const [startIndex, setStartIndex] = useState(0);
+  const visibleCount = 7;
+  const visibleDates = dates.slice(startIndex, startIndex + visibleCount);
+  const canGoPrev = startIndex > 0;
+  const canGoNext = startIndex + visibleCount < dates.length;
+
 
   const product = {
     title: "남산 타워 & 한강 유람선",
@@ -34,7 +41,17 @@ export default function ProductDetailPage() {
   return (
     <div className="ProductDetailPage">
       {/* ── Header ── */}
-      <header>
+      <header className="Header">
+        <div className="page Header_Row">
+          <a href="#" className="Header_logo" aria-label="5trip 홈">
+            <span className="ohtrip-logo-icon2">
+              <img src="/icon/ohtrip-logo-icon2.png" alt="5TRIP" className="logo_img" />
+            </span>
+          </a>
+          <Link to="/mypage" className="MyPage_Btn" aria-label="마이페이지로 이동">
+            <span className="MyPage_Btn_Text">마이페이지</span>
+          </Link>
+        </div>
       </header>
 
       {/* ── Nav ── */}
@@ -48,8 +65,8 @@ export default function ProductDetailPage() {
       </nav>
 
       <main>
-        {/* Tour_Section */}
-        <section className="Tour_Section">
+        {/* 상세 전용 투어 섹션 (메인 .Tour_Section과 구분) */}
+        <section className="Detail_Tour_Section">
           <img className="Tour_Image" src={product.imagePath} alt={product.title} />
 
           <div className="Tour_Info">
@@ -98,7 +115,7 @@ export default function ProductDetailPage() {
         <section className="Tour_Date_Section">
           <h2 className="Date_Title">이용 날짜</h2>
           <hr className="Divider" />
-          <div className="Date_Card_List">
+          {/* <div className="Date_Card_List">
             {dates.map((date, index) => (
               <div
                 key={index}
@@ -113,7 +130,35 @@ export default function ProductDetailPage() {
               <span>모든 날짜</span>
               <span className="Date_All_Link">보러 가기</span>
             </div>
-            </div>
+          </div> */}
+          <div className="Date_Card_List">
+            <button
+              className="Date_Nav_Btn"
+              onClick={() => setStartIndex(startIndex - 1)}
+              disabled={!canGoPrev}
+            >
+              <img src="/public/icon/back_ic.svg" alt="이전" />
+            </button>
+
+            {visibleDates.map((date, index) => (
+              <div
+                key={startIndex + index}
+                className={selectedDate === dates[startIndex + index] ? "Date_Card_Selected" : "Date_Card"}
+                onClick={() => setSelectedDate(dates[startIndex + index])}
+              >
+                <span>{date.getMonth() + 1}월 {date.getDate()}일 ({days[date.getDay()]})</span>
+                <span>{product.pricePerPerson.toLocaleString()}원</span>
+              </div>
+            ))}
+
+            <button
+              className="Date_Nav_Btn"
+              onClick={() => setStartIndex(startIndex + 1)}
+              disabled={!canGoNext}
+            >
+              <img src="/public/icon/next_ic.svg" alt="다음" />
+            </button>
+          </div>
         </section>
         {/* Tour_People_Section */}
         <section className="Tour_People_Section">
