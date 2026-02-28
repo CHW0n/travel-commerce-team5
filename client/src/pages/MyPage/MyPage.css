@@ -1,0 +1,406 @@
+.MyPage {
+  min-height: 100vh;
+  background: #f4f4f4;
+  color: #222222;
+}
+
+.MyPage .page {
+  width: 100%;
+  margin: 0;
+}
+
+.MyPage .Header {
+  width: 1728px;
+  max-width: 100%;
+  height: 80px;
+  margin: 0 auto;
+  padding: 16px 60px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.MyPage .Header_Row {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.MyPage .Header_logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.MyPage .ohtrip-logo-icon2 {
+  width: 140px;
+  height: 29.97px;
+  display: block;
+}
+
+.MyPage .logo_img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.MyPage .MyPage_Btn {
+  width: 120px;
+  height: 48px;
+  gap: 10px;
+  opacity: 1;
+  border-radius: 8px;
+  border: 0;
+  padding: 8px 16px;
+  background: #3db1fd;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.MyPage .MyPage_Btn_Text {
+  width: 78px;
+  height: 26px;
+  opacity: 1;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.MyPage .Nav {
+  width: 1728px;
+  max-width: 100%;
+  height: 64px;
+  margin: 0 auto;
+  opacity: 1;
+  padding: 16px 56px 16px 168px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #f4f4f4;
+}
+
+.MyPage .Nav_container {
+  width: 217px;
+  height: 32px;
+  gap: 8px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+}
+
+.MyPage .Breadcrumb_Text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.MyPage .Home_icon {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  object-fit: contain;
+  display: block;
+}
+
+.MyPage .Nav_text {
+  width: auto;
+  height: 32px;
+  opacity: 1;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #222222;
+}
+
+.MyPage .Icon_Frame {
+  width: auto;
+  height: 32px;
+  opacity: 1;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #666666;
+}
+
+.MyPage .Nav_text_Active {
+  width: auto;
+  height: 32px;
+  opacity: 1;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #222222;
+}
+
+.MyPage .MyPage_Main {
+  width: 1728px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.MyPage .Search_Module {
+  width: 1392px;
+  max-width: calc(100% - 48px);
+  height: 497px;
+  margin: 57px auto 0;
+  opacity: 1;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.04);
+  padding: 24px 24px 30px 24px;
+  gap: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.MyPage .Tabs_Wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.MyPage .Tabs {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.MyPage .tab {
+  border: 0;
+  background: transparent;
+  color: #666666;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 46px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.MyPage .tab.is-active {
+  color: #222222;
+  font-weight: 700;
+  border-bottom: 3px solid #3db1fd;
+}
+
+.MyPage .divider {
+  width: 100%;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+.MyPage .Order_Product_Section {
+  width: 1344px;
+  height: 358px;
+  padding: 24px;
+  gap: 24px;
+  opacity: 1;
+  border-radius: 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 34px;
+}
+
+.MyPage .Section_Title {
+  width: 89px;
+  height: 36px;
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.5%;
+  color: #222222;
+}
+
+.MyPage .Divider {
+  width: 1296px;
+  height: 1px;
+  background: #d2d2d2;
+  margin-top: 0;
+}
+
+.MyPage .Product_Row {
+  width: 1296px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 0;
+  box-sizing: border-box;
+}
+
+.MyPage .Product_Info {
+  width: 313px;
+  height: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.MyPage .Product_Image {
+  width: 166px;
+  height: 108px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+
+.MyPage .Product_Text {
+  width: 89px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.MyPage .Product_Title {
+  width: 62px;
+  height: 36px;
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.5%;
+  color: #222222;
+}
+
+.MyPage .People_Date {
+  width: 89px;
+  height: 24px;
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.5%;
+  color: #666666;
+}
+
+.MyPage .People_Count {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.5%;
+  color: #666666;
+}
+
+.MyPage .Product_Price {
+  width: 102px;
+  height: 36px;
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.5%;
+  color: #333333;
+}
+
+.MyPage .Button_Row {
+  margin: 44px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.MyPage .Btn_Home,
+.MyPage .Btn_Booking {
+  height: 40px;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 20px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.MyPage .Btn_Home {
+  background: #f0f0f0;
+  color: #666666;
+}
+
+.MyPage .Btn_Booking {
+  background: #3db1fd;
+  color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+  .MyPage .Nav {
+    padding: 16px 24px;
+  }
+
+  .MyPage .MyPage_Main {
+    width: 100%;
+  }
+
+  .MyPage .Product_Row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .MyPage .Product_Price {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
+  .MyPage .page {
+    width: calc(100% - 24px);
+  }
+
+  .MyPage .Tabs {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .MyPage .Nav_container {
+    width: auto;
+  }
+
+  .MyPage .Product_Image {
+    width: 132px;
+    height: 96px;
+  }
+
+  .MyPage .Product_Title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .MyPage .People_Count {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .MyPage .Product_Price {
+    font-size: 30px;
+    line-height: 38px;
+  }
+}
