@@ -115,30 +115,36 @@ export default function ProductDetailPage() {
         <section className="Tour_Date_Section">
           <h2 className="Date_Title">이용 날짜</h2>
           <hr className="Divider" />
-          {/* <div className="Date_Card_List">
-            {dates.map((date, index) => (
-              <div
-                key={index}
-                className={selectedDate === date ? "Date_Card_Selected" : "Date_Card"}
-                onClick={() => setSelectedDate(date)}
-              >
-                <span>{date.getMonth() + 1}월 {date.getDate()}일 ({days[date.getDay()]})</span>
-                <span>{product.pricePerPerson.toLocaleString()}원</span>
-              </div>
-            ))}
-            <div className="Date_All">
-              <span>모든 날짜</span>
-              <span className="Date_All_Link">보러 가기</span>
-            </div>
-          </div> */}
           <div className="Date_Card_List">
-            <button
+            {/* <button
               className="Date_Nav_Btn"
               onClick={() => setStartIndex(startIndex - 1)}
               disabled={!canGoPrev}
             >
               <img src="/public/icon/back_ic.svg" alt="이전" />
+            </button> */}
+            <button
+              className="Date_Nav_Btn"
+              onClick={() => setStartIndex(startIndex - 1)}
+              disabled={!canGoPrev}
+            >
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="15.5" fill={canGoPrev ? "#3DB1FD" : "white"} stroke={canGoPrev ? "#3DB1FD" : "#D2D2D2"} filter="url(#shadow)"/>
+                <path 
+                  d="M17.6569 10.5L12 16.1569L17.6569 21.8137" 
+                  stroke={canGoPrev ? "white" : "#D2D2D2"}
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                />
+                <defs>
+                  <filter id="shadow">
+                    <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.1"/>
+                  </filter>
+                </defs>
+              </svg>
             </button>
+
 
             {visibleDates.map((date, index) => (
               <div
@@ -151,12 +157,33 @@ export default function ProductDetailPage() {
               </div>
             ))}
 
-            <button
+            {/* <button
               className="Date_Nav_Btn"
               onClick={() => setStartIndex(startIndex + 1)}
               disabled={!canGoNext}
             >
               <img src="/public/icon/next_ic.svg" alt="다음" />
+            </button> */}
+            <button
+              className="Date_Nav_Btn"
+              onClick={() => setStartIndex(startIndex + 1)}
+              disabled={!canGoNext}
+            >
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="15.5" transform="matrix(-1 0 0 1 32 0)" fill={canGoNext ? "#3DB1FD" : "white"} stroke={canGoNext ? "#3DB1FD" : "#D2D2D2"} filter="url(#shadow)"/>
+                <path 
+                  d="M14.3431 10.5L20 16.1569L14.3431 21.8137" 
+                  stroke={canGoNext ? "white" : "#D2D2D2"}
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                />
+                <defs>
+                  <filter id="shadow">
+                    <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.1"/>
+                  </filter>
+                </defs>
+              </svg>
             </button>
           </div>
         </section>

@@ -286,6 +286,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 /* ── Date Card ── */
@@ -310,36 +311,24 @@
   letter-spacing: -0.5px;
 }
 
-/* ── Date All ── */
-.Date_All {
-  width: 170px;
-  border-radius: 8px;
-  gap: 6px;
-  padding: 12px;
-  background-color: #FFFFFF;
-  border: 1px solid #222222;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.Date_Nav_Btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
   cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
 }
 
-/* ── Date All 텍스트 ── */
-.Date_All span:first-child {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.5px;
-  color: #222222;
+.Date_Nav_Btn:first-child {
+  left: -4px; /* 왼쪽 카드 위에 */
 }
 
-/* ── Date All Link (보러 가기) ── */
-.Date_All_Link {
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.5px;
-  color: #3DB1FD;
+.Date_Nav_Btn:last-child {
+  right: -4px; /* 오른쪽 카드 위에 */
 }
 
 /* ── Date Card Selected ── */
