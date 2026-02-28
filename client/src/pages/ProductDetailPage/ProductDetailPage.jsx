@@ -32,7 +32,7 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <div>
+    <div className="ProductDetailPage">
       {/* ── Header ── */}
       <header>
       </header>
