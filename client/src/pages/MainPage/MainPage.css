@@ -1,0 +1,817 @@
+.Main {
+  min-height: 100vh;
+  background: var(--bg-base);
+  color: var(--text-900);
+}
+
+.page {
+  width: min(1384px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.Header {
+  width: 1728px;
+  max-width: 100%;
+  height: 80px;
+  margin: 0 auto;
+  padding: 16px 60px;
+  box-sizing: border-box;
+  background: var(--white);
+  border-bottom: 1px solid var(--line-200);
+}
+
+.Header .page {
+  width: 100%;
+  margin: 0;
+}
+
+.Header_Row {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Header_logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ohtrip-logo-icon2 {
+  width: 140px;
+  height: 29.97px;
+  display: block;
+}
+
+.logo_img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.MyPage_Btn {
+  width: 120px;
+  height: 48px;
+  opacity: 1;
+  border-radius: 8px;
+  gap: 10px;
+  padding: 8px 16px;
+  background: #3DB1FD;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.MyPage_Btn_Text {
+  width: 78px;
+  height: 26px;
+  opacity: 1;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.Rectangle_150353 {
+  width: 1728px;
+  max-width: 100%;
+  height: 444px;
+  background: linear-gradient(180deg, #1348ff 0%, #0a2db9 57.69%, #02249b 100%);
+  margin: 0 auto;
+}
+
+.Rectangle_150353_Inner {
+  min-height: 444px;
+  background-image: url("/images/Rectangle 150353.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.Search_Module {
+  width: min(1392px, calc(100% - 48px));
+  height: 191px;
+  margin: -36px auto 0;
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+}
+
+.Search_Module .page {
+  width: 100%;
+  height: 100%;
+}
+
+.Search_Card {
+  width: 100%;
+  height: 100%;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0px 11px 23px -5px #c5c5c540;
+  padding: 24px 24px 30px 24px;
+  gap: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.Tabs_Wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.Tabs {
+  display: flex;
+  align-items: flex-start;
+}
+
+.tab {
+  width: 126px;
+  height: 54px;
+  opacity: 1;
+  gap: 14px;
+  padding: 16px 16px 0 16px;
+  box-sizing: border-box;
+  border: 0;
+  background: rgb(255, 255, 255);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.tab.is-active {
+  border-bottom: 3px solid #3db1fd;
+}
+
+.tab_label {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+  color: rgb(34, 34, 34);
+  text-align: center;
+}
+
+.tab_indicator {
+  width: 126px;
+  height: 4px;
+  opacity: 1;
+  background: transparent;
+  display: block;
+}
+
+.tab.is-active .tab_indicator {
+  background: rgb(61, 177, 253);
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgb(210, 210, 210);
+}
+
+.Search_Form {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  column-gap: 24px;
+  row-gap: 10px;
+}
+
+.Search_Field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.Search_Field_Label {
+  color: var(--text-500);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.Search_Field select,
+.Search_Field input {
+  appearance: none;
+  height: 38px;
+  border-radius: 4px;
+  border: 1px solid var(--line-300);
+  background: var(--white);
+  color: var(--text-900);
+  font-size: 13px;
+  padding: 0 12px;
+}
+
+.Search_Field_Control {
+  position: relative;
+}
+
+.Search_Field_Control input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.Field_Icon_Button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.Field_Icon_Button img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.DropdownList {
+  width: 602px;
+  height: 208px;
+  border-radius: 8px;
+  opacity: 1;
+  background: #ffffff;
+  box-shadow: 0px 4px 14px 0px #0000001a;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.Dropdown_Item {
+  height: 52px;
+  border: 0;
+  border-bottom: 1px solid #f1f1f1;
+  background: #ffffff;
+  color: #222222;
+  text-align: left;
+  padding: 0 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.Date_Picker {
+  width: 602px;
+  height: 360px;
+  border-radius: 8px;
+  gap: 20px;
+  opacity: 1;
+  padding: 24px;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: 0px 4px 14px 0px #0000001a;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+}
+
+.Calendar_Header {
+  width: 554px;
+  height: 24px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Month_Label {
+  width: 76px;
+  height: 20px;
+  opacity: 1;
+  gap: 4px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.Month_Text,
+.Year_Text {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.Month_Navigation {
+  width: 76px;
+  height: 20px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.Prev_Button,
+.Next_Button {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  padding: 8px;
+  box-sizing: border-box;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Icon_Frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1;
+  color: #222222;
+}
+
+.Calendar {
+  width: 554px;
+  height: 212px;
+  opacity: 1;
+}
+
+.Calendar_Body {
+  width: 554px;
+  height: 212px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.Week_Days {
+  width: 554px;
+  height: 32px;
+  opacity: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  color: #8d8d8d;
+  font-size: 12px;
+}
+
+.Date_Grid {
+  width: 554px;
+  height: 176px;
+  gap: 4px;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.Date_Row {
+  width: 554px;
+  height: 32px;
+  opacity: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+}
+
+.Date_Row button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #555555;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.Date_Row .is-selected {
+  background: #3db1fd;
+  color: #ffffff;
+}
+
+.Date_Row button:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.CTAs {
+  width: 180px;
+  height: 36px;
+  gap: 16px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  margin-top: 24px;
+}
+
+.Button_Tertiary,
+.Button_Primary {
+  width: 82px;
+  height: 36px;
+  border-radius: 4px;
+  gap: 10px;
+  opacity: 1;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Button_Tertiary {
+  background: #f3f3f3;
+  color: #000000;
+  font-weight: 400;
+}
+
+.Button_Primary {
+  background: #3db1fd;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.Button_Tertiary_Text {
+  width: 25px;
+  height: 20px;
+  opacity: 1;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #000000;
+}
+
+.Button_Primary_Text {
+  width: 49px;
+  height: 20px;
+  opacity: 1;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.Search_Field select {
+  background-image: url("/icon/dropdown_icon.png");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px 14px;
+  padding-right: 34px;
+}
+
+.Search_Btn {
+  align-self: end;
+  height: 38px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--primary-600);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.Tour_Section {
+  padding-top: 68px;
+  padding-bottom: 40px;
+}
+
+.Card_grid {
+  width: 1384px;
+  max-width: 100%;
+  height: 1592px;
+  display: grid;
+  grid-template-columns: repeat(4, 328px);
+  row-gap: 24px;
+  column-gap: 24px;
+  align-content: start;
+}
+
+.Card_item {
+  width: 328px;
+  height: 380px;
+  opacity: 1;
+}
+
+.media {
+  width: 328px;
+  height: 380px;
+  position: relative;
+  opacity: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.image_cover {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(13, 13, 15, 0) 30%, rgba(13, 13, 15, 0.7) 100%),
+    linear-gradient(130deg, #2f3747 0%, #896037 45%, #ae7b46 100%);
+}
+
+.best_badge {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  width: 62px;
+  height: 28px;
+  border-radius: 4px;
+  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-sizing: border-box;
+  opacity: 1;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #fff5cf;
+  background: #ff8800;
+}
+
+.info {
+  width: 328px;
+  height: 158px;
+  top: 216px;
+  left: 0;
+  position: absolute;
+  opacity: 1;
+  padding: 16px 20px 24px 20px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 51.44%, #000000 100%);
+  color: var(--white);
+}
+
+.Card_location {
+  margin: 0;
+  font-size: 11px;
+  line-height: 14px;
+  color: #c8c8d0;
+}
+
+.Card_title {
+  margin: 4px 0 6px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.Card_meta {
+  margin: 0;
+  font-size: 11px;
+  line-height: 14px;
+  color: #f2d66a;
+}
+
+.Card_price {
+  margin: 8px 0 0;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 800;
+}
+
+.Pagination {
+  width: 700px;
+  height: 60px;
+  opacity: 1;
+  padding: 16px;
+  gap: 10px;
+  box-sizing: border-box;
+  margin: 24px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Pagination_Container {
+  width: 668px;
+  height: 28px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.Numbers {
+  width: 244px;
+  height: 28px;
+  gap: 0;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.Number_List {
+  width: 244px;
+  height: 28px;
+  gap: 24px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+
+.arrow_item_left {
+  width: 72px;
+  height: 28px;
+  gap: 16px;
+  opacity: 0.35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.arrow_item_right {
+  width: 72px;
+  height: 28px;
+  gap: 16px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.Pagination button {
+  border: 0;
+  background: transparent;
+  color: #222222;
+  min-width: 10px;
+  height: 28px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.arrow_item_left button,
+.arrow_item_right button {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow_item_left img,
+.arrow_item_right img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
+}
+
+.arrow_left .left_chevron_icon {
+  transform: scaleX(-1);
+}
+
+.Page_Number {
+  width: 148px;
+  height: 28px;
+  gap: 12px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.Page_Number button {
+  color: #222222;
+}
+
+.Page_Number .is-active {
+  color: #3db1fd;
+  font-weight: 700;
+}
+
+@media (max-width: 1024px) {
+  .Card_grid {
+    width: 100%;
+    height: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .Card_item,
+  .media,
+  .info {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    width: min(1384px, calc(100% - 24px));
+  }
+
+  .Header_Row {
+    height: 52px;
+  }
+
+  .Header_logo {
+    transform: scale(0.9);
+    transform-origin: left center;
+  }
+
+  .Rectangle_150353 {
+    min-height: 180px;
+    height: 180px;
+  }
+
+  .Rectangle_150353_Inner {
+    min-height: 180px;
+  }
+
+  .Search_Module {
+    margin-top: -20px;
+  }
+
+  .Search_Module .page {
+    width: min(1392px, calc(100% - 24px));
+  }
+
+  .Search_Form {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+  }
+
+  .DropdownList,
+  .Date_Picker,
+  .Calendar_Header,
+  .Calendar,
+  .Calendar_Body,
+  .Week_Days,
+  .Date_Grid,
+  .Date_Row {
+    width: 100%;
+  }
+
+  .Search_Btn {
+    width: 100%;
+  }
+
+  .Card_grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .Pagination {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .Pagination_Container {
+    width: 100%;
+  }
+
+  .Card_item,
+  .media {
+    height: 320px;
+  }
+
+  .info {
+    top: auto;
+    bottom: 0;
+    height: 148px;
+  }
+
+  .Card_price {
+    font-size: 14px;
+  }
+}
