@@ -6,7 +6,7 @@ const today = new Date();
 const days = ["일", "월", "화", "수", "목", "금", "토"];
 const dates = Array.from({ length: 6 }, (_, i) => {
   const date = new Date(today);
-  date.setDate(today.getDate() + (i - 2));
+  date.setDate(today.getDate() + i); // 오늘부터 +5일까지
   return date;
 });
 
@@ -56,7 +56,7 @@ export default function ProductDetailPage() {
             {/* 첫 번째 Tour_Info */}
             <div className="Tour_Info_Top">
 
-              <div className="Tour_Detail">
+              <div className="Tour_Detail_Top">
                 <h1 className="Tour_Title">{product.title}</h1>
                 <div className="Location_Row">
                   <img className="Location_Icon" src="/public/icon/Location_icon.png" alt="location" />
@@ -74,9 +74,9 @@ export default function ProductDetailPage() {
               <div className="Tour_Detail_Bottom">
                 <div className="Tour_Text">
                   <span className="Tour_Rating">
-                    {product.satisfaction} / {product.bookings.toLocaleString()}명 예약
+                   ⭐️ {product.satisfaction} / {product.bookings.toLocaleString()}명 예약
                   </span>
-                  <span className="Tour_Meta">{product.duration}</span>
+                  <span className="Tour_Meta">소요시간: {product.duration}</span>
                   <span className="language">{product.languages.join(", ")}</span>
                 </div>
               </div>
@@ -88,11 +88,11 @@ export default function ProductDetailPage() {
         <section className="Tour_Description_Section">
           <h2 className="Description_Title">일정</h2>
           <hr className="Divider" />
-          {product.itinerary.map((item, index) => (
-            <p className="Description_Text" key={index}>
-              {item}
-            </p>
-          ))}
+          <div className="Description_Text">
+            {product.itinerary.map((item, index) => (
+              <p key={index}>{item}</p>
+            ))}
+          </div>
         </section>
         {/* Tour_Date_Section */}
         <section className="Tour_Date_Section">
@@ -128,7 +128,23 @@ export default function ProductDetailPage() {
                 onClick={() => setGuests(guests - 1)}
                 disabled={guests === 1}
               >
-                <img src="/public/icon/Btn_minus.png" alt="minus" />
+                {/* <img src="/public/icon/Btn_minus.png" alt="minus" /> */}
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clipPath="url(#clip0_138_1962)">
+                    <path 
+                      d="M10 16H22" 
+                      stroke={guests === 1 ? "#9E9E9E" : "#222222"}
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_138_1962">
+                      <rect width="32" height="32" rx="6" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
               </button>
               <span className="People_Count">{guests}명</span>
               <button
@@ -151,8 +167,10 @@ export default function ProductDetailPage() {
 
             <div className="Payment_Info">
               <span className="Payment_Title">결제 금액</span>
-              <span className="Payment_Price">{(product.pricePerPerson * guests).toLocaleString()}</span>
-              <span className="Payment_Price_w">원</span>
+              <div className="Payment">
+                <span className="Payment_Price">{(product.pricePerPerson * guests).toLocaleString()}</span>
+                <span className="Payment_Price_w">원</span>
+              </div>
             </div>
 
             <button className="Btn_Booking" onClick={() => navigate("/payment")}>
