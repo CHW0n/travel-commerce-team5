@@ -1,0 +1,11 @@
+/* ===== Reset ===== */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #f2f2f2; /* 페이지 전체 배경 */
+}

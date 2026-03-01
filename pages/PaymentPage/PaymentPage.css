@@ -1,0 +1,622 @@
+/* =========================
+   PaymentPage.css (Figma 기반)
+   - content width: 1392px (1728 - 168*2)
+   - header -> nav: 31px
+   - nav height: 64px
+   - tour starts at header+95px (=> nav 아래 바로 붙음)
+   - tour -> traveler: 24px  (821 -> 845)
+   - traveler -> payment summary: 44px (1495 -> 1539)
+   - section radius: 18px
+========================= */
+
+.PaymentPage {
+  /* 피그마 배경이 회색이라면 */
+  background: #f2f2f2;
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 60px;
+}
+
+/* 공통: header 아래 컨텐츠 영역(좌우 168 고정) */
+.PaymentPage > .Tour_Section,
+.PaymentPage > .TravelerInfo_Section,
+.PaymentPage > .Booking_People_Summary,
+.PaymentPage > .Payment_Summary_Section {
+  width: 1392px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 작은 화면에서 깨지지 않게(데스크 1728 기준이지만) */
+@media (max-width: 1728px) {
+  .PaymentPage > .Nav,
+  .PaymentPage > .Tour_Section,
+  .PaymentPage > .TravelerInfo_Section,
+  .PaymentPage > .Payment_Summary_Section {
+    width: calc(100% - 336px); /* 좌우 168 유지 */
+  }
+}
+@media (max-width: 900px) {
+  .PaymentPage > .Nav,
+  .PaymentPage > .Tour_Section,
+  .PaymentPage > .TravelerInfo_Section,
+  .PaymentPage > .Payment_Summary_Section {
+    width: calc(100% - 32px); /* 모바일은 그냥 패딩 16 */
+  }
+}
+
+/* ================= Header ================= */
+.Header {
+  width: 100%;
+  height: 80px;
+  background: #ffffff;
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  justify-content: center;
+}
+
+/* 피그마 1728 컨테이너 역할 */
+.Header_inner {
+  width: 1728px;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 60px;
+  box-sizing: border-box;
+}
+
+.ohtrip-logo-icon2 {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+
+.logo_img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  background: transparent;
+  border-radius: 0;
+}
+
+/* 마이페이지 버튼 */
+.MyPage_Btn {
+  height: 36px;
+  padding: 0 14px;
+
+  border: 1px solid #111;
+  border-radius: 8px;
+  background: #7ea7ff;
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.MyPage_Btn:active {
+  transform: translateY(1px);
+}
+
+/* ================= Nav ================= */
+.Nav {
+  width: 1728px;
+  height: 64px;
+  margin: 31px auto 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 56px 16px 170px;
+  box-sizing: border-box;
+
+  background: transparent;
+}
+
+.Nav_container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.Nav_homeIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+.Nav_arrowIcon {  
+  width: 24px;       /* 보통 홈보다 조금 작게 */
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+.Nav_text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: #222222;
+
+  font-weight: 400;        /* 기본은 Regular */
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+/* 강조: 현재 페이지(결제) */
+.Nav_text.active {
+  font-weight: 700;        /* Bold */
+}
+
+
+/* ================= Tour Section =================
+   Figma 기준:
+   - Tour_Section: 1392 x 726
+   - Tour_Image:   1392 x 550
+   - radius: 18
+*/
+.Tour_Section {
+  margin-top: 0;
+  height: 726px;
+  border-radius: 18px;
+  background: #ffffff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 이미지 영역 (피그마: 550px) */
+.Tour_Image {
+  height: 550px;
+  width: 100%;
+  background: #dcdcdc;
+}
+
+/* 텍스트 영역 */
+.Tour_Info {
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* 제목 + 가격: 오른쪽 정렬 핵심 */
+.Tour_DetailRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* 피그마 캡처: 제목 32px / line-height 48 */
+.Tour_Title {
+  font-family: "Pretendard", sans-serif;
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: 700;
+  letter-spacing: -0.5%;
+  color: #000;
+}
+
+/* 피그마 캡처: 가격 24px / line-height 36 */
+.Tour_Price {
+  font-family: "Pretendard", sans-serif;
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 700;
+  letter-spacing: -0.5%;
+  color: #000;
+  white-space: nowrap;
+}
+
+/* 위치 줄 */
+.Location_Row {
+  display: flex;
+  align-items: center;   /* 세로 가운데 정렬 */
+  gap: 8px;
+}
+
+.Location_Icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: block;        /* inline baseline 제거 */
+}
+
+.Location_Text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 400;
+  letter-spacing: -0.5%;
+  color: #000;
+}
+
+/* 메타 줄 */
+.Meta_Row {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap; /* 줄어들 때 깨짐 방지 */
+}
+
+.Tour_Rating {
+  font-family: "Pretendard", sans-serif;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5%;
+  color: #000;
+}
+
+.Tour_Meta,
+.language {
+  font-family: "Pretendard", sans-serif;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.5%;
+  color: #000;
+}
+
+/* ================= Traveler Info Section =================
+   - tour(821) -> traveler(845) = 24px
+   - padding: top 70, left/right/bottom 24
+*/
+.TravelerInfo_Section {
+  height: 650px;
+  margin-top: 24px;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 70px 24px 24px;
+  box-sizing: border-box;
+  display: flex;              
+  flex-direction: column; 
+}
+
+/* Title + Divider는 위 */
+.TravelerInfo_Title{ flex: 0 0 auto; }
+.TravelerInfo_Section .Divider{ flex: 0 0 auto; margin:16px 0 24px; }
+
+/* 타이틀 (피그마: 24 / 36 / 600 / -0.5%) */
+.TravelerInfo_Title {
+  font-family: Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: -0.005em;
+  color: #000;
+}
+
+.Booking_People_Summary .Divider {
+  height: 1px;
+  width: 100%;
+  background: #e6e6e6;
+  margin: 16px 0 24px;  /* 피그마 값에 맞게 조절 */
+}
+
+/* Form: 고정 높이 240 + padding 10 + gap 20 */
+.TravelerInfo_Form{
+  height: 240px;
+  padding: 10px;
+  box-sizing: border-box;
+  display:flex;
+  flex-direction:column;
+  gap:40px;
+  flex: 0 0 auto;            /* 절대 늘어나지 않게 */
+  margin-bottom: 10px;       /* Form ↔ Summary 34 */
+}
+
+/* 2열: 컨테이너 폭(1344)에서 양 끝 정렬 */
+.FieldRow_Name,
+.FieldRow_Contact {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* ✅ 두 칸이 컨테이너를 반반 사용 */
+  column-gap: 44px;               /* ✅ 피그마 간격 */
+  align-items: start;
+}
+
+.Field_FirstName,
+.Field_LastName,
+.Field_Phone,
+.Field_Email {
+  width: 100%;                    /* ✅ grid 안에서 꽉 채움 */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start; 
+}
+
+/* 화면 좁아지면 1열로 */
+@media (max-width: 900px) {
+  .FieldRow_Name,
+  .FieldRow_Contact {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+}
+
+/* 라벨 (피그마: 16 / 24 / 400) */
+.Label {
+  font-family: Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000;
+}
+
+/* 입력 박스 공통 (피그마: 375x48, r=4, padding 13 16, fill black 2%) */
+.Input_Box {
+  width: 375px;
+  height: 48px;
+
+  border: 1px solid rgba(17, 17, 19, 0.2);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.02);
+
+  display: flex;
+  align-items: center;
+  padding: 13px 16px;
+  box-sizing: border-box;
+}
+
+/* input */
+.Input_field {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+
+  font-size: 14px;
+  line-height: 22px;
+  color: #111;
+}
+
+.Input_field::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* ===== 휴대폰 입력: 한 박스 내부 구성 ===== */
+.Input_Box.Input_Phone {
+  gap: 12px;
+}
+
+/* +82 버튼 */
+.CountryCode {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+
+  font-size: 14px;
+  line-height: 22px;
+  color: #111;
+  flex: 0 0 auto;
+}
+
+.CountryArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+/* ✅ 아이콘 프레임: "실제 아이콘이 보이게" 처리 필요
+   1) svg를 background로 넣는 경우 */
+.Icon_Frame {
+  width: 16px;
+  height: 16px;
+  display: block;
+  transform: rotate(-90deg);
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  /* 예시: 네 파일명에 맞게 바꿔 */
+  /* background-image: url("/icon/arrow_right.svg"); */
+}
+
+/* 구분선 */
+.PhoneDivider {
+  width: 1px;
+  height: 22px;
+  background: rgba(0, 0, 0, 0.12);
+  flex: 0 0 auto;
+}
+
+/* ✅ 핵심: 휴대폰 input이 남은 공간을 먹고 줄어들 수 있게 */
+.Input_Box.Input_Phone .Input_field {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+
+/* ================= Booking People Summary ================= */
+/* Summary: 고정 높이 207 */
+.Booking_People_Summary{
+  height: 207px;
+  border-radius:18px;
+  background:#fff;
+  padding:70px 24px 24px;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  flex: 0 0 auto;
+  margin-top: 0;             /* 여기 margin-top 쓰지 말 것 */
+}
+
+.Summary_Title {
+  width: 62px;
+  height: 36px;
+
+  font-family: "Pretendard", sans-serif;
+  font-weight: 600;          /* SemiBold */
+  font-size: 24px;
+  line-height: 36px;         /* 행간 */
+  letter-spacing: -0.005em;  /* -0.5% = -0.005em */
+
+  color: #000000;
+  white-space: nowrap;
+}
+
+/* Summary row */
+.Summary_Row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* left */
+.People_Info {
+  display: flex;
+  align-items: center;
+}
+
+.People_Control {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.People_Label {
+  width: 41px;
+  height: 24px;
+
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.5px;
+
+  color: #222222;
+
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.People_Count {
+  width: 44px;
+  height: 24px;
+
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px !important;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.5px;
+
+  color: #222222;
+
+  display: flex;
+  align-items: center;
+}
+
+/* right */
+.Price_Info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 12px;
+  color: #111;
+}
+
+.Unit_Price {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.Multiply {
+  font-size: 16px;
+  color: #222222;
+  font-weight: 700;
+}
+
+
+/* ================= Payment Summary Section =================
+   - traveler(845~1495) -> payment(1539) = 44px
+   - 높이 116px
+*/
+.Payment_Summary_Section {
+  margin-top: 44px;
+
+  height: 116px;
+  border-radius: 18px;
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* 금액 영역 */
+.Payment_Info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+.Total_Label {
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: 700;
+}
+
+.Payment {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.Total_Price {
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: 700;
+  color: #3DB1FD; 
+}
+
+.Total_Price_w {
+  font-size: 32px;
+  line-height: 48px;
+  font-weight: 700;
+  color: #000000;
+}
+
+/* 결제하기 버튼(오른쪽) */
+.Btn_Payment {
+  height: 44px;
+  padding: 0 20px;         
+  
+  display: flex;           
+  align-items: center;      
+  justify-content: center; 
+
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  background: #3DB1FD;
+  color: #ffffff;
+}
+.Btn_Payment:active {
+  transform: translateY(1px);
+}
