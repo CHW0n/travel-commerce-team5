@@ -259,7 +259,13 @@ export default function MainPage() {
         <section className="page Tour_Section" aria-label="추천 투어 리스트">
           <div className="Card_grid">
             {tourCards.map((tour) => (
-              <article key={tour.id} className="Card_item">
+              <Link
+                key={tour.id}
+                to={`/products/${tour.id}`}
+                className="Card_item"
+                style={{ display: "block" }}
+              >
+              <article>
                 <div className="media">
                   <div className="image_cover" />
                   {tour.badge && <span className="best_badge">{tour.badge}</span>}
@@ -273,6 +279,7 @@ export default function MainPage() {
                   </div>
                 </div>
               </article>
+              </Link>
             ))}
           </div>
 

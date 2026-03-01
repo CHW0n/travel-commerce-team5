@@ -245,7 +245,26 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            <button className="Btn_Booking" onClick={() => navigate("/payment")}>
+            <button
+              className="Btn_Booking"
+              onClick={() => {
+                const dateText = selectedDate
+                  ? `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일 (${days[selectedDate.getDay()]})`
+                  : "";
+
+                navigate("/payment", {
+                  state: {
+                    title: product.title,
+                    dateText,
+                    guests,
+                    pricePerPerson: product.pricePerPerson,
+                    // 필요하면 이미지/주소도 같이
+                    // imageUrl: product.imagePath,
+                    // address: product.address,
+                  },
+                });
+              }}
+            >
               예약하기
             </button>
 
