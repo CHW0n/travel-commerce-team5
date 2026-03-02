@@ -53,10 +53,10 @@ export default function MyPage() {
             <div className="Divider" />
             <article className="Product_Row">
               <div className="Product_Info">
-                <img src="/images/Rectangle 150353.png" alt="경복궁" className="Product_Image" />
+                <img src="/images/Gyeongbokgung.png" alt="경복궁" className="Product_Image" />
                 <div className="Product_Text">
                   <h3 className="Product_Title">경복궁</h3>
-                  <p className="People_Count">2월 20일 (화)</p>
+                  <p className="People_Date">2월 20일 (화)</p>
                   <p className="People_Count">2명</p>
                 </div>
               </div>
@@ -67,12 +67,12 @@ export default function MyPage() {
         </section>
 
         <div className="Button_Row">
-          <button type="button" className="Btn_Home">
+          <Link to="/" className="Btn_Home">
             홈으로 가기
-          </button>
-          <button type="button" className="Btn_Booking">
+          </Link>
+          <Link to="/products/1" className="Btn_Booking">
             예약 상세보기
-          </button>
+          </Link>
         </div>
       </main>
     </div>

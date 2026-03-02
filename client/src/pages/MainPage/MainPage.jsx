@@ -1,23 +1,79 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./MainPage.css";
 
-const tourCards = Array.from({ length: 16 }, (_, index) => ({
+// API 없을 때 쓰는 기본 카드 데이터
+const defaultTourCards = Array.from({ length: 16 }, (_, index) => ({
   id: index + 1,
   title: "경복궁",
   location: "서울 종로구",
   rating: 4.9,
   reviews: 215,
   price: "33,280원",
-  badge: index < 3 ? `TOP ${index +1}`:"",
+  badge: index < 3 ? `TOP ${index + 1}` : "",
+  firstImage: null,
 }));
 
 export default function MainPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("서울");
-  const [selectedDate, setSelectedDate] = useState("2월 2026");
+  const [selectedDate, setSelectedDate] = useState("2월 16일");
+  const [selectedDay, setSelectedDay] = useState(16);
+  const [draftSelectedDay, setDraftSelectedDay] = useState(16);
+  const [tourCards, setTourCards] = useState(defaultTourCards);
+  const [tourLoading, setTourLoading] = useState(false);
+  const [tourError, setTourError] = useState(null);
   const dropdownRef = useRef(null);
   const datePickerRef = useRef(null);
+  const calendarRows = [
+    [1, 2, 3, 4, 5, 6, 7],
+    [8, 9, 10, 11, 12, 13, 14],
+    [15, 16, 17, 18, 19, 20, 21],
+    [22, 23, 24, 25, 26, 27, 28],
+    [29, 30, 31, null, null, null, null],
+  ];
+
+  function formatSelectedDate(day) {
+    return `2월 ${day}일`;
+  }
+
+  // 지역 선택 시 한국관광공사 API(서버 프록시)로 목록 조회
+  useEffect(() => {
+    let cancelled = false;
+    setTourError(null);
+    setTourLoading(true);
+
+    fetch(`/api/tour?region=${encodeURIComponent(selectedRegion)}`)
+      .then((res) => {
+        if (!res.ok) return res.json().then((d) => Promise.reject(d));
+        return res.json();
+      })
+      .then((items) => {
+        if (cancelled) return;
+        const cards = (items || []).slice(0, 16).map((item, index) => ({
+          id: item.contentid || index + 1,
+          title: item.title || "관광지",
+          location: item.addr1 || selectedRegion,
+          rating: 4.9,
+          reviews: 215,
+          price: "33,280원",
+          badge: index < 3 ? `TOP ${index + 1}` : "",
+          firstImage: item.firstimage || item.firstImage || null,
+        }));
+        setTourCards(cards.length ? cards : defaultTourCards);
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        setTourError(err?.error || err?.message || "목록을 불러오지 못했습니다.");
+        setTourCards(defaultTourCards);
+      })
+      .finally(() => {
+        if (!cancelled) setTourLoading(false);
+      });
+
+    return () => { cancelled = true; };
+  }, [selectedRegion]);
 
   useEffect(() => {
     function handleOutsideClick(event) {
@@ -42,9 +98,9 @@ export default function MainPage() {
               <img src="/icon/ohtrip-logo-icon2.png" alt="5TRIP" className="logo_img" />
             </span>
           </a>
-          <button type="button" className="MyPage_Btn">
+          <Link to="/mypage" className="MyPage_Btn" aria-label="마이페이지로 이동">
             <span className="MyPage_Btn_Text">마이페이지</span>
-          </button>
+          </Link>
         </div>
       </header>
 
@@ -145,7 +201,11 @@ export default function MainPage() {
                     className="Field_Icon_Button"
                     aria-label="날짜 선택 열기"
                     onClick={() => {
-                      setIsDatePickerOpen((prev) => !prev);
+                      setIsDatePickerOpen((prev) => {
+                        const next = !prev;
+                        if (next) setDraftSelectedDay(selectedDay);
+                        return next;
+                      });
                       setIsDropdownOpen(false);
                     }}
                   >
@@ -181,66 +241,50 @@ export default function MainPage() {
                         <span>토</span>
                       </div>
                       <div className="Date_Grid">
-                        <div className="Date_Row">
-                          <button type="button">1</button>
-                          <button type="button">2</button>
-                          <button type="button">3</button>
-                          <button type="button">4</button>
-                          <button type="button">5</button>
-                          <button type="button">6</button>
-                          <button type="button">7</button>
-                        </div>
-                        <div className="Date_Row">
-                          <button type="button">8</button>
-                          <button type="button">9</button>
-                          <button type="button">10</button>
-                          <button type="button">11</button>
-                          <button type="button">12</button>
-                          <button type="button">13</button>
-                          <button type="button">14</button>
-                        </div>
-                        <div className="Date_Row">
-                          <button type="button">15</button>
-                          <button
-                            type="button"
-                            className="is-selected"
-                            onClick={() => setSelectedDate("2월 16일")}
-                          >
-                            16
-                          </button>
-                          <button type="button">17</button>
-                          <button type="button">18</button>
-                          <button type="button">19</button>
-                          <button type="button">20</button>
-                          <button type="button">21</button>
-                        </div>
-                        <div className="Date_Row">
-                          <button type="button">22</button>
-                          <button type="button">23</button>
-                          <button type="button">24</button>
-                          <button type="button">25</button>
-                          <button type="button">26</button>
-                          <button type="button">27</button>
-                          <button type="button">28</button>
-                        </div>
-                        <div className="Date_Row">
-                          <button type="button">29</button>
-                          <button type="button">30</button>
-                          <button type="button">31</button>
-                          <button type="button" disabled />
-                          <button type="button" disabled />
-                          <button type="button" disabled />
-                          <button type="button" disabled />
-                        </div>
+                        {calendarRows.map((row, rowIndex) => (
+                          <div className="Date_Row" key={`row-${rowIndex}`}>
+                            {row.map((day, columnIndex) => {
+                              if (!day) {
+                                return <button type="button" key={`empty-${columnIndex}`} disabled />;
+                              }
+
+                              return (
+                                <button
+                                  type="button"
+                                  key={day}
+                                  className={draftSelectedDay === day ? "is-selected" : ""}
+                                  onClick={() => setDraftSelectedDay(day)}
+                                >
+                                  {day}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        ))}
                       </div>
                       </div>
                     </div>
 
                     <div className="CTAs">
-                      <button type="button" className="Button_Tertiary" onClick={() => setIsDatePickerOpen(false)}>
+                      <button
+                        type="button"
+                        className="Button_Tertiary"
+                        onClick={() => {
+                          setDraftSelectedDay(selectedDay);
+                          setIsDatePickerOpen(false);
+                        }}
+                      >
                         <span className="Button_Tertiary_Text">취소</span>
                       </button>
-                      <button type="button" className="Button_Primary" onClick={() => setIsDatePickerOpen(false)}>
+                      <button
+                        type="button"
+                        className="Button_Primary"
+                        onClick={() => {
+                          setSelectedDay(draftSelectedDay);
+                          setSelectedDate(formatSelectedDate(draftSelectedDay));
+                          setIsDatePickerOpen(false);
+                        }}
+                      >
                         <span className="Button_Primary_Text">선택하기</span>
                       </button>
                     </div>
@@ -256,11 +300,25 @@ export default function MainPage() {
         </section>
 
         <section className="page Tour_Section" aria-label="추천 투어 리스트">
+          {tourLoading && (
+            <p className="Tour_Loading">목록 불러오는 중...</p>
+          )}
           <div className="Card_grid">
             {tourCards.map((tour) => (
               <article key={tour.id} className="Card_item">
                 <div className="media">
-                  <div className="image_cover" />
+                  {tour.firstImage ? (
+                    <div
+                      className="image_cover"
+                      style={{
+                        backgroundImage: `linear-gradient(180deg, rgba(13, 13, 15, 0) 30%, rgba(13, 13, 15, 0.7) 100%), url(${tour.firstImage})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    />
+                  ) : (
+                    <div className="image_cover" />
+                  )}
                   {tour.badge && <span className="best_badge">{tour.badge}</span>}
                   <div className="info">
                     <p className="Card_location">{tour.location}</p>

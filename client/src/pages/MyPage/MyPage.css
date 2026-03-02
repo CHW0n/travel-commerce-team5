@@ -73,21 +73,20 @@
 }
 
 .MyPage .Nav {
-  width: 1728px;
-  max-width: 100%;
+  width: min(1392px, calc(100% - 48px));
   height: 64px;
-  margin: 0 auto;
+  margin: 31px auto 0;
   opacity: 1;
-  padding: 16px 56px 16px 170px;
+  padding: 0;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   background: #f4f4f4;
 }
 
 .MyPage .Nav_container {
-  width: 217px;
+  width: 100%;
   height: 32px;
   gap: 8px;
   opacity: 1;
@@ -147,16 +146,15 @@
 }
 
 .MyPage .MyPage_Main {
-  width: 1728px;
-  max-width: 100%;
+  width: min(1392px, calc(100% - 48px));
   margin: 0 auto;
 }
 
 .MyPage .Search_Module {
-  width: 1392px;
-  max-width: calc(100% - 48px);
+  width: 100%;
+  max-width: 100%;
   height: 497px;
-  margin: 57px auto 0;
+  margin: 0 auto 0;
   opacity: 1;
   background: #ffffff;
   border-radius: 12px;
@@ -204,87 +202,129 @@
 }
 
 .MyPage .Order_Product_Section {
-  margin-top: 34px;
+  width: 1344px;
+  height: 358px;
+  padding: 24px;
+  gap: 24px;
+  opacity: 1;
+  border-radius: 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 24px;
 }
 
 .MyPage .Section_Title {
+  width: 89px;
+  height: 36px;
   margin: 0;
   font-family: "Pretendard", sans-serif;
-  font-weight: 700;
-  font-size: 34px;
-  line-height: 44px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.5%;
   color: #222222;
 }
 
 .MyPage .Divider {
-  width: 100%;
+  width: 1296px;
   height: 1px;
-  background: #e8e8e8;
-  margin-top: 20px;
+  background: #d2d2d2;
+  margin-top: 0;
 }
 
 .MyPage .Product_Row {
-  min-height: 186px;
+  width: 1296px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 22px 8px;
+  padding: 0 10px 0 0;
   box-sizing: border-box;
 }
 
 .MyPage .Product_Info {
+  width: 313px;
+  height: 200px;
+  padding: 10px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
 }
 
 .MyPage .Product_Image {
-  width: 166px;
-  height: 108px;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 2px;
+  border-radius: 0;
   display: block;
 }
 
 .MyPage .Product_Text {
+  width: 89px;
+  height: 100px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .MyPage .Product_Title {
+  width: 62px;
+  height: 36px;
   margin: 0;
   font-family: "Pretendard", sans-serif;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 52px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.5%;
   color: #222222;
 }
 
-.MyPage .People_Count {
+.MyPage .People_Date {
+  width: 89px;
+  height: 24px;
   margin: 0;
   font-family: "Pretendard", sans-serif;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 32px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.5%;
+  color: #666666;
+}
+
+.MyPage .People_Count {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.5%;
   color: #666666;
 }
 
 .MyPage .Product_Price {
+  width: 102px;
+  height: 36px;
   margin: 0;
   font-family: "Pretendard", sans-serif;
-  font-weight: 700;
-  font-size: 44px;
-  line-height: 52px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.5%;
   color: #333333;
 }
 
 .MyPage .Button_Row {
-  margin: 44px 0 0;
+  width: 100%;
+  margin: 24px auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 .MyPage .Btn_Home,
@@ -297,21 +337,28 @@
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
 .MyPage .Btn_Home {
-  background: #f0f0f0;
+  width: 96px;
+  background: #ffffff;
   color: #666666;
 }
 
 .MyPage .Btn_Booking {
+  width: 128px;
   background: #3db1fd;
   color: #ffffff;
 }
 
 @media (max-width: 1024px) {
   .MyPage .Nav {
-    padding: 16px 24px;
+    padding: 0;
   }
 
   .MyPage .MyPage_Main {
