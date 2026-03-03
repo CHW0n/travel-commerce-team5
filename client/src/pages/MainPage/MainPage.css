@@ -59,7 +59,7 @@
   display: block;
 }
 
-.MyPage_Btn {
+.Main .MyPage_Btn {
   width: 120px;
   height: 48px;
   gap: 10px;
@@ -74,15 +74,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
 }
 
-.MyPage_Btn:hover,
-.MyPage_Btn:active {
+.Main .MyPage_Btn:hover,
+.Main .MyPage_Btn:active {
   background: #3DB1FD;
 }
 
-.MyPage_Btn_Text {
+.Main .MyPage_Btn_Text {
   width: 78px;
   height: 26px;
   opacity: 1;
