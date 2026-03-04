@@ -8,7 +8,7 @@
 }
 
 /* ── Header ── */
-.Header {
+/* .ProductDetailPage .Header {
   width: 100%;
   max-width: 100%;
   height: 80px;
@@ -17,54 +17,76 @@
   background: var(--white);
   border-bottom: 1px solid var(--line-200);
   margin-bottom: 32px;
+} */
+
+.ProductDetailPage .Header {
+  width: 1728px;
+  max-width: 100%;
+  height: 80px;
+  margin: 0 auto;
+  padding: 16px 60px;
+  box-sizing: border-box;
+  background: var(--white);
+  border-bottom: 1px solid #E8E8E8;
 }
 
-.Header .page {
+.ProductDetailPage > .Header {
+  margin-bottom: 0;
+}
+
+.ProductDetailPage .Header .page {
   width: 100%;
   margin: 0;
 }
 
-.Header_Row {
+.ProductDetailPage .Header_Row {
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.Header_logo {
+.ProductDetailPage .Header_logo {
   display: inline-flex;
   align-items: center;
 }
 
-.ohtrip-logo-icon2 {
+.ProductDetailPage .ohtrip-logo-icon2 {
   width: 140px;
-  height: 29.97px;
+  height: 30px;
   display: block;
 }
 
-.logo_img {
+.ProductDetailPage .logo_img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
 }
 
-.MyPage_Btn {
+.ProductDetailPage .MyPage_Btn {
   width: 120px;
   height: 48px;
+  gap: 10px;
   opacity: 1;
   border-radius: 8px;
-  gap: 10px;
-  padding: 8px 16px;
-  background: var(--primary-600);
   border: 0;
+  padding-top: 8px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  background: #3DB1FD;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
 }
 
-.MyPage_Btn_Text {
+.ProductDetailPage .MyPage_Btn:hover,
+.ProductDetailPage .MyPage_Btn:active {
+  background: #3DB1FD;
+}
+
+.ProductDetailPage .MyPage_Btn_Text {
   width: 78px;
   height: 26px;
   opacity: 1;
@@ -74,19 +96,20 @@
   line-height: 26px;
   letter-spacing: 0;
   text-align: center;
-  color: var(--white);
+  color: #ffffff;
 }
 
 /* ── Nav ── */
-.ProductDetailPage nav {
+.Detail_Nav {
   height: 64px;
+  margin-top: 32px;
   padding: 16px 56px 16px 170px;
   display: flex;
   align-items: center;
 }
 
 /* ── Nav_Container ── */
-.Nav_container {
+.Detail_Nav_container {
   height: 32px;
   gap: 8px;
   display: flex;
@@ -94,13 +117,13 @@
 }
 
 /* ── Nav 아이콘 ── */
-.Nav_container img {
+.Detail_Nav_container img {
   width: 24px;
   height: 24px;
 }
 
 /* ── Nav Text ── */
-.Nav_text {
+.Detail_Nav_text {
   font-weight: 400;
   font-size: 20px;
   line-height: 32px;
@@ -108,7 +131,7 @@
 }
 
 /* ── Nav Text (상품 상세) ── */
-.Nav_text:last-child {
+.Detail_Nav_text:last-child {
   font-weight: 700;
 }
 
@@ -141,7 +164,7 @@
 }
 
 /* ── Tour Image ── */
-.Tour_Image {
+.Detail_Tour_Image {
   width: 100%;
   height: 550px;
   object-fit: cover;
@@ -163,7 +186,7 @@
 }
 
 /* ── Tour Title ── */
-.Tour_Title {
+.Detail_Tour_Title {
   font-weight: 700;
   font-size: 32px;
   line-height: 48px;
@@ -171,20 +194,20 @@
 }
 
 /* ── Location Row ── */
-.Location_Row {
+.Detail_Location_Row {
   gap: 14px;
   display: flex;
   align-items: center;
 }
 
 /* ── Location Icon ── */
-.Location_Icon {
+.Detail_Location_Icon {
   width: 24px;
   height: 24px;
 }
 
 /* ── Location Text ── */
-.Location_Text {
+.Detail_Location_Text {
   font-weight: 400;
   font-size: 20px;
   line-height: 32px;
@@ -192,7 +215,7 @@
 }
 
 /* ── Tour Price ── */
-.Tour_Price {
+.Detail_Tour_Price {
   font-weight: 700;
   font-size: 24px;
   line-height: 36px;
@@ -222,9 +245,9 @@
 }
 
 /* ── Tour Rating, Tour Meta, Language (공통) ── */
-.Tour_Rating,
-.Tour_Meta,
-.language {
+.Detail_Tour_Rating,
+.Detail_Tour_Meta,
+.Detail_language {
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
@@ -253,7 +276,7 @@
 }
 
 /* ── Divider ── */
-.Divider {
+.Detail_Divider {
   width: 100%;
   height: 1px;
   background-color: var(--line-300);
@@ -337,7 +360,7 @@
   border-radius: 8px;
   gap: 6px;
   padding: 12px;
-  background-color: var(--primary-600);
+  background-color: #3DB1FD;
   box-shadow: 0px 4px 4px 0px #0000001A;
   display: flex;
   flex-direction: column;
@@ -375,7 +398,7 @@
 }
 
 /* ── People Control ── */
-.People_Control {
+.Detail_People_Control {
   gap: 16px;
   padding: 10px;
   display: flex;
@@ -383,7 +406,7 @@
 }
 
 /* ── People Label ── */
-.People_Label {
+.Detail_People_Label {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
@@ -411,7 +434,7 @@
 }
 
 /* ── People Count ── */
-.People_Count {
+.Detail_People_Count {
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
@@ -429,6 +452,7 @@
 /* ── Tour Payment Section ── */
 .Tour_Payment_Section {
   width: 100%;
+  height: 116px;
   opacity: 1;
 }
 
@@ -444,7 +468,7 @@
 }
 
 /* ── Payment Info ── */
-.Payment_Info {
+.Detail_Payment_Info {
   gap: 12px;
   padding: 10px;
   display: flex;
@@ -460,7 +484,7 @@
 }
 
 /* ── Payment Price, Payment Price W ── */
-.Payment {
+.Detail_Payment {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -475,12 +499,12 @@
 }
 
 /* ── Btn Booking ── */
-.Btn_Booking {
+.Detail_Btn_Booking {
   width: 120px;
   height: 48px;
   border-radius: 8px;
   padding: 8px 16px;
-  background-color: var(--primary-600);
+  background-color: #3DB1FD;
   border: none;
   cursor: pointer;
   font-weight: 700;

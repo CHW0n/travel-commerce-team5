@@ -55,33 +55,33 @@ export default function ProductDetailPage() {
       </header>
 
       {/* ── Nav ── */}
-      <nav>
-        <div className="Nav_container">
+      <nav className="Detail_Nav">
+        <div className="Detail_Nav_container">
           <img src="/public/icon/Home_icon.png" alt="home icon" />
-          <span className="Nav_text">Home</span>
+          <span className="Detail_Nav_text">Home</span>
           <img src="/public/icon/arrow_right.png" alt="arrow right" />
-          <span className="Nav_text">상품 상세</span>
+          <span className="Detail_Nav_text">상품 상세</span>
         </div>
       </nav>
 
       <main>
         {/* 상세 전용 투어 섹션 (메인 .Tour_Section과 구분) */}
         <section className="Detail_Tour_Section">
-          <img className="Tour_Image" src={product.imagePath} alt={product.title} />
+          <img className="Detail_Tour_Image" src={product.imagePath} alt={product.title} />
 
-          <div className="Tour_Info">
+          <div className="Detail_Tour_Info">
             {/* 첫 번째 Tour_Info */}
             <div className="Tour_Info_Top">
 
               <div className="Tour_Detail_Top">
-                <h1 className="Tour_Title">{product.title}</h1>
-                <div className="Location_Row">
-                  <img className="Location_Icon" src="/public/icon/Location_icon.png" alt="location" />
-                  <span className="Location_Text">{product.address}</span>
+                <h1 className="Detail_Tour_Title">{product.title}</h1>
+                <div className="Detail_Location_Row">
+                  <img className="Detail_Location_Icon" src="/public/icon/Location_icon.png" alt="location" />
+                  <span className="Detail_Location_Text">{product.address}</span>
                 </div>
               </div>
 
-              <div className="Tour_Price">
+              <div className="Detail_Tour_Price">
                 {product.pricePerPerson.toLocaleString()}원
               </div>
 
@@ -90,11 +90,11 @@ export default function ProductDetailPage() {
             <div className="Tour_Info_Bottom">
               <div className="Tour_Detail_Bottom">
                 <div className="Tour_Text">
-                  <span className="Tour_Rating">
+                  <span className="Detail_Tour_Rating">
                    ⭐️ {product.satisfaction} / {product.bookings.toLocaleString()}명 예약
                   </span>
-                  <span className="Tour_Meta">소요시간: {product.duration}</span>
-                  <span className="language">{product.languages.join(", ")}</span>
+                  <span className="Detail_Tour_Meta">소요시간: {product.duration}</span>
+                  <span className="Detail_language">{product.languages.join(", ")}</span>
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function ProductDetailPage() {
         {/* Tour_Description_Section */}
         <section className="Tour_Description_Section">
           <h2 className="Description_Title">일정</h2>
-          <hr className="Divider" />
+          <hr className="Detail_Divider" />
           <div className="Description_Text">
             {product.itinerary.map((item, index) => (
               <p key={index}>{item}</p>
@@ -114,7 +114,7 @@ export default function ProductDetailPage() {
         {/* Tour_Date_Section */}
         <section className="Tour_Date_Section">
           <h2 className="Date_Title">이용 날짜</h2>
-          <hr className="Divider" />
+          <hr className="Detail_Divider" />
           <div className="Date_Card_List">
             {/* <button
               className="Date_Nav_Btn"
@@ -190,11 +190,11 @@ export default function ProductDetailPage() {
         {/* Tour_People_Section */}
         <section className="Tour_People_Section">
           <h2 className="People_Title">인원수</h2>
-          <hr className="Divider" />
+          <hr className="Detail_Divider" />
           <div className="People_Row">
 
-            <div className="People_Control">
-              <span className="People_Label">총 인원</span>
+            <div className="Detail_People_Control">
+              <span className="Detail_People_Label">총 인원</span>
               <button
                 className="Btn_Minus"
                 onClick={() => setGuests(guests - 1)}
@@ -218,7 +218,7 @@ export default function ProductDetailPage() {
                   </defs>
                 </svg>
               </button>
-              <span className="People_Count">{guests}명</span>
+              <span className="Detail_People_Count">{guests}명</span>
               <button
                 className="Btn_Plus"
                 onClick={() => setGuests(guests + 1)}
@@ -237,16 +237,16 @@ export default function ProductDetailPage() {
         <section className="Tour_Payment_Section">
           <div className="Tour_Payment_Row">
 
-            <div className="Payment_Info">
+            <div className="Detail_Payment_Info">
               <span className="Payment_Title">결제 금액</span>
-              <div className="Payment">
+              <div className="Detail_Payment">
                 <span className="Payment_Price">{(product.pricePerPerson * guests).toLocaleString()}</span>
                 <span className="Payment_Price_w">원</span>
               </div>
             </div>
 
             <button
-              className="Btn_Booking"
+              className="Detail_Btn_Booking"
               onClick={() => {
                 const dateText = selectedDate
                   ? `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일 (${days[selectedDate.getDay()]})`
