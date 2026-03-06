@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import Header from "../../components/header/header";
 import "./MainPage.css";
 
 const REGIONS = ["서울", "부산", "제주", "강릉"];
@@ -102,18 +103,7 @@ export default function MainPage() {
 
   return (
     <div className="Main">
-      <header className="Header">
-        <div className="page Header_Row">
-          <a href="#" className="Header_logo" aria-label="5trip 홈">
-            <span className="ohtrip-logo-icon2">
-              <img src="/icon/ohtrip-logo-icon2.png" alt="5TRIP" className="logo_img" />
-            </span>
-          </a>
-          <Link to="/mypage" className="MyPage_Btn" aria-label="마이페이지로 이동">
-            <span className="MyPage_Btn_Text">마이페이지</span>
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       <main className="Main_Content">
         <section className="Rectangle_150353" aria-label="프로모션 배너">

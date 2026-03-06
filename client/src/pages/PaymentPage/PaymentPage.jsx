@@ -1,12 +1,16 @@
 import { useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./PaymentPage.css";
+import Header from "../../components/header/header";
 
 export default function PaymentPage() {
   const navigate = useNavigate();
 
-  const handleGoHome = () => navigate("/");
-  const handleGoMyPage = () => navigate("/mypage");
+  const location = useLocation();
+  const { guests = 1, pricePerPerson = 0, title = "", dateText = ""} = location.state || {};
+
+  const totalPrice = guests * pricePerPerson;
+
   const handlePayment = () =>
     navigate("/complete", {
       state: {
@@ -20,41 +24,22 @@ export default function PaymentPage() {
       },
   });
 
-  const location = useLocation();
-  const { guests = 1, pricePerPerson = 0, title = "", dateText = ""} = location.state || {};
-
-  const totalPrice = guests * pricePerPerson;
-
   return (
     <div className="PaymentPage">
       {/* ================= Header ================= */}
-      <header className="Header">
-        <div className="Header_inner">
-          <div className="ohtrip-logo-icon2" onClick={handleGoHome}>
-            <img
-              src="/icon/ohtrip-logo-icon2.png"
-              alt="OhTrip 로고"
-              className="logo_img"
-            />
-          </div>
-
-          <button className="MyPage_Btn" type="button" onClick={handleGoMyPage}>
-            마이페이지
-          </button>
-        </div>
-      </header>
+      <Header />
 
       {/* ================= Nav ================= */}
       <div className="Nav">
-        <div className="Nav_container">
-          <img src="/icon/Home_icon.png" alt="홈" className="Nav_homeIcon" />
-          <span className="Nav_text">HOME</span>
+          <div className="Nav_container">
+            <img src="/icon/Home_icon.png" alt="홈" className="Nav_homeIcon" />
+            <span className="Nav_text">HOME</span>
 
-          <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
-          <span className="Nav_text">상품 상세</span>
+            <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
+            <span className="Nav_text">상품 상세</span>
 
-          <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
-          <span className="Nav_text active">예약</span>
+            <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
+            <span className="Nav_text active">예약</span>
         </div>
       </div>
 

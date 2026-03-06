@@ -8,128 +8,49 @@
 ========================= */
 
 .CompletePage {
-  background: #f2f2f2;
+  background: var(--bg-base);
   min-height: 100vh;
   width: 100%;
   padding-bottom: 81px;
 }
 
-/* ================= Header ================= */
-.Header {
-  width: 100%;
-  height: 80px;
-  background: #ffffff;
-  border-bottom: 1px solid #e6e6e6;
-  display: flex;
-  justify-content: center;
-}
-
-/* 피그마 1728 컨테이너 역할 */
-.Header_inner {
-  width: 1728px;
-  max-width: 100%;
-  height: 100%;
-  margin: 0 auto;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 16px 60px;
-  box-sizing: border-box;
-}
-
-.ohtrip-logo-icon2 {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  cursor: pointer;
-}
-
-.logo_img {
-  height: 36px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-  background: transparent;
-  border-radius: 0;
-}
-
-/* 마이페이지 버튼 */
-.MyPage_Btn {
-  height: 36px;
-  padding: 0 14px;
-
-  border: 1px solid #111;
-  border-radius: 8px;
-  background: #7ea7ff;
-  color: #fff;
-
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.MyPage_Btn:active {
-  transform: translateY(1px);
-}
 
 /* ================= Nav ================= */
-.Nav {
-  width: 1728px;
+.CompletePage .Nav {
   height: 64px;
-  margin: 31px auto 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
+  margin-top: 32px;
   padding: 16px 56px 16px 170px;
-  box-sizing: border-box;
-
-  background: transparent;
-}
-
-.Nav_container {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
-.Nav_homeIcon {
+.CompletePage .Nav_container {
+  height: 32px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.CompletePage .Nav_container img {
   width: 24px;
   height: 24px;
-  object-fit: contain;
-  display: block;
 }
 
-.Nav_arrowIcon {  
-  width: 24px;       /* 보통 홈보다 조금 작게 */
-  height: 24px;
-  object-fit: contain;
-  display: block;
-}
-
-.Nav_text {
-  font-family: "Pretendard", sans-serif;
+.CompletePage .Nav_text {
+  font-weight: 400;
   font-size: 20px;
   line-height: 32px;
-  letter-spacing: 0px;
-  color: #222222;
-
-  font-weight: 400;        /* 기본은 Regular */
-  height: 32px;
-  display: flex;
-  align-items: center;
+  letter-spacing: 0;
 }
 
-/* 강조: 현재 페이지(결제) */
-.Nav_text.active {
-  font-weight: 700;        /* Bold */
+.CompletePage .Nav_text.active {
+  font-weight: 700;
 }
+
 
 /* ================= Hero ================= */
 .Hero_Section {
-  width: 1392px;
+  width: calc(100% - 336px);
   height: 550px;
   margin: 0 auto;
   margin-top: 0; /* nav 바로 아래 */
@@ -227,7 +148,7 @@
 
 /* ================= Order Product Section ================= */
 .Order_Product_Section {
-  width: 1392px;
+  width: calc(100% - 336px);
   height: 449px;
   margin: 0 auto;
   margin-top: 72px;
@@ -440,7 +361,7 @@
 
 /* 예약 상세보기(Primary 버튼) */
 .Btn_Booking.primary {
-  background: #7ea7ff;
+  background: #3DB1FD;
   color: #ffffff;
   border: 1px solid transparent;
   box-shadow: 0 6px 18px rgba(0,0,0,0.08);
