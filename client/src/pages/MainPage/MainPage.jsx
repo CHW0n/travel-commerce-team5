@@ -1,17 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchProducts } from "../../api/client";
 import "./MainPage.css";
 
 const REGIONS = ["서울", "부산", "제주", "강릉"];
-
-const tourCards = Array.from({ length: 16 }, (_, index) => ({
-  id: index + 1,
-  title: "경복궁",
-  rating: 4.9,
-  reviews: 215,
-  price: "33,280원",
-  badge: index < 3 ? `TOP ${index + 1}` : "",
-}));
+const REGION_TO_ID = { 서울: "seoul", 부산: "busan", 제주: "jeju", 강릉: "gangneung" };
+const PER_PAGE = 16;
 
 function buildCalendarRows(year, month) {
   const firstDayOfWeek = new Date(year, month, 1).getDay();
@@ -43,13 +37,20 @@ export default function MainPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("어디로 가세요?");
+  const [selectedRegionId, setSelectedRegionId] = useState("seoul");
   const [selectedDate, setSelectedDate] = useState("언제 가세요?");
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [selectedCalendarDate, setSelectedCalendarDate] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
   const dropdownRef = useRef(null);
   const datePickerRef = useRef(null);
   const calendarRows = buildCalendarRows(viewYear, viewMonth);
+  const maxPage = 2;
 
   function handlePrevMonth() {
     setViewMonth((prevMonth) => {
@@ -85,6 +86,18 @@ export default function MainPage() {
       selectedCalendarDate.getDate() === day
     );
   }
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    fetchProducts(selectedRegionId, page, PER_PAGE)
+      .then((data) => {
+        setProducts(data.products);
+        setTotalCount(data.totalCount);
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [selectedRegionId, page]);
 
   useEffect(() => {
     function handleOutsideClick(event) {
@@ -140,7 +153,16 @@ export default function MainPage() {
               <div className="divider" />
             </div>
 
-            <form className="Search_Form" onSubmit={(event) => event.preventDefault()}>
+            <form
+              className="Search_Form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (REGIONS.includes(selectedRegion)) {
+                  setSelectedRegionId(REGION_TO_ID[selectedRegion]);
+                  setPage(1);
+                }
+              }}
+            >
               <label className="Search_Field" htmlFor="region" ref={dropdownRef}>
                 <div className="Search_Field_Control">
                   <input id="region" value={selectedRegion} readOnly />
@@ -265,59 +287,112 @@ export default function MainPage() {
         </section>
 
         <section className="page Tour_Section" aria-label="추천 투어 리스트">
-          <div className="Card_grid">
-            {tourCards.map((tour) => (
-              <Link
-                key={tour.id}
-                to={`/products/${tour.id}`}
-                className="Card_item"
-                style={{ display: "block" }}
-              >
-              <article>
-                <div className="media">
-                  <div className="image_cover" />
-                  {tour.badge && <span className="best_badge">{tour.badge}</span>}
-                  <div className="info">
-                    <h2 className="Card_title">{tour.title}</h2>
-                    <p className="Card_meta">
-                      ★ {tour.rating} · 후기 {tour.reviews}개
-                    </p>
-                    <p className="Card_price">{tour.price}</p>
+          {loading && (
+            <div style={{ padding: "40px", textAlign: "center" }}>로딩 중...</div>
+          )}
+          {error && (
+            <div style={{ padding: "40px", textAlign: "center", color: "#999" }}>
+              {error}
+            </div>
+          )}
+          {!loading && !error && (
+            <>
+              <div className="Card_grid">
+                {products.map((tour, index) => (
+                  <Link
+                    key={tour.id}
+                    to={`/products/${tour.id}`}
+                    className="Card_item"
+                    style={{ display: "block" }}
+                  >
+                    <article>
+                      <div className="media">
+                        <img
+                          src={tour.imagePath}
+                          alt={tour.title}
+                          className="Card_image"
+                          loading="lazy"
+                        />
+                        {index < 3 && (
+                          <span className="best_badge">TOP {index + 1}</span>
+                        )}
+                        <div className="info">
+                          <h2 className="Card_title">{tour.title}</h2>
+                          <p className="Card_meta">
+                            ★ {tour.satisfaction} · 후기 {tour.reviewCount}개
+                          </p>
+                          <p className="Card_price">
+                            {tour.pricePerPerson.toLocaleString()}원
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
+                ))}
+              </div>
+
+              <div className="Pagination">
+                <div className="Pagination_Container">
+                  <div className="arrow_item_left">
+                    <button
+                      type="button"
+                      className="arrow_left2"
+                      aria-label="첫 페이지"
+                      onClick={() => setPage(1)}
+                      disabled={page <= 1}
+                    >
+                      <img src="/icon/arrow_left2.png" alt="" />
+                    </button>
+                    <button
+                      type="button"
+                      className="arrow_left"
+                      aria-label="이전 페이지"
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      disabled={page <= 1}
+                    >
+                      <img src="/icon/arrow_right.png" className="left_chevron_icon" alt="" />
+                    </button>
+                  </div>
+
+                  <div className="Page_Number">
+                    {[1, 2, 3, 4].map((p) => (
+                      <button
+                        key={p}
+                        type="button"
+                        className={p === page ? "is-active" : ""}
+                        aria-current={p === page ? "page" : undefined}
+                        onClick={() => p <= maxPage && setPage(p)}
+                        disabled={p > maxPage}
+                      >
+                        {p}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="arrow_item_right">
+                    <button
+                      type="button"
+                      className="arrow_right"
+                      aria-label="다음 페이지"
+                      onClick={() => setPage((p) => Math.min(maxPage, p + 1))}
+                      disabled={page >= maxPage}
+                    >
+                      <img src="/icon/arrow_right.png" alt="" />
+                    </button>
+                    <button
+                      type="button"
+                      className="arrow_right2"
+                      aria-label="마지막 페이지"
+                      onClick={() => setPage(maxPage)}
+                      disabled={page >= maxPage}
+                    >
+                      <img src="/icon/arrow_right2.png" alt="" />
+                    </button>
                   </div>
                 </div>
-              </article>
-              </Link>
-            ))}
-          </div>
-
-          <div className="Pagination">
-            <div className="Pagination_Container">
-              <div className="arrow_item_left">
-                <button type="button" className="arrow_left2" aria-label="첫 페이지">
-                  <img src="/icon/arrow_left2.png" alt="" />
-                </button>
-                <button type="button" className="arrow_left" aria-label="이전 페이지">
-                  <img src="/icon/arrow_right.png" className="left_chevron_icon" alt="" />
-                </button>
               </div>
-
-              <div className="Page_Number">
-                <button type="button" className="is-active" aria-current="page">1</button>
-                <button type="button">2</button>
-                <button type="button">3</button>
-                <button type="button">4</button>
-              </div>
-
-              <div className="arrow_item_right">
-                <button type="button" className="arrow_right" aria-label="다음 페이지">
-                  <img src="/icon/arrow_right.png" alt="" />
-                </button>
-                <button type="button" className="arrow_right2" aria-label="마지막 페이지">
-                  <img src="/icon/arrow_right2.png" alt="" />
-                </button>
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </section>
       </main>
     </div>
