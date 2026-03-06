@@ -2,23 +2,89 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./MainPage.css";
 
+const REGIONS = ["서울", "부산", "제주", "강릉"];
+
 const tourCards = Array.from({ length: 16 }, (_, index) => ({
   id: index + 1,
   title: "경복궁",
-  location: "서울 종로구",
   rating: 4.9,
   reviews: 215,
   price: "33,280원",
-  badge: index < 3 ? `TOP ${index +1}`:"",
+  badge: index < 3 ? `TOP ${index + 1}` : "",
 }));
 
+function buildCalendarRows(year, month) {
+  const firstDayOfWeek = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const cells = Array(firstDayOfWeek).fill(null);
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    cells.push(day);
+  }
+
+  while (cells.length % 7 !== 0) {
+    cells.push(null);
+  }
+
+  const rows = [];
+  for (let index = 0; index < cells.length; index += 7) {
+    rows.push(cells.slice(index, index + 7));
+  }
+
+  return rows;
+}
+
+function formatDisplayDate(year, month, day) {
+  return `${year}년 ${month + 1}월 ${day}일`;
+}
+
 export default function MainPage() {
+  const today = new Date();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-  const [selectedRegion, setSelectedRegion] = useState("서울");
-  const [selectedDate, setSelectedDate] = useState("2월 2026");
+  const [selectedRegion, setSelectedRegion] = useState("어디로 가세요?");
+  const [selectedDate, setSelectedDate] = useState("언제 가세요?");
+  const [viewYear, setViewYear] = useState(today.getFullYear());
+  const [viewMonth, setViewMonth] = useState(today.getMonth());
+  const [selectedCalendarDate, setSelectedCalendarDate] = useState(null);
   const dropdownRef = useRef(null);
   const datePickerRef = useRef(null);
+  const calendarRows = buildCalendarRows(viewYear, viewMonth);
+
+  function handlePrevMonth() {
+    setViewMonth((prevMonth) => {
+      if (prevMonth === 0) {
+        setViewYear((prevYear) => prevYear - 1);
+        return 11;
+      }
+      return prevMonth - 1;
+    });
+  }
+
+  function handleNextMonth() {
+    setViewMonth((prevMonth) => {
+      if (prevMonth === 11) {
+        setViewYear((prevYear) => prevYear + 1);
+        return 0;
+      }
+      return prevMonth + 1;
+    });
+  }
+
+  function handleSelectDay(day) {
+    const nextDate = new Date(viewYear, viewMonth, day);
+    setSelectedCalendarDate(nextDate);
+    setSelectedDate(formatDisplayDate(viewYear, viewMonth, day));
+  }
+
+  function isSelectedDay(day) {
+    if (!selectedCalendarDate) return false;
+    return (
+      selectedCalendarDate.getFullYear() === viewYear &&
+      selectedCalendarDate.getMonth() === viewMonth &&
+      selectedCalendarDate.getDate() === day
+    );
+  }
 
   useEffect(() => {
     function handleOutsideClick(event) {
@@ -76,7 +142,6 @@ export default function MainPage() {
 
             <form className="Search_Form" onSubmit={(event) => event.preventDefault()}>
               <label className="Search_Field" htmlFor="region" ref={dropdownRef}>
-                <span className="Search_Field_Label">어디로 가세요?</span>
                 <div className="Search_Field_Control">
                   <input id="region" value={selectedRegion} readOnly />
                   <button
@@ -93,52 +158,24 @@ export default function MainPage() {
                 </div>
                 {isDropdownOpen && (
                   <div className="DropdownList" aria-label="지역 선택 목록">
-                    <button
-                      type="button"
-                      className="Dropdown_Item"
-                      onClick={() => {
-                        setSelectedRegion("서울");
-                        setIsDropdownOpen(false);
-                      }}
-                    >
-                      서울
-                    </button>
-                    <button
-                      type="button"
-                      className="Dropdown_Item"
-                      onClick={() => {
-                        setSelectedRegion("부산");
-                        setIsDropdownOpen(false);
-                      }}
-                    >
-                      부산
-                    </button>
-                    <button
-                      type="button"
-                      className="Dropdown_Item"
-                      onClick={() => {
-                        setSelectedRegion("제주");
-                        setIsDropdownOpen(false);
-                      }}
-                    >
-                      제주
-                    </button>
-                    <button
-                      type="button"
-                      className="Dropdown_Item"
-                      onClick={() => {
-                        setSelectedRegion("강릉");
-                        setIsDropdownOpen(false);
-                      }}
-                    >
-                      강릉
-                    </button>
+                    {REGIONS.map((region) => (
+                      <button
+                        key={region}
+                        type="button"
+                        className="Dropdown_Item"
+                        onClick={() => {
+                          setSelectedRegion(region);
+                          setIsDropdownOpen(false);
+                        }}
+                      >
+                        {region}
+                      </button>
+                    ))}
                   </div>
                 )}
               </label>
 
               <label className="Search_Field" htmlFor="date" ref={datePickerRef}>
-                <span className="Search_Field_Label">언제 가시나요?</span>
                 <div className="Search_Field_Control">
                   <input id="date" value={selectedDate} readOnly />
                   <button
@@ -157,15 +194,15 @@ export default function MainPage() {
                   <div className="Date_Picker" aria-label="날짜 선택">
                     <div className="Calendar_Header">
                       <div className="Month_Label">
-                        <span className="Month_Text">2월</span>
-                        <span className="Year_Text">2026</span>
+                        <span className="Month_Text">{viewMonth + 1}월</span>
+                        <span className="Year_Text">{viewYear}</span>
                       </div>
                       <div className="Month_Navigation">
-                        <button type="button" className="Prev_Button" aria-label="이전 달">
-                          <span className="Icon_Frame">‹</span>
+                        <button type="button" className="Prev_Button" aria-label="이전 달" onClick={handlePrevMonth}>
+                          <img src="/icon/arrow_left.png" alt="" className="Month_Arrow_Icon" />
                         </button>
-                        <button type="button" className="Next_Button" aria-label="다음 달">
-                          <span className="Icon_Frame">›</span>
+                        <button type="button" className="Next_Button" aria-label="다음 달" onClick={handleNextMonth}>
+                          <img src="/icon/arrow_right.png" alt="" className="Month_Arrow_Icon" />
                         </button>
                       </div>
                     </div>
@@ -173,66 +210,37 @@ export default function MainPage() {
                     <div className="Calendar">
                       <div className="Calendar_Body">
                       <div className="Week_Days">
-                        <span>일</span>
+                        <span className="is-weekend">일</span>
                         <span>월</span>
                         <span>화</span>
                         <span>수</span>
                         <span>목</span>
                         <span>금</span>
-                        <span>토</span>
+                        <span className="is-weekend">토</span>
                       </div>
                       <div className="Date_Grid">
-                        <div className="Date_Row">
-                          <button type="button">1</button>
-                          <button type="button">2</button>
-                          <button type="button">3</button>
-                          <button type="button">4</button>
-                          <button type="button">5</button>
-                          <button type="button">6</button>
-                          <button type="button">7</button>
-                        </div>
-                        <div className="Date_Row">
-                          <button type="button">8</button>
-                          <button type="button">9</button>
-                          <button type="button">10</button>
-                          <button type="button">11</button>
-                          <button type="button">12</button>
-                          <button type="button">13</button>
-                          <button type="button">14</button>
-                        </div>
-                        <div className="Date_Row">
-                          <button type="button">15</button>
-                          <button
-                            type="button"
-                            className="is-selected"
-                            onClick={() => setSelectedDate("2월 16일")}
-                          >
-                            16
-                          </button>
-                          <button type="button">17</button>
-                          <button type="button">18</button>
-                          <button type="button">19</button>
-                          <button type="button">20</button>
-                          <button type="button">21</button>
-                        </div>
-                        <div className="Date_Row">
-                          <button type="button">22</button>
-                          <button type="button">23</button>
-                          <button type="button">24</button>
-                          <button type="button">25</button>
-                          <button type="button">26</button>
-                          <button type="button">27</button>
-                          <button type="button">28</button>
-                        </div>
-                        <div className="Date_Row">
-                          <button type="button">29</button>
-                          <button type="button">30</button>
-                          <button type="button">31</button>
-                          <button type="button" disabled />
-                          <button type="button" disabled />
-                          <button type="button" disabled />
-                          <button type="button" disabled />
-                        </div>
+                        {calendarRows.map((row, rowIndex) => (
+                          <div className="Date_Row" key={`row-${rowIndex}`}>
+                            {row.map((day, dayIndex) => (
+                              <button
+                                key={day ? `${viewYear}-${viewMonth}-${day}` : `empty-${rowIndex}-${dayIndex}`}
+                                type="button"
+                                className={[
+                                  dayIndex === 0 || dayIndex === 6 ? "is-weekend" : "",
+                                  day && isSelectedDay(day) ? "is-selected" : "",
+                                ]
+                                  .filter(Boolean)
+                                  .join(" ")}
+                                onClick={() => {
+                                  if (day) handleSelectDay(day);
+                                }}
+                                disabled={!day}
+                              >
+                                {day ?? ""}
+                              </button>
+                            ))}
+                          </div>
+                        ))}
                       </div>
                       </div>
                     </div>
@@ -270,7 +278,6 @@ export default function MainPage() {
                   <div className="image_cover" />
                   {tour.badge && <span className="best_badge">{tour.badge}</span>}
                   <div className="info">
-                    <p className="Card_location">{tour.location}</p>
                     <h2 className="Card_title">{tour.title}</h2>
                     <p className="Card_meta">
                       ★ {tour.rating} · 후기 {tour.reviews}개
@@ -285,23 +292,20 @@ export default function MainPage() {
 
           <div className="Pagination">
             <div className="Pagination_Container">
-              <div className="Numbers">
-                <div className="Number_List">
-                  <div className="arrow_item_left">
-                    <button type="button" className="arrow_left2" aria-label="첫 페이지">
-                      <img src="/icon/arrow_left2.png" alt="" />
-                    </button>
-                    <button type="button" className="arrow_left" aria-label="이전 페이지">
-                      <img src="/icon/arrow_right.png" className="left_chevron_icon" alt="" />
-                    </button>
-                  </div>
-                  <div className="Page_Number">
-                    <button type="button" className="is-active" aria-current="page">1</button>
-                    <button type="button">2</button>
-                    <button type="button">3</button>
-                    <button type="button">4</button>
-                  </div>
-                </div>
+              <div className="arrow_item_left">
+                <button type="button" className="arrow_left2" aria-label="첫 페이지">
+                  <img src="/icon/arrow_left2.png" alt="" />
+                </button>
+                <button type="button" className="arrow_left" aria-label="이전 페이지">
+                  <img src="/icon/arrow_right.png" className="left_chevron_icon" alt="" />
+                </button>
+              </div>
+
+              <div className="Page_Number">
+                <button type="button" className="is-active" aria-current="page">1</button>
+                <button type="button">2</button>
+                <button type="button">3</button>
+                <button type="button">4</button>
               </div>
 
               <div className="arrow_item_right">
