@@ -117,15 +117,24 @@
 }
 
 /* ── Nav 아이콘 ── */
-.Detail_Nav_container img {
+.Detail_Nav_container img.arrow_icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
+}
+
+.Detail_Nav_container img.home_icon {
   width: 24px;
   height: 24px;
+  object-fit: contain;
+  display: block;
 }
 
 /* ── Nav Text ── */
 .Detail_Nav_text {
   font-weight: 400;
-  font-size: 20px;
+  font-size: 14px;
   line-height: 32px;
   letter-spacing: 0;
 }
@@ -175,7 +184,8 @@
   padding: 24px 24px 0 24px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start;
 }
 
 /* ── Tour Detail ── */
@@ -286,10 +296,11 @@
 /* ── Description Text ── */
 .Description_Text {
   font-weight: 400;
-  font-size: 20px;
-  line-height: 36px;
+  font-size: 16px;
+  line-height: 24px;
   letter-spacing: -0.005em;
 }
+
 
 /* ── Tour Date Section ── */
 .Tour_Date_Section {
