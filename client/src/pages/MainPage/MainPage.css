@@ -538,7 +538,7 @@
   left: 0;
   position: absolute;
   opacity: 1;
-  padding: 16px 20px 24px 20px;
+  padding: 16px 20px 30px 20px; 
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 51.44%, #000000 100%);
   color: var(--white);
 }
@@ -551,22 +551,22 @@
 }
 
 .Card_title {
-  margin: 4px 0 6px;
-  font-size: 14px;
+  margin: 4px 0 8px;
+  font-size: 20px;
   line-height: 20px;
   font-weight: 700;
 }
 
 .Card_meta {
-  margin: 0;
-  font-size: 11px;
+  margin: 0 0 4px;
+  font-size: 14px;
   line-height: 14px;
   color: #f2d66a;
 }
 
 .Card_price {
   margin: 8px 0 0;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 20px;
   font-weight: 800;
 }
@@ -755,6 +755,7 @@
   }
 
   .Card_price {
+    margin : 0;
     font-size: 14px;
   }
 }
