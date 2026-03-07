@@ -267,13 +267,15 @@ export default function ProductDetailPage() {
 
                 navigate("/payment", {
                   state: {
-                    title: product.title,
-                    dateText,
-                    guests,
-                    pricePerPerson: product.pricePerPerson,
-                    // 필요하면 이미지/주소도 같이
-                    // imageUrl: product.imagePath,
-                    // address: product.address,
+                    orderDraft: {
+                      productId: product.id ?? productId,
+                      title: product.title,
+                      dateText,
+                      people: guests,
+                      unitPrice: product.pricePerPerson,
+                      totalPrice: product.pricePerPerson * guests,
+                      productImageUrl: product.imagePath,
+                    },
                   },
                 });
               }}
