@@ -267,15 +267,13 @@ export default function ProductDetailPage() {
 
                 navigate("/payment", {
                   state: {
-                    orderDraft: {
-                      productId: product.id ?? productId,
-                      title: product.title,
-                      dateText,
-                      people: guests,
-                      unitPrice: product.pricePerPerson,
-                      totalPrice: product.pricePerPerson * guests,
-                      productImageUrl: product.imagePath,
-                    },
+                    productId: product.id ?? productId,
+                    title: product.title,
+                    dateText,
+                    guests,
+                    pricePerPerson: product.pricePerPerson,
+                    totalPrice: product.pricePerPerson * guests,
+                    productImageUrl: product.imagePath,
                   },
                 });
               }}
