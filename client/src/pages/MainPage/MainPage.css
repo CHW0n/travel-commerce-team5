@@ -14,88 +14,8 @@
   margin: 0 auto;
 }
 
-.Header {
-  width: 1728px;
-  max-width: 100%;
-  height: 80px;
-  margin: 0 auto;
-  padding: 16px 60px;
-  box-sizing: border-box;
-  background: var(--white);
-  border-bottom: 0;
-}
-
-.Main > .Header {
-  margin-bottom: 0;
-}
-
-.Header .page {
-  width: 100%;
-  margin: 0;
-}
-
-.Header_Row {
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.Header_logo {
-  display: inline-flex;
-  align-items: center;
-}
-
-.ohtrip-logo-icon2 {
-  width: 140px;
-  height: 29.97px;
-  display: block;
-}
-
-.logo_img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.Main .MyPage_Btn {
-  width: 120px;
-  height: 48px;
-  gap: 10px;
-  opacity: 1;
-  border-radius: 8px;
-  border: 0;
-  padding-top: 8px;
-  padding-right: 16px;
-  padding-bottom: 8px;
-  padding-left: 16px;
-  background: #3DB1FD;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.Main .MyPage_Btn:hover,
-.Main .MyPage_Btn:active {
-  background: #3DB1FD;
-}
-
-.Main .MyPage_Btn_Text {
-  width: 78px;
-  height: 26px;
-  opacity: 1;
-  font-family: "Pretendard", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 26px;
-  letter-spacing: 0;
-  text-align: center;
-  color: #ffffff;
-}
-
 .Rectangle_150353 {
-  width: 1728px;
+  width: 100%;
   max-width: 100%;
   height: 444px;
   background: linear-gradient(180deg, #1348ff 0%, #0a2db9 57.69%, #02249b 100%);
@@ -278,11 +198,9 @@
 
 .DropdownList {
   width: 602px;
-  height: 208px;
   border-radius: 8px;
-  opacity: 1;
-  background: #ffffff;
-  box-shadow: 0px 4px 14px 0px #0000001a;
+  background: #fff;
+  box-shadow: 0 4px 14px 0 #0000001a;
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
@@ -296,11 +214,14 @@
   height: 52px;
   border: 0;
   border-bottom: 1px solid #f1f1f1;
-  background: #ffffff;
-  color: #222222;
+  background: #fff;
+  color: #222;
   text-align: left;
-  padding: 0 12px;
-  font-size: 14px;
+  padding: 0 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 52px;
   cursor: pointer;
 }
 
@@ -320,6 +241,16 @@
   z-index: 20;
   display: flex;
   flex-direction: column;
+}
+.Dropdown_Item:last-child {
+  border-bottom: 0;
+}
+.Dropdown_Item:hover {
+  background: #f5f5f5;
+}
+.Dropdown_Item.is-active {
+  background: #ececec;
+  font-weight: 600;
 }
 
 .Calendar_Header {
@@ -439,10 +370,29 @@
 }
 
 .Date_Row .is-selected {
-  background: #3db1fd;
-  color: #ffffff;
-}
 
+  width: 79.14286041259766px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #3f92f433;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #3DB1FD;
+;
+}
+.Date_Row button.is-selected.is-weekend {
+  color: #3DB1FD;
+}
 .Date_Row button.is-weekend {
   color: #ff6b6b;
 }
@@ -618,7 +568,7 @@
   left: 0;
   position: absolute;
   opacity: 1;
-  padding: 16px 20px 24px 20px;
+  padding: 16px 20px 30px 20px; 
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 51.44%, #000000 100%);
   color: var(--white);
 }
@@ -631,22 +581,22 @@
 }
 
 .Card_title {
-  margin: 4px 0 6px;
-  font-size: 14px;
+  margin: 4px 0 8px;
+  font-size: 20px;
   line-height: 20px;
   font-weight: 700;
 }
 
 .Card_meta {
-  margin: 0;
-  font-size: 11px;
+  margin: 0 0 4px;
+  font-size: 14px;
   line-height: 14px;
   color: #f2d66a;
 }
 
 .Card_price {
   margin: 8px 0 0;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 20px;
   font-weight: 800;
 }
@@ -772,15 +722,6 @@
     width: min(1384px, calc(100% - 24px));
   }
 
-  .Header_Row {
-    height: 52px;
-  }
-
-  .Header_logo {
-    transform: scale(0.9);
-    transform-origin: left center;
-  }
-
   .Rectangle_150353 {
     min-height: 180px;
     height: 180px;
@@ -844,6 +785,7 @@
   }
 
   .Card_price {
+    margin : 0;
     font-size: 14px;
   }
 }

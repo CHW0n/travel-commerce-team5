@@ -10,8 +10,7 @@
 }
 
 .MyPage .Header {
-  width: 1728px;
-  max-width: 100%;
+  width: 100%;
   height: 80px;
   margin: 0;
   padding: 16px 60px;
@@ -358,8 +357,7 @@
   gap: 16px;
 }
 
-.MyPage .Btn_Home,
-.MyPage .Btn_Booking {
+.MyPage .Btn_Home {
   width: 130px;
   height: 44px;
   gap: 10px;
@@ -384,12 +382,6 @@
 .MyPage .Btn_Home {
   background: #ffffff;
   color: #222222;
-}
-
-.MyPage .Btn_Booking {
-  background: #3DB1FD;
-  color: #ffffff;
-  font-weight: 700;
 }
 
 @media (max-width: 1024px) {

@@ -43,11 +43,11 @@ export default function ProductDetailPage() {
       {/* ── Header ── */}
       <header className="Header">
         <div className="page Header_Row">
-          <a href="#" className="Header_logo" aria-label="5trip 홈">
+          <Link to="/" className="Header_logo" aria-label="5trip 홈">
             <span className="ohtrip-logo-icon2">
               <img src="/icon/ohtrip-logo-icon2.png" alt="5TRIP" className="logo_img" />
             </span>
-          </a>
+          </Link>
           <Link to="/mypage" className="MyPage_Btn" aria-label="마이페이지로 이동">
             <span className="MyPage_Btn_Text">마이페이지</span>
           </Link>
@@ -58,7 +58,7 @@ export default function ProductDetailPage() {
       <nav className="Detail_Nav">
         <div className="Detail_Nav_container">
           <img src="/public/icon/Home_icon.png" alt="home icon" />
-          <span className="Detail_Nav_text">Home</span>
+          <span className="Detail_Nav_text">HOME</span>
           <img src="/public/icon/arrow_right.png" alt="arrow right" />
           <span className="Detail_Nav_text">상품 상세</span>
         </div>
