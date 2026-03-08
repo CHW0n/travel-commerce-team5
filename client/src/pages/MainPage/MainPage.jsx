@@ -149,18 +149,18 @@ export default function MainPage() {
                 {isDropdownOpen && (
                   <div className="DropdownList" aria-label="지역 선택 목록">
                     {REGIONS.map((region) => (
-                      <button
-                        key={region}
-                        type="button"
-                        className="Dropdown_Item"
-                        onClick={() => {
-                          setSelectedRegion(region);
-                          setIsDropdownOpen(false);
-                        }}
-                      >
-                        {region}
-                      </button>
-                    ))}
+                  <button
+                    key={region}
+                    type="button"
+                    className={`Dropdown_Item ${selectedRegion === region ? "is-active" : ""}`}
+                    onClick={() => {
+                      setSelectedRegion(region);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    {region}
+                  </button>
+                ))}
                   </div>
                 )}
               </label>

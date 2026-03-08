@@ -198,11 +198,9 @@
 
 .DropdownList {
   width: 602px;
-  height: 208px;
   border-radius: 8px;
-  opacity: 1;
-  background: #ffffff;
-  box-shadow: 0px 4px 14px 0px #0000001a;
+  background: #fff;
+  box-shadow: 0 4px 14px 0 #0000001a;
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
@@ -216,11 +214,14 @@
   height: 52px;
   border: 0;
   border-bottom: 1px solid #f1f1f1;
-  background: #ffffff;
-  color: #222222;
+  background: #fff;
+  color: #222;
   text-align: left;
-  padding: 0 12px;
-  font-size: 14px;
+  padding: 0 24px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 52px;
   cursor: pointer;
 }
 
@@ -240,6 +241,16 @@
   z-index: 20;
   display: flex;
   flex-direction: column;
+}
+.Dropdown_Item:last-child {
+  border-bottom: 0;
+}
+.Dropdown_Item:hover {
+  background: #f5f5f5;
+}
+.Dropdown_Item.is-active {
+  background: #ececec;
+  font-weight: 600;
 }
 
 .Calendar_Header {
@@ -359,10 +370,29 @@
 }
 
 .Date_Row .is-selected {
-  background: #3db1fd;
-  color: #ffffff;
-}
 
+  width: 79.14286041259766px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #3f92f433;
+
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #3DB1FD;
+;
+}
+.Date_Row button.is-selected.is-weekend {
+  color: #3DB1FD;
+}
 .Date_Row button.is-weekend {
   color: #ff6b6b;
 }

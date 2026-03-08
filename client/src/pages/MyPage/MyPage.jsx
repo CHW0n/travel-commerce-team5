@@ -70,13 +70,6 @@ export default function MyPage() {
 
         <div className="Button_Row">
           <button type="button" className="Btn_Home" onClick={() => navigate("/")}>홈으로 가기</button>
-          <button
-            type="button"
-            className="Btn_Booking"
-            onClick={() => navigate(`/products/${latestOrder?.productId ?? "1"}`)}
-          >
-            예약 상세보기
-          </button>
         </div>
       </main>
     </div>
