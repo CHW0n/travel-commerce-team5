@@ -276,6 +276,11 @@ export default function ProductDetailPage() {
                     pricePerPerson: product.pricePerPerson,
                     totalPrice: product.pricePerPerson * guests,
                     productImageUrl: product.imagePath,
+                    address: product.address,
+                    satisfaction: product.satisfaction,
+                    bookings: product.bookings,
+                    duration: product.duration,
+                    languages: product.languages,
                   },
                 });
               }}

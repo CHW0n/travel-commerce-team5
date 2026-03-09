@@ -1,28 +1,75 @@
-import { useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { createOrder } from "../../api/client";
 import "./PaymentPage.css";
 import Header from "../../components/header/header";
 
 export default function PaymentPage() {
   const navigate = useNavigate();
-
   const location = useLocation();
-  const { guests = 1, pricePerPerson = 0, title = "", dateText = ""} = location.state || {};
 
-  const totalPrice = guests * pricePerPerson;
+  const {
+    productId = "",
+    title = "",
+    dateText = "",
+    guests = 1,
+    pricePerPerson = 0,
+    totalPrice: stateTotalPrice,
+    productImageUrl = "",
+    address = "",
+    satisfaction = "",
+    bookings = 0,
+    duration = "",
+    languages = [],
+  } = location.state || {};
 
-  const handlePayment = () =>
-    navigate("/complete", {
-      state: {
-        order: {
-          title,
-          dateText,
-          people: guests,
-          unitPrice: pricePerPerson,
-          totalPrice,
+  const totalPrice = stateTotalPrice ?? guests * pricePerPerson;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+
+  useEffect(() => {
+    if (!location.state?.title) {
+      navigate("/", { replace: true });
+    }
+  }, [location.state, navigate]);
+
+  const handlePayment = async () => {
+    if (!productId || !title || !dateText) {
+      setSubmitError("예약 정보가 올바르지 않습니다. 다시 시도해주세요.");
+      return;
+    }
+    setIsSubmitting(true);
+    setSubmitError(null);
+    try {
+      const created = await createOrder({
+        productId,
+        title,
+        dateText,
+        people: guests,
+        unitPrice: pricePerPerson,
+        totalPrice,
+        ...(productImageUrl ? { productImageUrl } : {}),
+      });
+      navigate("/complete", {
+        state: {
+          order: {
+            id: created.id,
+            createdAt: created.createdAt,
+            title: created.title,
+            dateText: created.dateText,
+            people: created.people,
+            unitPrice: created.unitPrice,
+            totalPrice: created.totalPrice,
+            productImageUrl: created.productImageUrl,
+          },
         },
-      },
-  });
+      });
+    } catch (err) {
+      setSubmitError(err.message || "주문 저장에 실패했습니다.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="PaymentPage">
@@ -46,13 +93,13 @@ export default function PaymentPage() {
       {/* ================= Tour Section ================= */}
       <div className="Pay_Tour_Section">
         <img
-          src="/images/Tour_Image.png"
-          alt="투어 이미지"
+          src={productImageUrl || "/images/Tour_Image.png"}
+          alt={title}
           className="Tour_Image"
         />
         <div className="Tour_Info">
           <div className="Tour_DetailRow">
-            <div className="Tour_Title">남산 타워 & 한강 유람선</div>
+            <div className="Tour_Title">{title}</div>
             <div className="Tour_Price">{pricePerPerson.toLocaleString()}원</div>
           </div>
 
@@ -63,13 +110,17 @@ export default function PaymentPage() {
               alt=""
               className="Location_Icon"
             />
-            <div className="Location_Text">서울특별시 중구 남산공원길 105</div>
+            <div className="Location_Text">{address}</div>
           </div>
 
           <div className="Meta_Row">
-            <div className="Tour_Rating">⭐ 4.9 / 3,200명 예약</div>
-            <div className="Tour_Meta">소요시간: 5시간</div>
-            <div className="language">한국어, 영어</div>
+            <div className="Tour_Rating">
+              ⭐ {satisfaction} / {Number(bookings).toLocaleString()}명 예약
+            </div>
+            <div className="Tour_Meta">소요시간: {duration}</div>
+            <div className="language">
+              {Array.isArray(languages) ? languages.join(", ") : languages}
+            </div>
           </div>
         </div>
       </div>
@@ -160,7 +211,17 @@ export default function PaymentPage() {
           </div>
         </div>
 
-        <button className="Btn_Payment" type="button" onClick={handlePayment}>
+        {submitError && (
+          <p style={{ color: "#c00", marginBottom: 8, fontSize: "14px" }}>
+            {submitError}
+          </p>
+        )}
+        <button
+          className="Btn_Payment"
+          type="button"
+          onClick={handlePayment}
+          disabled={isSubmitting}
+        >
           결제하기
         </button>
       </div>
