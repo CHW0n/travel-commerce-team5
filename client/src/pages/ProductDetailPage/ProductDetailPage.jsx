@@ -19,6 +19,7 @@ export default function ProductDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [dateError, setDateError] = useState("");
   const [guests, setGuests] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
   const visibleCount = 7;
@@ -153,7 +154,7 @@ export default function ProductDetailPage() {
               <div
                 key={startIndex + index}
                 className={selectedDate === dates[startIndex + index] ? "Date_Card_Selected" : "Date_Card"}
-                onClick={() => setSelectedDate(dates[startIndex + index])}
+                onClick={() => {setSelectedDate(dates[startIndex + index]); setDateError("");}}
               >
                 <span>{date.getMonth() + 1}월 {date.getDate()}일 ({days[date.getDay()]})</span>
                 <span>{product.pricePerPerson.toLocaleString()}원</span>
@@ -189,6 +190,12 @@ export default function ProductDetailPage() {
               </svg>
             </button>
           </div>
+
+          {dateError && (
+              <p style={{ marginTop: "12px", color: "#d32f2f", fontSize: "14px" }}>
+                {dateError}
+              </p>
+            )}
         </section>
         {/* Tour_People_Section */}
         <section className="Tour_People_Section">
@@ -251,6 +258,11 @@ export default function ProductDetailPage() {
             <button
               className="Detail_Btn_Booking"
               onClick={() => {
+                if (!selectedDate) {
+                  setDateError("이용 날짜를 선택해주세요.");
+                  return;
+                }
+
                 const dateText = selectedDate
                   ? `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일 (${days[selectedDate.getDay()]})`
                   : "";
