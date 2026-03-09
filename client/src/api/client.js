@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:4000";
+﻿const BASE_URL = "http://localhost:4000";
 
 async function request(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
@@ -29,4 +29,15 @@ export async function fetchProducts(region, page = 1, perPage = 16) {
 
 export async function fetchProductDetail(productId) {
   return request(`/api/products/${encodeURIComponent(productId)}`);
+}
+
+export async function createOrder(payload) {
+  return request("/api/orders", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function fetchOrders() {
+  return request("/api/orders");
 }
