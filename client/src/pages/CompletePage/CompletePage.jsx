@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./CompletePage.css";
+import Header from "../../components/header/header";
 
 export default function CompletePage() {
   const navigate = useNavigate();
@@ -34,28 +35,13 @@ export default function CompletePage() {
     );
   }, [order, calcTotal]);
 
-
   const handleGoHome = () => navigate("/");
   const handleGoMyPage = () => navigate("/mypage");
 
   return (
     <div className="CompletePage">
       {/* ================= Header ================= */}
-      <header className="Header">
-        <div className="Header_inner">
-          <div className="ohtrip-logo-icon2" onClick={handleGoHome}>
-            <img
-              src="/icon/ohtrip-logo-icon2.png"
-              alt="OhTrip 로고"
-              className="logo_img"
-            />
-          </div>
-
-          <button className="MyPage_Btn" type="button" onClick={handleGoMyPage}>
-            마이페이지
-          </button>
-        </div>
-      </header>
+      <Header />
 
       {/* ================= Nav ================= */}
       <div className="Nav">
