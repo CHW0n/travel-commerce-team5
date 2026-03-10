@@ -1,0 +1,700 @@
+[
+  {
+    "id": "gangneung-1",
+    "title": "강남축구공원",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/94/3577794_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 남부로 222 (노암동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.5,
+    "reviewCount": 418,
+    "bookings": 1973,
+    "duration": "1.5시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어",
+      "중국어"
+    ],
+    "pricePerPerson": 47000,
+    "itinerary": [
+      "강남축구공원 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-2",
+    "title": "강릉 3·1운동 기념공원",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/65/2900665_image2_1.JPG",
+    "address": "강원특별자치도 강릉시 경포로 349 (저동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.7,
+    "reviewCount": 300,
+    "bookings": 247,
+    "duration": "1.5시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어",
+      "중국어"
+    ],
+    "pricePerPerson": 36000,
+    "itinerary": [
+      "집합 장소 안내",
+      "강릉 3·1운동 기념공원 관람",
+      "Q&A 및 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-3",
+    "title": "강릉 경포대",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/52/3501452_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 경포로 365",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 332,
+    "bookings": 1611,
+    "duration": "2.5시간",
+    "languages": [
+      "한국어"
+    ],
+    "pricePerPerson": 26000,
+    "itinerary": [
+      "강릉 경포대 도착 및 입장",
+      "전경 감상 및 사진 촬영",
+      "주변 산책 및 휴식"
+    ]
+  },
+  {
+    "id": "gangneung-4",
+    "title": "강릉 굴산사지",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/22/3025022_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 구정면 학산리",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 41,
+    "bookings": 162,
+    "duration": "2.5시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "중국어"
+    ],
+    "pricePerPerson": 35000,
+    "itinerary": [
+      "강릉 굴산사지 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-5",
+    "title": "강릉 남산공원",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/05/3022205_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 강변로 224-12 (노암동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.3,
+    "reviewCount": 173,
+    "bookings": 479,
+    "duration": "1일",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어"
+    ],
+    "pricePerPerson": 34000,
+    "itinerary": [
+      "강릉 남산공원 도착 및 입장",
+      "전경 감상 및 사진 촬영",
+      "주변 산책 및 휴식"
+    ]
+  },
+  {
+    "id": "gangneung-6",
+    "title": "강릉 녹색도시체험센터",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/33/3072433_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 난설헌로 131 (초당동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 376,
+    "bookings": 881,
+    "duration": "1시간",
+    "languages": [
+      "한국어",
+      "영어"
+    ],
+    "pricePerPerson": 45000,
+    "itinerary": [
+      "강릉 녹색도시체험센터 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-7",
+    "title": "강릉 대기리마을",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/50/2050650_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 왕산면 왕산로 1327",
+    "regionId": "gangneung",
+    "satisfaction": 4.2,
+    "reviewCount": 253,
+    "bookings": 295,
+    "duration": "1.5시간",
+    "languages": [
+      "한국어",
+      "영어"
+    ],
+    "pricePerPerson": 31000,
+    "itinerary": [
+      "강릉 대기리마을 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-8",
+    "title": "강릉 대도호부 관아",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/79/3378379_image2_1.JPG",
+    "address": "강원특별자치도 강릉시 임영로131번길 6",
+    "regionId": "gangneung",
+    "satisfaction": 4.8,
+    "reviewCount": 69,
+    "bookings": 1383,
+    "duration": "반나절",
+    "languages": [
+      "한국어",
+      "영어"
+    ],
+    "pricePerPerson": 17000,
+    "itinerary": [
+      "강릉 대도호부 관아 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-9",
+    "title": "강릉 메타버스 체험관",
+    "imagePath": "https://tong.visitkorea.or.kr/cms/resource/96/3507296_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 난설헌로 131 (초당동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.3,
+    "reviewCount": 243,
+    "bookings": 1094,
+    "duration": "반나절",
+    "languages": [
+      "한국어"
+    ],
+    "pricePerPerson": 16000,
+    "itinerary": [
+      "강릉 메타버스 체험관 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-10",
+    "title": "강릉 모래내 한과마을(갈골한과)",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/75/3029675_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 사천면 한과마을길 20",
+    "regionId": "gangneung",
+    "satisfaction": 4.2,
+    "reviewCount": 441,
+    "bookings": 87,
+    "duration": "1일",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어",
+      "중국어"
+    ],
+    "pricePerPerson": 23000,
+    "itinerary": [
+      "강릉 모래내 한과마을(갈골한과) 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-11",
+    "title": "강릉 방동리 무궁화",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/39/3050739_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 사천면 가마골길 22-8",
+    "regionId": "gangneung",
+    "satisfaction": 4.2,
+    "reviewCount": 494,
+    "bookings": 1795,
+    "duration": "반나절",
+    "languages": [
+      "한국어",
+      "영어",
+      "중국어"
+    ],
+    "pricePerPerson": 41000,
+    "itinerary": [
+      "강릉 방동리 무궁화 도착 및 입장",
+      "전경 감상 및 사진 촬영",
+      "주변 산책 및 휴식"
+    ]
+  },
+  {
+    "id": "gangneung-12",
+    "title": "강릉 복사꽃마을",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/42/3383742_image2_1.JPG",
+    "address": "강원특별자치도 강릉시 신리천로 527-3 복사꽃정보마을센타",
+    "regionId": "gangneung",
+    "satisfaction": 4.5,
+    "reviewCount": 287,
+    "bookings": 1317,
+    "duration": "2.5시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "중국어"
+    ],
+    "pricePerPerson": 12000,
+    "itinerary": [
+      "강릉 복사꽃마을 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-13",
+    "title": "강릉 선교장",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/68/3493168_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 운정길 63",
+    "regionId": "gangneung",
+    "satisfaction": 4.3,
+    "reviewCount": 449,
+    "bookings": 713,
+    "duration": "2시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "중국어"
+    ],
+    "pricePerPerson": 18000,
+    "itinerary": [
+      "강릉 선교장 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-14",
+    "title": "강릉 솔향수목원",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/70/3493370_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 구정면 수목원길 156",
+    "regionId": "gangneung",
+    "satisfaction": 4.3,
+    "reviewCount": 502,
+    "bookings": 733,
+    "duration": "1.5시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어"
+    ],
+    "pricePerPerson": 50000,
+    "itinerary": [
+      "강릉 솔향수목원 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-15",
+    "title": "강릉 안목해맞이공원",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/09/3378409_image2_1.JPG",
+    "address": "강원특별자치도 강릉시 견소동",
+    "regionId": "gangneung",
+    "satisfaction": 4.6,
+    "reviewCount": 337,
+    "bookings": 454,
+    "duration": "2.5시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "중국어"
+    ],
+    "pricePerPerson": 22000,
+    "itinerary": [
+      "강릉 안목해맞이공원 도착 및 입장",
+      "전경 감상 및 사진 촬영",
+      "주변 산책 및 휴식"
+    ]
+  },
+  {
+    "id": "gangneung-16",
+    "title": "강릉 오금집",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/31/3378331_image2_1.JPG",
+    "address": "강원특별자치도 강릉시 강릉대로210번길 23-9 (임당동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.5,
+    "reviewCount": 320,
+    "bookings": 298,
+    "duration": "3시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어"
+    ],
+    "pricePerPerson": 23000,
+    "itinerary": [
+      "강릉 오금집 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-17",
+    "title": "강릉 월화거리",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/49/2921849_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 금성로11번길 9",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 70,
+    "bookings": 1303,
+    "duration": "1일",
+    "languages": [
+      "한국어",
+      "영어"
+    ],
+    "pricePerPerson": 44000,
+    "itinerary": [
+      "집합 장소 안내",
+      "강릉 월화거리 관람",
+      "Q&A 및 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-18",
+    "title": "강릉 임영관 삼문",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/25/3393425_image2_1.JPG",
+    "address": "강원특별자치도 강릉시 임영로131번길 6",
+    "regionId": "gangneung",
+    "satisfaction": 4.8,
+    "reviewCount": 363,
+    "bookings": 1273,
+    "duration": "2시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어",
+      "중국어"
+    ],
+    "pricePerPerson": 10000,
+    "itinerary": [
+      "강릉 임영관 삼문 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-19",
+    "title": "강릉 통일공원",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/50/3516850_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 율곡로 1715-38 통일안보전시관",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 301,
+    "bookings": 1434,
+    "duration": "반나절",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어"
+    ],
+    "pricePerPerson": 18000,
+    "itinerary": [
+      "강릉 통일공원 도착 및 입장",
+      "전경 감상 및 사진 촬영",
+      "주변 산책 및 휴식"
+    ]
+  },
+  {
+    "id": "gangneung-20",
+    "title": "강릉 한복 문화 창작소",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/50/3379850_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 동부시장3길 9 (옥천동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 316,
+    "bookings": 1057,
+    "duration": "1.5시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어"
+    ],
+    "pricePerPerson": 33000,
+    "itinerary": [
+      "강릉 한복 문화 창작소 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-21",
+    "title": "강릉 한울타리마을",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/99/3378399_image2_1.JPG",
+    "address": "강원특별자치도 강릉시 옥계면 북동용소길 137",
+    "regionId": "gangneung",
+    "satisfaction": 4.5,
+    "reviewCount": 458,
+    "bookings": 355,
+    "duration": "1일",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어",
+      "중국어"
+    ],
+    "pricePerPerson": 34000,
+    "itinerary": [
+      "강릉 한울타리마을 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-22",
+    "title": "강릉 해살이마을",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/60/3383760_image2_1.JPG",
+    "address": "강원특별자치도 강릉시 사천면 중앙서로 557-1",
+    "regionId": "gangneung",
+    "satisfaction": 4.3,
+    "reviewCount": 286,
+    "bookings": 1200,
+    "duration": "1일",
+    "languages": [
+      "한국어",
+      "영어"
+    ],
+    "pricePerPerson": 38000,
+    "itinerary": [
+      "집합 장소 안내",
+      "강릉 해살이마을 관람",
+      "Q&A 및 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-23",
+    "title": "강릉 해운정",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/55/3528055_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 운정길 125",
+    "regionId": "gangneung",
+    "satisfaction": 4.6,
+    "reviewCount": 248,
+    "bookings": 273,
+    "duration": "3시간",
+    "languages": [
+      "한국어",
+      "영어"
+    ],
+    "pricePerPerson": 47000,
+    "itinerary": [
+      "강릉 해운정 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-24",
+    "title": "강릉수월래",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/93/3050593_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 죽헌길9번길 17 (유천동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 224,
+    "bookings": 1784,
+    "duration": "1일",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어"
+    ],
+    "pricePerPerson": 33000,
+    "itinerary": [
+      "집합 장소 안내",
+      "강릉수월래 관람",
+      "Q&A 및 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-25",
+    "title": "강릉시강남축구공원",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/95/3406895_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 남부로 226 (노암동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.6,
+    "reviewCount": 148,
+    "bookings": 1338,
+    "duration": "2시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "중국어"
+    ],
+    "pricePerPerson": 28000,
+    "itinerary": [
+      "강릉시강남축구공원 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-26",
+    "title": "강릉아기동물농장",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/28/3499728_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 사천면 해안로 1121-144",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 220,
+    "bookings": 438,
+    "duration": "1일",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어"
+    ],
+    "pricePerPerson": 14000,
+    "itinerary": [
+      "강릉아기동물농장 정문 집합",
+      "내부 관람 및 해설 투어",
+      "주변 연계 코스 안내"
+    ]
+  },
+  {
+    "id": "gangneung-27",
+    "title": "강릉아트센터",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/95/3531895_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 종합운동장길 84",
+    "regionId": "gangneung",
+    "satisfaction": 4.5,
+    "reviewCount": 180,
+    "bookings": 302,
+    "duration": "2시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어"
+    ],
+    "pricePerPerson": 14000,
+    "itinerary": [
+      "집합 장소 안내",
+      "강릉아트센터 관람",
+      "Q&A 및 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-28",
+    "title": "강릉안반데기관광농원",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/04/3500804_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 안반데기1길 203",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 394,
+    "bookings": 1023,
+    "duration": "1.5시간",
+    "languages": [
+      "한국어"
+    ],
+    "pricePerPerson": 45000,
+    "itinerary": [
+      "강릉안반데기관광농원 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-29",
+    "title": "강릉커피거리",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/93/3557693_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 창해로14번길 20-1",
+    "regionId": "gangneung",
+    "satisfaction": 4.1,
+    "reviewCount": 448,
+    "bookings": 817,
+    "duration": "1.5시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "중국어"
+    ],
+    "pricePerPerson": 25000,
+    "itinerary": [
+      "강릉커피거리 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-30",
+    "title": "강릉항",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/82/2921882_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 창해로14번길 55-11",
+    "regionId": "gangneung",
+    "satisfaction": 4.6,
+    "reviewCount": 153,
+    "bookings": 1465,
+    "duration": "3시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "중국어"
+    ],
+    "pricePerPerson": 12000,
+    "itinerary": [
+      "강릉항 도착 및 입장",
+      "전경 감상 및 사진 촬영",
+      "주변 산책 및 휴식"
+    ]
+  },
+  {
+    "id": "gangneung-31",
+    "title": "강릉향교",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/99/3374199_image2_1.JPG",
+    "address": "강원특별자치도 강릉시 명륜로 29",
+    "regionId": "gangneung",
+    "satisfaction": 4.6,
+    "reviewCount": 66,
+    "bookings": 1181,
+    "duration": "2.5시간",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어",
+      "중국어"
+    ],
+    "pricePerPerson": 49000,
+    "itinerary": [
+      "강릉향교 집합 및 투어 안내",
+      "주요 관람 포인트 둘러보기",
+      "해설 및 자유 관람 마무리"
+    ]
+  },
+  {
+    "id": "gangneung-32",
+    "title": "강문솟대다리",
+    "imagePath": "http://tong.visitkorea.or.kr/cms/resource/32/2921932_image2_1.jpg",
+    "address": "강원특별자치도 강릉시 해안로406번길 2 (강문동)",
+    "regionId": "gangneung",
+    "satisfaction": 4.8,
+    "reviewCount": 43,
+    "bookings": 694,
+    "duration": "1일",
+    "languages": [
+      "한국어",
+      "영어",
+      "일본어"
+    ],
+    "pricePerPerson": 27000,
+    "itinerary": [
+      "집합 장소 안내",
+      "강문솟대다리 관람",
+      "Q&A 및 마무리"
+    ]
+  }
+]

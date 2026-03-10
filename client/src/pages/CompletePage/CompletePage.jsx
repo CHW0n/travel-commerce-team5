@@ -7,19 +7,16 @@ export default function CompletePage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ PaymentPage에서 navigate("/complete", { state: {...} })로 넘기면 여기서 받음
-  // 아직 안 넘기고 있으니 fallback(임시값)으로 렌더됨
-  const order = location.state?.order ?? {
-    title: "남산 타워 & 한강 유람선",
-    dateText: "2월 20일 (화)",
-    people: 2,
-    unitPrice: 33280,
-    totalPrice: 66269, // 피그마 예시 값(스크린샷)
-    // productImageUrl: "", // 나중에 실제 이미지 URL 넣기
-  };
+  // PaymentPage에서 navigate("/complete", { state: { order } })로 넘긴 주문 정보
+  const order = location.state?.order ?? null;
+
+  useEffect(() => {
+    if (!order) navigate("/", { replace: true });
+  }, [order, navigate]);
 
   const calcTotal = useMemo(() => {
     // totalPrice가 있으면 우선 사용, 없으면 unitPrice*people
+    if (!order) return 0;
     if (typeof order.totalPrice === "number") return order.totalPrice;
     return (order.unitPrice ?? 0) * (order.people ?? 1);
   }, [order]);
@@ -112,7 +109,7 @@ export default function CompletePage() {
           <div className="Product_Info">
             <div className="Product_Image">
               <img
-                src="/images/Tour_Image.png"
+                src={order.productImageUrl || "/images/Tour_Image.png"}
                 alt={order.title}
                 className="Product_Image_Img"
               />
