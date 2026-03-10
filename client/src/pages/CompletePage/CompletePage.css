@@ -1,0 +1,416 @@
+/* =========================
+   CompletePage.css (Figma 기반)
+   - Header: 1728 x 80, padding 16 60, space-between
+   - Nav:    1728 x 64, padding 16 56 16 170
+   - Hero:   1392 x 550, left 168, radius 18
+   - Order:  1392 x 449, left 168, radius 18, padding 24, gap 24
+   - Buttons: 130 x 44, radius 8, padding 10 20
+========================= */
+
+.CompletePage {
+  background: var(--bg-base);
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 81px;
+}
+
+
+/* ================= Nav ================= */
+.CompletePage .Nav {
+  height: 64px;
+  margin-top: 32px;
+  padding: 16px 56px 16px 170px;
+  display: flex;
+  align-items: center;
+}
+
+.CompletePage .Nav_container {
+  height: 32px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.CompletePage .Nav_container img {
+  width: 24px;
+  height: 24px;
+}
+
+.CompletePage .Nav_text {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0;
+}
+
+.CompletePage .Nav_text.active {
+  font-weight: 700;
+}
+
+
+/* ================= Hero ================= */
+.Hero_Section {
+  width: calc(100% - 336px);
+  height: 550px;
+  margin: 0 auto;
+  margin-top: 0; /* nav 바로 아래 */
+
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+
+  background: #dcdcdc; /* 이미지 없을 때 placeholder */
+}
+
+.Hero_Image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 35%; 
+  background-repeat: no-repeat;
+}
+
+/* 아래쪽 어둡게 그라데이션 */
+.Gradient_Overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 45%,   
+    rgba(0, 0, 0, 0.3) 65%, 
+    rgba(0, 0, 0, 0.75) 100% 
+  );
+
+  pointer-events: none;
+}
+
+.Hero_Content {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+  text-align: center;
+
+  z-index: 2;
+  color: #ffffff;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* 체크 아이콘  */
+.check_icon {
+  width: 93.48px;   
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check_icon_img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* Hero 제목(예약 완료) */
+.Tour_Title.main {
+  width: 526px;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+  letter-spacing: -0.005em; /* -0.5% 근사 */
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Hero 설명문 */
+.Tour_Title.sub {
+  width: 526px;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: -0.005em; /* -0.5% 근사 */
+  color: #ffffff;
+  text-align: center;
+  opacity: 1; /* 피그마가 100%면 1 */
+}
+
+/* ================= Order Product Section ================= */
+.Order_Product_Section {
+  width: calc(100% - 336px);
+  height: 449px;
+  margin: 0 auto;
+  margin-top: 72px;
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.Section_Title {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 600;
+  color: #222222;
+}
+
+.Divider {
+  width: 100%;
+  height: 1px;
+  background: #d2d2d2; 
+}
+
+/* 상품 row */
+.Product_Row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  height: 200px;        /* 피그마 캡쳐에 200px로 잡힘 */
+  padding-right: 10px;  /* 피그마 우측 padding 10px */
+  box-sizing: border-box;
+}
+
+.Product_Info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.Product_Image {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  overflow: hidden; /* 이미지 모서리 잘리게 */
+  flex: 0 0 auto;
+}
+
+.Product_Image_Img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 꽉 차게 */
+  display: block;
+}
+
+.Product_Text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.Product_Title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #222222;
+  font-family: "Pretendard", sans-serif;
+  line-height: 36px;
+  letter-spacing: -0.005em;
+}
+
+/* 날짜: 고정 width/height 빼는 게 안전 */
+.Product_Date {
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+  color: #222222;
+
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+/* 2명: 피그마처럼 24x24 박스 */
+.Product_People {
+  width: 24px;
+  height: 24px;
+
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+  color: #222222;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+
+  white-space: nowrap;
+}
+
+.Product_Price {
+  font-size: 24px;
+  font-weight: 600;
+  color: #222222;
+  white-space: nowrap;
+  font-family: "Pretendard", sans-serif;
+}
+
+/* 가격 요약 */
+
+.Order_Price_Row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  width: 100%;
+}
+
+/* 위 작은 줄 */
+.Order_Price_Meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #222;
+}
+
+/* 아래 큰 줄 */
+.Order_Total_Price {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.Order_Total_Label {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 700;
+  color: #222;
+}
+
+.Frame_5921 {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.Order_Total_Value {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 700;
+  color: #3DB1FD;
+}
+
+.Order_Total_Won {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* ================= Buttons ================= */
+/* ================= Buttons ================= */
+.Btn_Group {
+  width: 1392px;
+  margin: 0 auto;
+  margin-top: 55px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+/* 공통 버튼 (Figma: 130x44, radius 8, padding 10 20) */
+.Btn_Booking {
+  width: 130px;
+  height: 44px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border-radius: 8px;
+
+  /* 텍스트 정렬 안정화 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Figma 느낌: 16/24 */
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* 홈으로 가기(기본 버튼) */
+.Btn_Booking.secondary {
+  background: #ffffff;
+  color: #222;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* 예약 상세보기(Primary 버튼) */
+.Btn_Booking.primary {
+  background: #3DB1FD;
+  color: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  font-weight: 700; /* 피그마에서 강조면 */
+}
+
+.Btn_Booking:active {
+  transform: translateY(1px);
+}
+
+/* ================= Responsive ================= */
+/* 화면이 좁아져도 좌우 168 유지(가능한 구간까지) */
+@media (max-width: 1728px) {
+  .Header,
+  .Nav {
+    width: 100%;
+  }
+
+  .Hero_Section,
+  .Order_Product_Section,
+  .Btn_Group {
+    width: calc(100% - 336px);
+  }
+}
+
+@media (max-width: 900px) {
+  .Header {
+    padding: 16px;
+  }
+
+  .Nav {
+    padding: 16px;
+  }
+
+  .Hero_Section,
+  .Order_Product_Section,
+  .Btn_Group {
+    width: calc(100% - 32px);
+  }
+
+  .Product_Image {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+.Hero_Section,
+.Order_Product_Section {
+  box-shadow: 0px 11px 23px -5px #C5C5C540;
+}
