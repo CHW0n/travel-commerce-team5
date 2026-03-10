@@ -94,105 +94,94 @@
    - radius: 18
 */
 .Pay_Tour_Section  {
-  margin-top: 0;
+  width: 100%;
   height: 726px;
   border-radius: 18px;
-  background: #ffffff;
   overflow: hidden;
-  box-sizing: border-box;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
 }
 
 /* 이미지 영역 (피그마: 550px) */
 .Tour_Image {
-  height: 550px;
   width: 100%;
-  background: #dcdcdc;
+  height: 550px;
+  object-fit: cover;
 }
 
 /* 텍스트 영역 */
 .Tour_Info {
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
 }
 
-/* 제목 + 가격: 오른쪽 정렬 핵심 */
-.Tour_DetailRow {
+.Tour_Info_Top {
+  padding: 24px 24px 0 24px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  align-items: flex-start;
 }
 
-/* 피그마 캡처: 제목 32px / line-height 48 */
-.Tour_Title {
-  font-family: "Pretendard", sans-serif;
+.Tour_Detail_Top {
+  gap: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Detail_Tour_Title {
+  margin: 0;
+  font-weight: 700;
   font-size: 32px;
   line-height: 48px;
-  font-weight: 700;
-  letter-spacing: -0.5%;
-  color: #000;
 }
 
-/* 피그마 캡처: 가격 24px / line-height 36 */
-.Tour_Price {
-  font-family: "Pretendard", sans-serif;
-  font-size: 24px;
-  line-height: 36px;
-  font-weight: 700;
-  letter-spacing: -0.5%;
-  color: #000;
-  white-space: nowrap;
-}
-
-/* 위치 줄 */
-.Location_Row {
-  display: flex;
-  align-items: center;   /* 세로 가운데 정렬 */
-  gap: 8px;
-}
-
-.Location_Icon {
-  width: 24px;
-  height: 24px;
-  flex: 0 0 24px;
-  display: block;        /* inline baseline 제거 */
-}
-
-.Location_Text {
-  font-family: "Pretendard", sans-serif;
-  font-size: 20px;
-  line-height: 32px;
-  font-weight: 400;
-  letter-spacing: -0.5%;
-  color: #000;
-}
-
-/* 메타 줄 */
-.Meta_Row {
-  margin-top: 6px;
+.Detail_Location_Row {
+  gap: 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-wrap: wrap; /* 줄어들 때 깨짐 방지 */
 }
 
-.Tour_Rating {
-  font-family: "Pretendard", sans-serif;
-  font-size: 18px;
-  line-height: 20px;
+.Detail_Location_Icon {
+  width: 24px;
+  height: 24px;
+}
+
+.Detail_Location_Text {
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.Detail_Tour_Price {
+  font-size: 24px;
   font-weight: 700;
-  letter-spacing: -0.5%;
-  color: #000;
 }
 
-.Tour_Meta,
-.language {
-  font-family: "Pretendard", sans-serif;
+.Tour_Info_Bottom {
+  gap: 10px;
+  padding: 14px 26px 24px 26px;
+  display: flex;
+  align-items: center;
+}
+
+.Tour_Detail_Bottom {
+  gap: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.Tour_Text {
+  gap: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.Detail_Tour_Rating,
+.Detail_Tour_Meta,
+.Detail_language {
   font-size: 18px;
   line-height: 20px;
-  font-weight: 400;
-  letter-spacing: -0.5%;
-  color: #000;
 }
 
 /* ================= Traveler Info Section =================
@@ -548,4 +537,10 @@
 }
 .Btn_Payment:active {
   transform: translateY(1px);
+}
+
+.Pay_Tour_Section,
+.TravelerInfo_Section,
+.Payment_Summary_Section {
+  box-shadow: 0px 11px 23px -5px #C5C5C540;
 }
