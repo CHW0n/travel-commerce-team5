@@ -540,6 +540,15 @@
     linear-gradient(130deg, #2f3747 0%, #896037 45%, #ae7b46 100%);
 }
 
+/* 메인페이지 api 연동하면서 추가한 스타일 */
+.Card_image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .best_badge {
   position: absolute;
   top: 24px;

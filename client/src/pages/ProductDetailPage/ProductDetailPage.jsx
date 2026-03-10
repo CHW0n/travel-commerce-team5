@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchProductDetail } from "../../api/client";
+import Header from "../../components/header/header";
 import "./ProductDetailPage.css";
 
 const today = new Date();
@@ -10,10 +12,14 @@ const dates = Array.from({ length: 10 }, (_, i) => {
   return date;
 });
 
-
 export default function ProductDetailPage() {
   const navigate = useNavigate();
+  const { productId } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [dateError, setDateError] = useState("");
   const [guests, setGuests] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
   const visibleCount = 7;
@@ -21,49 +27,47 @@ export default function ProductDetailPage() {
   const canGoPrev = startIndex > 0;
   const canGoNext = startIndex + visibleCount < dates.length;
 
+  useEffect(() => {
+    if (!productId) {
+      setLoading(false);
+      setError("상품 ID가 없습니다.");
+      return;
+    }
 
-  const product = {
-    title: "남산 타워 & 한강 유람선",
-    imagePath: "/public/images/seoul-1.png",
-    address: "서울특별시 중구 남산공원길 105",
-    satisfaction: 4.8,
-    bookings: 3200,
-    duration: "5시간",
-    languages: ["한국어", "영어"],
-    pricePerPerson: 35000,
-    itinerary: [
-      "남산 케이블카 → N서울타워 전망대 관람",
-      "한강 유람선 탑승 및 야경 감상",
-      "광장시장 야시장 투어"
-    ]
-  };
+    setLoading(true);
+    setError(null);
+    fetchProductDetail(productId)
+      .then(setProduct)
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [productId]);
 
   return (
     <div className="ProductDetailPage">
       {/* ── Header ── */}
-      <header className="Header">
-        <div className="page Header_Row">
-          <Link to="/" className="Header_logo" aria-label="5trip 홈">
-            <span className="ohtrip-logo-icon2">
-              <img src="/icon/ohtrip-logo-icon2.png" alt="5TRIP" className="logo_img" />
-            </span>
-          </Link>
-          <Link to="/mypage" className="MyPage_Btn" aria-label="마이페이지로 이동">
-            <span className="MyPage_Btn_Text">마이페이지</span>
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       {/* ── Nav ── */}
       <nav className="Detail_Nav">
         <div className="Detail_Nav_container">
-          <img src="/public/icon/Home_icon.png" alt="home icon" />
+          <img className="home_icon" src="/public/icon/Home_icon.png" alt="home icon" />
           <span className="Detail_Nav_text">HOME</span>
-          <img src="/public/icon/arrow_right.png" alt="arrow right" />
+          <img className="arrow_icon" src="/public/icon/arrow_right.png" alt="arrow right" />
           <span className="Detail_Nav_text">상품 상세</span>
         </div>
       </nav>
 
+      {loading && (
+        <main style={{ padding: "40px", textAlign: "center" }}>
+          로딩 중...
+        </main>
+      )}
+      {error && (
+        <main style={{ padding: "40px", textAlign: "center", color: "#999" }}>
+          {error}
+        </main>
+      )}
+      {!loading && !error && product && (
       <main>
         {/* 상세 전용 투어 섹션 (메인 .Tour_Section과 구분) */}
         <section className="Detail_Tour_Section">
@@ -150,7 +154,7 @@ export default function ProductDetailPage() {
               <div
                 key={startIndex + index}
                 className={selectedDate === dates[startIndex + index] ? "Date_Card_Selected" : "Date_Card"}
-                onClick={() => setSelectedDate(dates[startIndex + index])}
+                onClick={() => {setSelectedDate(dates[startIndex + index]); setDateError("");}}
               >
                 <span>{date.getMonth() + 1}월 {date.getDate()}일 ({days[date.getDay()]})</span>
                 <span>{product.pricePerPerson.toLocaleString()}원</span>
@@ -186,6 +190,12 @@ export default function ProductDetailPage() {
               </svg>
             </button>
           </div>
+
+          {dateError && (
+              <p style={{ marginTop: "12px", color: "#d32f2f", fontSize: "14px" }}>
+                {dateError}
+              </p>
+            )}
         </section>
         {/* Tour_People_Section */}
         <section className="Tour_People_Section">
@@ -248,19 +258,29 @@ export default function ProductDetailPage() {
             <button
               className="Detail_Btn_Booking"
               onClick={() => {
+                if (!selectedDate) {
+                  setDateError("이용 날짜를 선택해주세요.");
+                  return;
+                }
+
                 const dateText = selectedDate
                   ? `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일 (${days[selectedDate.getDay()]})`
                   : "";
 
                 navigate("/payment", {
                   state: {
+                    productId: product.id ?? productId,
                     title: product.title,
                     dateText,
                     guests,
                     pricePerPerson: product.pricePerPerson,
-                    // 필요하면 이미지/주소도 같이
-                    // imageUrl: product.imagePath,
-                    // address: product.address,
+                    totalPrice: product.pricePerPerson * guests,
+                    productImageUrl: product.imagePath,
+                    address: product.address,
+                    satisfaction: product.satisfaction,
+                    bookings: product.bookings,
+                    duration: product.duration,
+                    languages: product.languages,
                   },
                 });
               }}
@@ -271,6 +291,7 @@ export default function ProductDetailPage() {
           </div>
         </section>
       </main>
+      )}
     </div>
   );
 }

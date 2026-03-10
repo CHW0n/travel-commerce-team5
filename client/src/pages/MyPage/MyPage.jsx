@@ -1,10 +1,31 @@
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useBooking } from "../../context/BookingContext";
+import { fetchOrders } from "../../api/client";
 import "./MyPage.css";
 
 export default function MyPage() {
   const navigate = useNavigate();
-  const { orders } = useBooking();
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function loadOrders() {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await fetchOrders();
+        setOrders(Array.isArray(data) ? data : []);
+      } catch (err) {
+        setError(err.message || "주문 목록을 불러오지 못했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadOrders();
+  }, []);
+
   const latestOrder = orders[0] ?? null;
 
   return (
@@ -47,11 +68,21 @@ export default function MyPage() {
             <h2 className="Section_Title">주문 상품</h2>
             <div className="Divider" />
 
-            {latestOrder ? (
+            {loading && (
+              <p style={{ padding: "20px", textAlign: "center" }}>로딩 중...</p>
+            )}
+            {!loading && error && (
+              <p style={{ padding: "20px", color: "#c00", textAlign: "center" }}>{error}</p>
+            )}
+            {!loading && !error && latestOrder && (
               <div key={latestOrder.id} className="Order_Row_Block">
                 <article className="My_Product_Row">
                   <div className="Product_Info">
-                    <img src="/images/Tour_Image.png" alt={latestOrder.title} className="Product_Image" />
+                    <img
+                      src={latestOrder.productImageUrl || "/images/Tour_Image.png"}
+                      alt={latestOrder.title}
+                      className="Product_Image"
+                    />
                     <div className="Product_Text">
                       <h3 className="My_Product_Title">{latestOrder.title}</h3>
                       <p className="My_People_Date">{latestOrder.dateText || "날짜 미정"}</p>
@@ -62,7 +93,8 @@ export default function MyPage() {
                 </article>
                 <div className="Divider" />
               </div>
-            ) : (
+            )}
+            {!loading && !error && !latestOrder && (
               <p style={{ padding: "20px" }}>예약 내역이 없습니다.</p>
             )}
           </section>
