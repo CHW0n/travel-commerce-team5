@@ -57,9 +57,9 @@ export default function ProductDetailPage() {
       {/* ── Nav ── */}
       <nav className="Detail_Nav">
         <div className="Detail_Nav_container">
-          <img src="/public/icon/Home_icon.png" alt="home icon" />
+          <img className="home_icon" src="/public/icon/Home_icon.png" alt="home icon" />
           <span className="Detail_Nav_text">HOME</span>
-          <img src="/public/icon/arrow_right.png" alt="arrow right" />
+          <img className="arrow_icon" src="/public/icon/arrow_right.png" alt="arrow right" />
           <span className="Detail_Nav_text">상품 상세</span>
         </div>
       </nav>
