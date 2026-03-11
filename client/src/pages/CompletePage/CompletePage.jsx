@@ -23,6 +23,7 @@ export default function CompletePage() {
 
   useEffect(() => {
     // complete 페이지에 도착하면 최신 주문 1건 저장
+    if (!order) return;
     localStorage.setItem(
       "latestOrder",
       JSON.stringify({
@@ -34,6 +35,8 @@ export default function CompletePage() {
 
   const handleGoHome = () => navigate("/");
   const handleGoMyPage = () => navigate("/mypage");
+
+  if (!order) return null;
 
   return (
     <div className="CompletePage">
