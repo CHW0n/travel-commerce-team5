@@ -308,8 +308,10 @@ export default function MainPage() {
                         )}
                         <div className="info">
                           <h2 className="Card_title">{tour.title}</h2>
-                          <p className="Card_meta">
-                            ★ {tour.satisfaction} · 후기 {tour.reviewCount}개
+                          <p className="Card_rating">
+                            ⭐️ {tour.satisfaction} / 5
+                          </p>
+                          <p className="Card_duration"> 한국어 · 1박 2일
                           </p>
                           <p className="Card_price">
                             {tour.pricePerPerson.toLocaleString()}원
