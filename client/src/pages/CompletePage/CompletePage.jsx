@@ -79,7 +79,12 @@ export default function CompletePage() {
 
       {/* ================= Hero_Section ================= */}
       <div className="Hero_Section">
-        <div className="Hero_Image" />
+        <div
+          className="Hero_Image"
+          style={{
+            backgroundImage: `url(${order?.productImageUrl || "/images/Tour_Image.png"})`,
+          }}
+        />
         <div className="Gradient_Overlay" />
         <div className="Hero_Content">
           <div className="check_icon">

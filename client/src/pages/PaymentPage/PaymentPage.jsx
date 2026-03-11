@@ -93,38 +93,47 @@ export default function PaymentPage() {
       {/* ================= Tour Section ================= */}
       <div className="Pay_Tour_Section">
         <img
+          className="Tour_Image"
           src={productImageUrl || "/images/Tour_Image.png"}
           alt={title}
-          className="Tour_Image"
         />
+
         <div className="Tour_Info">
-          <div className="Tour_DetailRow">
-            <div className="Tour_Title">{title}</div>
-            <div className="Tour_Price">{pricePerPerson.toLocaleString()}원</div>
-          </div>
+          <div className="Tour_Info_Top">
+            <div className="Tour_Detail_Top">
+              <h1 className="Detail_Tour_Title">{title}</h1>
 
-          <div className="Location_Row">
-            {/* 아이콘: 너가 svg로 받았으면 svg 경로로 바꿔 */}
-            <img
-              src="/icon/Location_Icon.png"
-              alt=""
-              className="Location_Icon"
-            />
-            <div className="Location_Text">{address}</div>
-          </div>
-
-          <div className="Meta_Row">
-            <div className="Tour_Rating">
-              ⭐ {satisfaction} / {Number(bookings).toLocaleString()}명 예약
+              <div className="Detail_Location_Row">
+                <img
+                  className="Detail_Location_Icon"
+                  src="/icon/Location_Icon.png"
+                  alt="location"
+                />
+                <span className="Detail_Location_Text">{address}</span>
+              </div>
             </div>
-            <div className="Tour_Meta">소요시간: {duration}</div>
-            <div className="language">
-              {Array.isArray(languages) ? languages.join(", ") : languages}
+
+            <div className="Detail_Tour_Price">
+              {pricePerPerson.toLocaleString()}원
+            </div>
+          </div>
+
+          <div className="Tour_Info_Bottom">
+            <div className="Tour_Detail_Bottom">
+              <div className="Tour_Text">
+                <span className="Detail_Tour_Rating">
+                  ⭐ {satisfaction} / {Number(bookings).toLocaleString()}명 예약
+                </span>
+                <span className="Detail_Tour_Meta">소요시간: {duration}</span>
+                <span className="Detail_language">
+                  {Array.isArray(languages) ? languages.join(", ") : languages}
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
+      
       {/* ================= TravelerInfo Section ================= */}
       <div className="TravelerInfo_Section">
         <div className="TravelerInfo_Title">여행자 정보 입력</div>

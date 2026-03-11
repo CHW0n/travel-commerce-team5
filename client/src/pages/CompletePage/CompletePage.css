@@ -65,10 +65,8 @@
 .Hero_Image {
   position: absolute;
   inset: 0;
-
-  background-image: url("/images/Tour_Image.png"); /* 여기만 네 파일명으로 */
   background-size: cover;
-  background-position: center 35%; /* 인물/건물 위쪽 살리고 싶으면 35~45% 추천 */
+  background-position: center 35%; 
   background-repeat: no-repeat;
 }
 
@@ -216,9 +214,12 @@
 }
 
 .Product_Title {
-  font-size: 16px;
-  font-weight: 900;
-  color: #111;
+  font-size: 24px;
+  font-weight: 600;
+  color: #222222;
+  font-family: "Pretendard", sans-serif;
+  line-height: 36px;
+  letter-spacing: -0.005em;
 }
 
 /* 날짜: 고정 width/height 빼는 게 안전 */
@@ -254,10 +255,11 @@
 }
 
 .Product_Price {
-  font-size: 18px;
-  font-weight: 900;
-  color: #111;
+  font-size: 24px;
+  font-weight: 600;
+  color: #222222;
   white-space: nowrap;
+  font-family: "Pretendard", sans-serif;
 }
 
 /* 가격 요약 */
@@ -406,4 +408,9 @@
     width: 96px;
     height: 96px;
   }
+}
+
+.Hero_Section,
+.Order_Product_Section {
+  box-shadow: 0px 11px 23px -5px #C5C5C540;
 }
