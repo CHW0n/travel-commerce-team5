@@ -50,9 +50,9 @@ export default function ProductDetailPage() {
       {/* ── Nav ── */}
       <nav className="Detail_Nav">
         <div className="Detail_Nav_container">
-          <img className="home_icon" src="/public/icon/Home_icon.png" alt="home icon" />
+          <img className="home_icon" src="/icon/Home_icon.png" alt="home icon" />
           <span className="Detail_Nav_text">HOME</span>
-          <img className="arrow_icon" src="/public/icon/arrow_right.png" alt="arrow right" />
+          <img className="arrow_icon" src="/icon/arrow_right.png" alt="arrow right" />
           <span className="Detail_Nav_text">상품 상세</span>
         </div>
       </nav>
@@ -80,7 +80,7 @@ export default function ProductDetailPage() {
               <div className="Tour_Detail_Top">
                 <h1 className="Detail_Tour_Title">{product.title}</h1>
                 <div className="Detail_Location_Row">
-                  <img className="Detail_Location_Icon" src="/public/icon/Location_icon.png" alt="location" />
+                  <img className="Detail_Location_Icon" src="/icon/Location_Icon.png" alt="location" />
                   <span className="Detail_Location_Text">{product.address}</span>
                 </div>
               </div>
@@ -233,7 +233,7 @@ export default function ProductDetailPage() {
                 className="Btn_Plus"
                 onClick={() => setGuests(guests + 1)}
               >
-                <img src="/public/icon/Btn_plus.png" alt="plus" />
+                <img src="/icon/Btn_Plus.png" alt="plus" />
               </button>
             </div>
 
