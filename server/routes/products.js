@@ -9,12 +9,23 @@ const __dirname = dirname(__filename);
 const PRODUCTS_DIR = join(__dirname, "../data/products");
 const VALID_REGIONS = ["seoul", "busan", "jeju", "gangneung"];
 
+function normalizeImageUrl(url) {
+  if (typeof url !== "string") return url;
+  // In HTTPS deployments, HTTP images are blocked as mixed content.
+  // Prefer HTTPS when the upstream supports it.
+  if (url.startsWith("http://")) return `https://${url.slice("http://".length)}`;
+  return url;
+}
+
 // ── 초기화: 서버 시작 시 전체 지역 데이터 캐싱 ──
 const productsCache = {};
 for (const regionId of VALID_REGIONS) {
   const filePath = join(PRODUCTS_DIR, `${regionId}.json`);
   if (existsSync(filePath)) {
-    productsCache[regionId] = JSON.parse(readFileSync(filePath, "utf-8"));
+    productsCache[regionId] = JSON.parse(readFileSync(filePath, "utf-8")).map((product) => ({
+      ...product,
+      imagePath: normalizeImageUrl(product.imagePath),
+    }));
   }
 }
 

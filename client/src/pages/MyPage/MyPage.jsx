@@ -45,10 +45,10 @@ export default function MyPage() {
 
       <nav className="Nav" aria-label="breadcrumb">
         <div className="Nav_container">
-          <img src="/icon/Home_icon.png" alt="" className="Home_icon" />
+          <img src="/icon/Home_icon.png" alt="홈" className="Nav_homeIcon" />
           <span className="Nav_text">HOME</span>
-          <img src="/icon/arrow_right.png" alt="" className="Nav_arrowIcon" />
-          <strong className="Nav_text_Active">마이페이지</strong>
+          <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
+          <span className="Nav_text active">마이페이지</span>
         </div>
       </nav>
 
