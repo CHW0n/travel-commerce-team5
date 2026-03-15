@@ -48,12 +48,12 @@ export default function ProductDetailPage() {
       <Header />
 
       {/* ── Nav ── */}
-      <nav className="Detail_Nav">
-        <div className="Detail_Nav_container">
-          <img className="home_icon" src="/icon/Home_icon.png" alt="home icon" />
-          <span className="Detail_Nav_text">HOME</span>
-          <img className="arrow_icon" src="/icon/arrow_right.png" alt="arrow right" />
-          <span className="Detail_Nav_text">상품 상세</span>
+      <nav className="Nav" aria-label="breadcrumb">
+        <div className="Nav_container">
+          <img className="Nav_homeIcon" src="/icon/Home_icon.png" alt="홈" />
+          <span className="Nav_text">HOME</span>
+          <img className="Nav_arrowIcon" src="/icon/arrow_right.png" alt=">" />
+          <span className="Nav_text active">상품 상세</span>
         </div>
       </nav>
 

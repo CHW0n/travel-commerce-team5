@@ -82,26 +82,27 @@
 }
 
 .MyPage .Nav {
-  width: min(1392px, calc(100% - 48px));
   height: 64px;
-  margin: 0 auto 0;
-  opacity: 1;
-  padding: 0;
-  box-sizing: border-box;
+  margin-top: 32px;
+  padding: 16px 56px 16px 170px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  background: #f4f4f4;
+  box-sizing: border-box;
 }
 
 .MyPage .Nav_container {
-  width: 217px;
-  height: 32px;
-  gap: 8px;
-  opacity: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  gap: 8px;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.MyPage .Nav_homeIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
 }
 
 .MyPage .Nav_arrowIcon {
@@ -111,49 +112,26 @@
   display: block;
 }
 
-.MyPage .Home_icon {
-  width: 24px;
-  height: 24px;
-  opacity: 1;
-  object-fit: contain;
-  display: block;
-}
-
 .MyPage .Nav_text {
-  width: auto;
-  height: 32px;
-  opacity: 1;
   font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: #222222;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 32px;
-  letter-spacing: 0;
-  color: #222222;
+  height: 32px;
+  display: flex;
+  align-items: center;
 }
 
-.MyPage .Icon_Frame {
-  width: auto;
-  height: 32px;
-  opacity: 1;
-  font-family: "Pretendard", sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 32px;
-  letter-spacing: 0;
-  text-align: center;
-  color: #666666;
-}
-
-.MyPage .Nav_text_Active {
-  width: auto;
-  height: 32px;
-  opacity: 1;
-  font-family: "Pretendard", sans-serif;
+.MyPage .Nav_text.active {
   font-weight: 700;
-  font-size: 14px;
-  line-height: 32px;
-  letter-spacing: 0;
-  color: #222222;
+}
+
+@media (max-width: 900px) {
+  .MyPage .Nav {
+    padding: 16px;
+  }
 }
 
 .MyPage .MyPage_Main {
