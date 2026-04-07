@@ -1,0 +1,164 @@
+.user_content {
+  width: 100%;
+  max-width: 1344px;
+  padding: 0 34px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.user_header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.user_title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user_Title_main {
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.5%;
+  color: #222222;
+}
+
+.user_Title_sub {
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 36px;
+  letter-spacing: -0.5%;
+  color: #222222;
+}
+
+/* 회원 정보 표 */
+.user_Form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.user_name {
+  display: flex;
+  width: 100%;
+  height: 68px;
+  border-top: 1px solid #D2D2D2;
+}
+
+.user_name:last-child {
+  border-bottom: 1px solid #D2D2D2;
+}
+
+.user_Label_name,
+.user_Label_user,
+.user_Label_email,
+.user_Label_pw {
+  width: 280px;
+  height: 100%;
+  padding: 10px 10px 10px 24px;
+  box-sizing: border-box;
+  background: #FAFAFA;
+  display: flex;
+  align-items: center;
+}
+
+.user_Label_text {
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: #222222;
+}
+
+.user_Field_name,
+.user_Field_user,
+.user_Field_email,
+.user_Field_pw {
+  width: 395px;
+  height: 100%;
+  padding: 10px 10px 10px 24px;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+}
+
+/* 홈 버튼과 수정 버튼 */
+.user_Field_text {
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: #222222;
+}
+
+.user_FieldRow_Contact {
+  width: 100%;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.user_Field_btn_con {
+  width: 100%;
+  height: 68px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user_Field_btn {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.user_btn_home {
+  width: 200px;
+  height: 48px;
+  padding: 13px 16px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #CFCFD0;
+  background: #FFFFFF;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: #222222;
+  cursor: pointer;
+}
+
+.user_btn_ch {
+  width: 200px;
+  height: 48px;
+  padding: 13px 16px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 0;
+  background: #3DB1FD;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
