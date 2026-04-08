@@ -162,7 +162,7 @@ export default function MyPage() {
                 className={({ isActive }) => `tab_pay${isActive ? " is-active" : ""}`}
               >
                 <span className="tab_label">결제 내역</span>
-                <div className="my_tab_indicator" />
+                {/* <div className="my_tab_indicator" /> */}
               </NavLink>
               <NavLink
                 to="profile"
