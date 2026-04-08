@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchProductDetail } from "../../api/client";
 import Header from "../../components/header/header";
+import LoginRequiredModal from "../../components/LoginRequiredModal/LoginRequiredModal";
+import { isLoggedIn } from "../../utils/auth";
 import "./ProductDetailPage.css";
 
 const today = new Date();
@@ -22,6 +24,7 @@ export default function ProductDetailPage() {
   const [dateError, setDateError] = useState("");
   const [guests, setGuests] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const visibleCount = 7;
   const visibleDates = dates.slice(startIndex, startIndex + visibleCount);
   const canGoPrev = startIndex > 0;
@@ -263,6 +266,11 @@ export default function ProductDetailPage() {
                   return;
                 }
 
+                if (!isLoggedIn()) {
+                  setIsLoginModalOpen(true);
+                  return;
+                }
+
                 const dateText = selectedDate
                   ? `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일 (${days[selectedDate.getDay()]})`
                   : "";
@@ -290,6 +298,10 @@ export default function ProductDetailPage() {
 
           </div>
         </section>
+        <LoginRequiredModal
+          open={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
       </main>
       )}
     </div>
