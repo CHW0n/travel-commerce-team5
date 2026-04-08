@@ -162,3 +162,254 @@
   cursor: pointer;
 }
 
+/* 기존 비밀번호 입력 */
+/* 비밀번호 입력 칸 */
+.user_Input_pw {
+  width: 375px;
+  height: 48px;
+  padding: 13px 16px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid rgba(17, 17, 19, 0.2); /* #11111333 */
+  background: rgba(0, 0, 0, 0.02); /* #00000005 */
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222222;
+}
+
+.user_Input_pw::placeholder {
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 14px; 
+  line-height: 100%; 
+  color: #9D9D9D; 
+  opacity: 1;
+}
+
+/* 확인 버튼 */
+.user_btn_pw {
+  width: 60px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(17, 17, 19, 0.2);
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+/* 버튼 내부 텍스트 */
+.user_pw_c {
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222222;
+}
+
+/* 두 요소를 나란히 배치하는 컨테이너 */
+.user_Field_pw_edit {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.user_pw_c_fail {
+  display: flex;
+  align-items: center;
+  width: 162px;
+  /* 버튼 바로 오른쪽에 고정되도록 설정 */
+}
+
+.pw_fail_text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 13px;
+  color: #F36A6A;
+  white-space: nowrap; 
+}
+
+/* 회원 탈퇴 */
+.Withdraw_container {
+  width: 100%;       /* 부모 너비를 꽉 채우고 */
+  text-align: right; /* 안의 내용물(버튼)을 오른쪽으로 밀기 */
+  margin-top: 12px;  /* 표와의 간격 */
+}
+
+.Withdraw_btn {
+  background: none;
+  border: none;
+  color: #9D9D9D;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+/* 새 비밀번호 입력 에러 */
+/* 공통: 에러 메시지가 나타나도 인풋창 크기가 변하지 않게 보호 */
+.user_Input_pw {
+  width: 375px;
+  flex-shrink: 0;
+}
+
+/* 1. 새 비밀번호 에러 (326px) */
+.user_pw_fail {
+  width: 326px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pw_fail_text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 13px;
+  color: #F36A6A;
+  white-space: nowrap;
+}
+
+/* 2. 비밀번호 확인 에러 (177px) */
+.user_pw_fail2 {
+  width: 177px; /* 피그마 수치 */
+  height: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pw_fail_text2 {
+  width: 177px; /* 피그마 수치 */
+  height: 16px;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 100%;
+  color: #F36A6A;
+  white-space: nowrap;
+}
+
+/* --- 모달 본체 --- */
+.Modal_Overlay {
+  position: fixed; 
+  
+  /* 2. 화면 전체 기준 0,0 위치에 고정 */
+  top: 0;
+  left: 0;
+  
+  /* 3. 브라우저 화면 꽉 채우기 */
+  width: 100vw;
+  height: 100vh;
+  
+  /* 4. 자식(User_Modal_Log)을 화면 정중앙으로 보내기 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* 6. 다른 요소보다 무조건 위로 */
+  z-index: 9999; 
+}
+
+
+.User_Modal_Log {
+  width: 574px;
+  height: auto; /* 내용에 맞게 조절되도록 auto 권장 (피그마는 238px) */
+  min-height: 238px;
+  padding: 20px 28px 24px 28px;
+  background: #FFFFFF;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* 1. X 버튼: 오른쪽 끝 */
+.User_Modal_dialog {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  justify-content: flex-end; /* 오른쪽으로 밀기 */
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.close_btn {
+  width: 20px;             /* 크기 고정 */
+  height: 20px;            /* 크기 고정 */
+  background: none;        /* 배경 투명 */
+  border: none;            /* 테두리 삭제 */
+  padding: 0;              /* 내부 여백 삭제 (이게 있으면 밀림) */
+  margin: 0;               /* 외부 여백 삭제 */
+  cursor: pointer;
+  display: flex;           /* 아이콘 중앙 정렬용 */
+  align-items: center;
+  justify-content: center;
+  line-height: 0;          /* 텍스트 라인 간섭 제거 */
+  outline: none;           /* 클릭 시 파란 테두리 제거 */
+}
+
+.close_icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;     /* 비율 유지 */
+}
+
+/* 2. 텍스트 영역: 왼쪽 정렬 */
+.User_Modal_header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left; /* 왼쪽 정렬 */
+  flex: 1;
+  margin-bottom: 30px; /* 버튼과의 간격 */
+}
+
+.Desc_text_title {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.4;
+  color: #000000;
+  margin: 0;
+}
+
+.Desc_text_content {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0;
+}
+
+/* 3. 하단 버튼: 오른쪽 끝 정렬 */
+.User_Modal_btn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* ⭐ 이미지처럼 오른쪽 끝으로 밀기 */
+  gap: 10px;
+}
+
+.Modal_user_btn_ext {
+  width: 57px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #CECECE;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+.Modal_user_btn_filled {
+  width: 65px;
+  height: 36px;
+  border-radius: 8px;
+  background: #3DB1FD;
+  border: none;
+  cursor: pointer;
+}
+
+.btn_text_cancel { color: #6D6D6D; font-size: 14px; }
+.btn_text_confirm { color: #FFFFFF; font-size: 14px; font-weight: 600; }

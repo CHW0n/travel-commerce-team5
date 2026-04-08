@@ -1,4 +1,4 @@
-.MyPage {
+/* .MyPage {
   min-height: 100vh;
   background: #f4f4f4;
   color: #222222;
@@ -419,20 +419,69 @@
     font-size: 30px;
     line-height: 38px;
   }
+} */
+
+
+
+
+
+
+
+
+.MyPage .Nav {
+  width: min(1392px, calc(100% - 48px));
+  
+  margin: 31px auto 0 auto; 
+  
+  height: 64px;
+
+  /* padding: 16px 24px;  */
+  
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-
-
-
-
-
-
+.MyPage .Nav_container {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 32px;
+  gap: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
 
 .Nav_userIcon {
   width: 24px;
   height: 24px;
   object-fit: contain;
   display: block;
+}
+
+.MyPage .Nav_arrowIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+.MyPage .Nav_text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: #222222;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.MyPage .Nav_text.active {
+  font-weight: 700;
+  color: #000000;
 }
 
 .MyPage .User_Module {

@@ -135,7 +135,21 @@ export default function MyPage() {
           <img src="/icon/User_02.png" alt="사용자" className="Nav_userIcon" />
           <span className="Nav_text">마이페이지</span>
           <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
-          <span className="Nav_text active">{tabLabel}</span>
+          {/* 경로에 따라 동적으로 표시 */}
+          <span className={`Nav_text ${!pathname.includes("edit") ? "active" : ""}`}>회원정보</span>
+          
+          {pathname.includes("edit") && (
+            <>
+              <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
+              <span className="Nav_text active">회원정보 수정</span>
+            </>
+          )}
+          {pathname.includes("withdraw-complete") && (
+            <>
+              <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
+              <span className="Nav_text active">회원탈퇴 완료</span>
+            </>
+          )}
         </div>
       </nav>
 
