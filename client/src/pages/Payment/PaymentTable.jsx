@@ -2,13 +2,6 @@ import React from 'react';
 import './PaymentTable.css';
 
 const PaymentTable = () => {
-    // 1. 시안용 임시 데이터
-    const payments = [
-        { id: 1, date: '2026.04.09', product: '[제주] 감성 숙소 2박 3일 패키지', amount: '450,000원', status: '결제완료' },
-        { id: 2, date: '2026.04.05', product: '[부산] 해운대 요트 투어', amount: '85,000원', status: '결제완료' },
-        { id: 3, date: '2026.03.20', product: '[강원] 속초 서핑 레슨', amount: '120,000원', status: '취소완료' },
-    ];
-
     return (
         <div className="payment-container">
             <nav className='nav'>

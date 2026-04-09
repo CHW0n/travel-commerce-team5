@@ -66,19 +66,14 @@
 /* tab */
 .my_Tabs_Wrapper {
     display: flex;
-    /* 가로로 배치 */
     width: 100%;
-    /* 1344 Fill (부모 너비에 꽉 차게) */
     height: 55px;
-    /* 55 Hug (높이 고정) */
     border-bottom: 2px solid #EEEEEE;
-    /* 기본 바닥 선 */
     margin-bottom: 30px;
 }
 
 .tab_item {
     flex: 1;
-    /* 탭 너비를 동일하게 배분 */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,27 +81,21 @@
     font-size: 18px;
     color: #999999;
     position: relative;
-    /* 파란색 바 위치 잡기용 */
 }
 
-/* 활성화된 탭 (파란색 바가 있는 곳) */
 .tab_item.active {
     color: #333333;
     font-weight: 600;
 }
 
-/* 두 번째 스팬 가르키기 질문하신 것처럼 가상 선택자로 바를 만들면 깔끔해요! */
 .tab_item.active::after {
     content: "";
     position: absolute;
     bottom: -2px;
-    /* 부모 border-bottom과 겹치게 */
     left: 0;
     width: 100%;
     height: 4px;
-    /* 파란색 바 두께 */
     background-color: #5DA7EF;
-    /* 피그마 시안의 파란색 */
 }
 
 .Paylist_content {
@@ -119,43 +108,31 @@
     font-weight: 600;
 }
 
-/* 1. 이미지와 정보를 감싸는 Row */
 .product_Row {
     display: flex;
     justify-content: space-between;
-    /* 양쪽 끝으로 밀어내기 (핵심!) */
     align-items: center;
-    /* 세로 중앙 정렬 */
     padding: 30px 0;
-    /* 위아래 간격 */
 }
 
-/* 2. 왼쪽 영역 (이미지 + 텍스트) */
 .product_info {
     display: flex;
     align-items: center;
-    /* 이미지와 텍스트 세로 중앙 정렬 */
     gap: 24px;
-    /* 이미지와 텍스트 사이 간격 */
 }
 
 .product_info img {
     width: 135px;
-    /* 시안에 맞춰 조절 */
     height: 135px;
     object-fit: cover;
     border-radius: 4px;
 }
 
-/* 3. 오른쪽 영역 (가격 + 버튼) */
 .paylist_etc {
     display: flex;
     flex-direction: column;
-    /* 세로로 쌓기 */
     align-items: flex-end;
-    /* 오른쪽 정렬 */
     gap: 12px;
-    /* 가격과 버튼 사이 간격 */
     align-items: center;
 }
 
