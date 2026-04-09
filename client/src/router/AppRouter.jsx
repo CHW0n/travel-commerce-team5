@@ -16,13 +16,12 @@ export default function AppRouter() {
       <Route path="/payment" element={<PaymentPage />} />
       <Route path="/complete" element={<CompletePage />} />
       <Route path="/mypage" element={<MyPage />}>
-        {/* /mypage 접속 시 기본적으로 profile로 리다이렉트 */}
+        {/* /mypage 접속 시 기본적으로 profile로 리다이렉트, 나중에 변경 필요 */}
         <Route index element={<Navigate to="profile" replace />} />
         <Route path="profile">
           <Route index element={<MemberInfo />} />       {/* /mypage/profile */}
           <Route path="edit" element={<EditPassword />} />  {/* /mypage/profile/edit */}
         </Route>
-        {/* orders는 나중에 추가 */}
       </Route>
       <Route path="/mypage/profile/withdraw-complete" element={<WithdrawComplete />} />
     </Routes>

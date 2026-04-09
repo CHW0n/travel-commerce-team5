@@ -233,9 +233,9 @@
 
 /* 회원 탈퇴 */
 .Withdraw_container {
-  width: 100%;       /* 부모 너비를 꽉 채우고 */
-  text-align: right; /* 안의 내용물(버튼)을 오른쪽으로 밀기 */
-  margin-top: 12px;  /* 표와의 간격 */
+  width: 100%;       
+  text-align: right; 
+  margin-top: 12px;  
 }
 
 .Withdraw_btn {
@@ -389,7 +389,7 @@
 .User_Modal_btn {
   width: 100%;
   display: flex;
-  justify-content: flex-end; /* 이미지처럼 오른쪽 끝으로 밀기 */
+  justify-content: flex-end; 
   gap: 10px;
 }
 

@@ -428,9 +428,33 @@
 
 
 
+.MyPage .MyPage_Btn {
+  width: 120px;
+  height: 48px;
+  padding: 8px 16px;
+  gap: 10px;
+  border-radius: 8px;
+  border: 0;
+  background: #3DB1FD;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.MyPage .MyPage_Btn_Text {
+  font-family: "Pretendard", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #FFFFFF;
+}
+
 .MyPage .Nav {
   width: min(1392px, calc(100% - 48px));
-  
+
   margin: 31px auto 0 auto; 
   
   height: 64px;
@@ -529,12 +553,12 @@
 
 .MyPage .tab_pay,
 .MyPage .tab_user {
-  flex: 1; /* width: 50% 대신 flex: 1을 쓰면 더 정확하게 절반을 나눕니다 */
+  flex: 1; 
   height: 54px;
   
   display: flex;
-  align-items: center;    /* 세로 중앙 정렬 */
-  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center;    
+  justify-content: center; 
   
   text-decoration: none;
   color: #222222;
@@ -553,10 +577,9 @@
   color: #222222;
 }
 
-/* [핵심] active 상태일 때 스타일 */
+/* active 상태일 때 스타일 */
 .MyPage .tab_pay.is-active,
 .MyPage .tab_user.is-active {
-  /* 투명했던 바닥 선에 색상을 넣습니다 */
   border-bottom-color: #3DB1FD;
 }
 

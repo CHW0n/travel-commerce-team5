@@ -1,9 +1,3 @@
-// export default function MemberInfo() {
-//   return (
-//     <div className="MemberInfo">
-//     </div>
-//   );
-// }
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MemberInfo.css";
@@ -117,7 +111,7 @@ export default function MemberInfo() {
       <div className="user_FieldRow_Contact">
         <div className="user_Field_btn_con">
           <div className="user_Field_btn">
-            <button type="button" className="user_btn_home">홈</button>
+            <button type="button" className="user_btn_home" onClick={() => navigate("/")}>홈</button>
             {/* <button type="button" className="user_btn_ch">회원정보 수정</button> */}
             <button type="button" className="user_btn_ch" onClick={handleEditModeOpen}>
               회원정보 수정

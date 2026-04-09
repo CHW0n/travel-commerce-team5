@@ -159,14 +159,14 @@ export default function EditPassword() {
       {isModalOpen && (
         <div className="Modal_Overlay">
           <div className="User_Modal_Log">
-            {/* 1. 상단 닫기 (오른쪽 정렬) */}
+            {/* 1. 상단 닫기 */}
             <div className="User_Modal_dialog">
               <button className="close_btn" onClick={() => setIsModalOpen(false)}>
                 <img src="/icon/Vector.png" alt="close" className="close_icon" />
               </button>
             </div>
 
-            {/* 2. 헤더 영역 (제목 + 설명 모두 왼쪽 정렬) */}
+            {/* 2. 헤더 영역 */}
             <div className="User_Modal_header">
               <div className="User_Modal_title">
                 <h3 className="Desc_text_title">정말 탈퇴하시겠어요?</h3>
@@ -179,7 +179,7 @@ export default function EditPassword() {
               </div>
             </div>
 
-            {/* 3. 버튼 영역 (오른쪽 정렬) */}
+            {/* 3. 버튼 영역 */}
             <div className="User_Modal_btn">
               <button className="Modal_user_btn_ext" onClick={() => setIsModalOpen(false)}>
                 <span className="btn_text_cancel">취소</span>
