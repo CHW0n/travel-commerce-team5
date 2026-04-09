@@ -15,9 +15,14 @@ export default function Header() {
           </span>
         </Link>
 
-        <Link to="/mypage" className="MyPage_Btn" aria-label="마이페이지로 이동">
-          <span className="MyPage_Btn_Text">마이페이지</span>
-        </Link>
+        <div className="Frame_56" aria-label="사용자 메뉴">
+          <button type="button" className="Header_LoginButton">
+            로그인
+          </button>
+          <button type="button" className="Header_SignupButton">
+            회원가입
+          </button>
+        </div>
       </div>
     </header>
   );
