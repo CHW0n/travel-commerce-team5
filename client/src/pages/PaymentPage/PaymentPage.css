@@ -29,48 +29,51 @@
 
 /* 작은 화면에서 깨지지 않게 */
 @media (max-width: 900px) {
-  .PaymentPage > .Nav,
   .PaymentPage > .Pay_Tour_Section ,
   .PaymentPage > .TravelerInfo_Section,
   .PaymentPage > .Payment_Summary_Section {
     width: calc(100% - 32px); 
   }
+
+  .PaymentPage .Nav {
+    padding: 16px;
+  }
 }
 
 /* ================= Nav ================= */
 .PaymentPage .Nav {
-  width: calc(100% - 336px);
-  margin: 31px auto 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.PaymentPage .Nav_container {
   height: 64px;
+  margin-top: 32px;
+  padding: 16px 56px 16px 170px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 16px 0;
   box-sizing: border-box;
 }
 
 .PaymentPage .Nav_container {
+  height: 32px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
-.PaymentPage .Nav_homeIcon,
-.PaymentPage .Nav_arrowIcon {
+.PaymentPage .Nav_homeIcon {
   width: 24px;
   height: 24px;
   object-fit: contain;
   display: block;
 }
 
+.PaymentPage .Nav_arrowIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
+}
+
 .PaymentPage .Nav_text {
   font-family: "Pretendard", sans-serif;
-  font-size: 20px;
+  font-size: 14px;
   line-height: 32px;
   letter-spacing: 0px;
   color: #222222;

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchProductDetail } from "../../api/client";
 import Header from "../../components/header/header";
+import LoginRequiredModal from "../../components/LoginRequiredModal/LoginRequiredModal";
+import { isLoggedIn } from "../../utils/auth";
 import "./ProductDetailPage.css";
 
 const today = new Date();
@@ -22,6 +24,7 @@ export default function ProductDetailPage() {
   const [dateError, setDateError] = useState("");
   const [guests, setGuests] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const visibleCount = 7;
   const visibleDates = dates.slice(startIndex, startIndex + visibleCount);
   const canGoPrev = startIndex > 0;
@@ -48,12 +51,12 @@ export default function ProductDetailPage() {
       <Header />
 
       {/* ── Nav ── */}
-      <nav className="Detail_Nav">
-        <div className="Detail_Nav_container">
-          <img className="home_icon" src="/public/icon/Home_icon.png" alt="home icon" />
-          <span className="Detail_Nav_text">HOME</span>
-          <img className="arrow_icon" src="/public/icon/arrow_right.png" alt="arrow right" />
-          <span className="Detail_Nav_text">상품 상세</span>
+      <nav className="Nav" aria-label="breadcrumb">
+        <div className="Nav_container">
+          <img className="Nav_homeIcon" src="/icon/Home_icon.png" alt="홈" />
+          <span className="Nav_text">HOME</span>
+          <img className="Nav_arrowIcon" src="/icon/arrow_right.png" alt=">" />
+          <span className="Nav_text active">상품 상세</span>
         </div>
       </nav>
 
@@ -80,7 +83,7 @@ export default function ProductDetailPage() {
               <div className="Tour_Detail_Top">
                 <h1 className="Detail_Tour_Title">{product.title}</h1>
                 <div className="Detail_Location_Row">
-                  <img className="Detail_Location_Icon" src="/public/icon/Location_icon.png" alt="location" />
+                  <img className="Detail_Location_Icon" src="/icon/Location_Icon.png" alt="location" />
                   <span className="Detail_Location_Text">{product.address}</span>
                 </div>
               </div>
@@ -233,7 +236,7 @@ export default function ProductDetailPage() {
                 className="Btn_Plus"
                 onClick={() => setGuests(guests + 1)}
               >
-                <img src="/public/icon/Btn_plus.png" alt="plus" />
+                <img src="/icon/Btn_Plus.png" alt="plus" />
               </button>
             </div>
 
@@ -260,6 +263,11 @@ export default function ProductDetailPage() {
               onClick={() => {
                 if (!selectedDate) {
                   setDateError("이용 날짜를 선택해주세요.");
+                  return;
+                }
+
+                if (!isLoggedIn()) {
+                  setIsLoginModalOpen(true);
                   return;
                 }
 
@@ -290,6 +298,10 @@ export default function ProductDetailPage() {
 
           </div>
         </section>
+        <LoginRequiredModal
+          open={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+        />
       </main>
       )}
     </div>

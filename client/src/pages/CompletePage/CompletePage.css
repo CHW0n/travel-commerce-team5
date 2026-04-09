@@ -22,29 +22,51 @@
   padding: 16px 56px 16px 170px;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .CompletePage .Nav_container {
-  height: 32px;
+  display: flex;
+  align-items: center;
   gap: 8px;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.CompletePage .Nav_homeIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+.CompletePage .Nav_arrowIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
+}
+
+.CompletePage .Nav_text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: #222222;
+  font-weight: 400;
+  height: 32px;
   display: flex;
   align-items: center;
 }
 
-.CompletePage .Nav_container img {
-  width: 24px;
-  height: 24px;
-}
-
-.CompletePage .Nav_text {
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 32px;
-  letter-spacing: 0;
-}
-
 .CompletePage .Nav_text.active {
   font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .CompletePage .Nav {
+    padding: 16px;
+  }
 }
 
 
@@ -377,8 +399,8 @@
 /* ================= Responsive ================= */
 /* 화면이 좁아져도 좌우 168 유지(가능한 구간까지) */
 @media (max-width: 1728px) {
-  .Header,
-  .Nav {
+  .CompletePage .Header,
+  .CompletePage .Nav {
     width: 100%;
   }
 
@@ -390,11 +412,11 @@
 }
 
 @media (max-width: 900px) {
-  .Header {
+  .CompletePage .Header {
     padding: 16px;
   }
 
-  .Nav {
+  .CompletePage .Nav {
     padding: 16px;
   }
 
@@ -408,9 +430,4 @@
     width: 96px;
     height: 96px;
   }
-}
-
-.Hero_Section,
-.Order_Product_Section {
-  box-shadow: 0px 11px 23px -5px #C5C5C540;
 }

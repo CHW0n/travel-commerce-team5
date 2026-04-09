@@ -99,49 +99,57 @@
   color: #ffffff;
 }
 
-/* ── Nav ── */
-.Detail_Nav {
+/* ================= Nav (PaymentPage 스타일로 통일) ================= */
+.ProductDetailPage .Nav {
   height: 64px;
   margin-top: 32px;
   padding: 16px 56px 16px 170px;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
-/* ── Nav_Container ── */
-.Detail_Nav_container {
+.ProductDetailPage .Nav_container {
   height: 32px;
-  gap: 8px;
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
-/* ── Nav 아이콘 ── */
-.Detail_Nav_container img.arrow_icon {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-  display: block;
-}
-
-.Detail_Nav_container img.home_icon {
+.ProductDetailPage .Nav_homeIcon {
   width: 24px;
   height: 24px;
   object-fit: contain;
   display: block;
 }
 
-/* ── Nav Text ── */
-.Detail_Nav_text {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 32px;
-  letter-spacing: 0;
+.ProductDetailPage .Nav_arrowIcon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
 }
 
-/* ── Nav Text (상품 상세) ── */
-.Detail_Nav_text:last-child {
+.ProductDetailPage .Nav_text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  color: #222222;
+  font-weight: 400;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.ProductDetailPage .Nav_text.active {
   font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .ProductDetailPage .Nav {
+    padding: 16px;
+  }
 }
 
 /* ── Main ── */

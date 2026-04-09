@@ -35,6 +35,12 @@ function isPositiveNumber(value) {
   return typeof value === "number" && Number.isFinite(value) && value > 0;
 }
 
+function normalizeImageUrl(url) {
+  if (typeof url !== "string") return url;
+  if (url.startsWith("http://")) return `https://${url.slice("http://".length)}`;
+  return url;
+}
+
 router.get("/", (req, res) => {
   const orders = readOrders().sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -73,7 +79,9 @@ router.post("/", (req, res) => {
     people,
     unitPrice,
     totalPrice,
-    ...(productImageUrl ? { productImageUrl: productImageUrl.trim() } : {}),
+    ...(productImageUrl
+      ? { productImageUrl: normalizeImageUrl(productImageUrl.trim()) }
+      : {}),
   };
 
   const orders = readOrders();
