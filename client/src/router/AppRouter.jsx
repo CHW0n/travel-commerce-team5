@@ -4,6 +4,7 @@ import ProductDetailPage from "../pages/ProductDetailPage/ProductDetailPage";
 import PaymentPage from "../pages/PaymentPage/PaymentPage";
 import CompletePage from "../pages/CompletePage/CompletePage";
 import MyPage from "../pages/MyPage/MyPage";
+import AdminPage from "../pages/AdminPage/AdminPage"; 
 
 export default function AppRouter() {
   return (
@@ -13,6 +14,7 @@ export default function AppRouter() {
       <Route path="/payment" element={<PaymentPage />} />
       <Route path="/complete" element={<CompletePage />} />
       <Route path="/mypage" element={<MyPage />} />
+      <Route path="/admin" element={<AdminPage />} />
     </Routes>
   );
 }
