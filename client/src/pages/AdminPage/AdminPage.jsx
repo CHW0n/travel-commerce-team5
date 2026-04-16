@@ -1,23 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './AdminPage.css';
 
 const AdminPage = () => {
-    
-    // 페이지네이션 
+    const [users, setUsers] = useState([]);
     const [page, setPage] = useState(1);
-    const itemsPerPage = 10; 
-    const users = Array.from({ length: 25 }, (_, i) => ({
-        id: i + 1,
-        name: `사용자 ${i + 1}`,
-        email: `user${i + 1}@gmail.com`,
-        nickname: `닉네임${i + 1}`,
-        phone: '01012345678',
-        userId: `user_id_${i + 1}`,
-        date: '21.03.2026',
-        update: ''
-    }));
+    const itemsPerPage = 10;
 
-    // 페이지 계산 로직
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                // 백엔드 서버 주소로 데이터 요청
+                const response = await axios.get('http://localhost:8080/api/admin/users');
+                setUsers(response.data);
+            } catch (error) {
+                console.error("데이터를 가져오는데 실패했습니다:", error);
+            }
+        };
+        loadData();
+    }, []);
+
     const maxPage = Math.ceil(users.length / itemsPerPage);
     const currentData = users.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
@@ -25,12 +27,11 @@ const AdminPage = () => {
         <div className="admin-container">
             <nav className='nav'>
                 <div className='nav_container'>
-                    <img src='/images/Settings.png'></img>
+                    <img src='/images/Settings.png' alt='설정' />
                     <span>관리자 페이지</span>
                 </div>
             </nav>
             <div className='User_Module'>
-                {/* 제목 영역 */}
                 <div className='user_content'>
                     <div className='user_header'>
                         <h1>관리자 페이지</h1>
@@ -38,7 +39,6 @@ const AdminPage = () => {
                     </div>
                 </div>
 
-                {/* 검색 및 테이블 영역 */}
                 <div className='User_Table_Area'>
                     <div className='Table_header'>
                         <div className='Table_dropdown'>
@@ -56,7 +56,6 @@ const AdminPage = () => {
                         </div>
                     </div>
 
-                    {/* 테이블 영역 */}
                     <div className="table-container">
                         <table className="admin-table">
                             <thead>
@@ -87,7 +86,6 @@ const AdminPage = () => {
                     </div>
                 </div>
 
-                {/* 페이지네이션 영역 */}
                 <div className="Pagination">
                     <div className="Pagination_Container">
                         <div className="arrow_item_left">
@@ -98,20 +96,13 @@ const AdminPage = () => {
                                 <img src="/icon/arrow_right.png" style={{ transform: 'rotate(180deg)' }} alt="이전" />
                             </button>
                         </div>
-
                         <div className="Page_Number">
                             {Array.from({ length: maxPage }, (_, i) => i + 1).map((p) => (
-                                <button
-                                    key={p}
-                                    type="button"
-                                    className={p === page ? "is-active" : ""}
-                                    onClick={() => setPage(p)}
-                                >
+                                <button key={p} type="button" className={p === page ? "is-active" : ""} onClick={() => setPage(p)}>
                                     {p}
                                 </button>
                             ))}
                         </div>
-
                         <div className="arrow_item_right">
                             <button type="button" onClick={() => setPage(p => Math.min(maxPage, p + 1))} disabled={page === maxPage}>
                                 <img src="/icon/arrow_right.png" alt="다음" />
