@@ -1,41 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./MemberInfo.css";
 
-const dummyUser = {
-  name: "김다은",
-  nickname: "마동석",
-  email: "daeun@example.com",
-  password: "password123",
-};
-
+// TODO: 세션 연동 후 제거
+const TEMP_USER_ID = 2;
 
 export default function MemberInfo() {
+  const [user, setUser] = useState(null);
   const [mode, setMode] = useState("view"); // "view" | "verifying"
   const [currentPassword, setCurrentPassword] = useState("");
   const [pwError, setPwError] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    axios.get(`/api/users/me?userId=${TEMP_USER_ID}`)
+      .then((res) => setUser(res.data))
+      .catch((err) => console.error("회원 정보 조회 실패", err));
+  }, []);
+
   const handleEditModeOpen = () => {
     setMode("verifying");
   };
 
-  const handleVerify = () => {
-    // 임시 비밀번호 확인 로직
-    if (currentPassword === dummyUser.password) {
-      setPwError(false);
-      navigate("/mypage/profile/edit"); // 성공 시 이동
-    } else {
+  const handleVerify = async () => {
+    try {
+      const res = await axios.post(
+        `/api/users/verify-password?userId=${TEMP_USER_ID}`,
+        { password: currentPassword }
+      );
+      if (res.data.matched) {
+        setPwError(false);
+        navigate("/mypage/profile/edit", { state: { currentPassword } });
+      } else {
+        setPwError(true);
+        setCurrentPassword("");
+      }
+    } catch (err) {
+      console.error("비밀번호 확인 실패", err);
       setPwError(true);
       setCurrentPassword("");
     }
   };
 
-  // 사용자가 다시 입력하기 시작하면 에러 메시지 숨기기
   const handleInputChange = (e) => {
-    if (pwError) setPwError(false); 
+    if (pwError) setPwError(false);
     setCurrentPassword(e.target.value);
   };
+
+  if (!user) return null;
 
   return (
     <div className="user_content">
@@ -52,7 +65,7 @@ export default function MemberInfo() {
             <span className="user_Label_text">이름</span>
           </div>
           <div className="user_Field_name">
-            <span className="user_Field_text">{dummyUser.name}</span>
+            <span className="user_Field_text">{user.name}</span>
           </div>
         </div>
 
@@ -61,7 +74,7 @@ export default function MemberInfo() {
             <span className="user_Label_text">닉네임</span>
           </div>
           <div className="user_Field_user">
-            <span className="user_Field_text">{dummyUser.nickname}</span>
+            <span className="user_Field_text">{user.nickname}</span>
           </div>
         </div>
 
@@ -70,7 +83,7 @@ export default function MemberInfo() {
             <span className="user_Label_text">이메일</span>
           </div>
           <div className="user_Field_email">
-            <span className="user_Field_text">{dummyUser.email}</span>
+            <span className="user_Field_text">{user.email}</span>
           </div>
         </div>
 
@@ -82,10 +95,10 @@ export default function MemberInfo() {
             {mode === "view" ? (
               <span className="user_Field_text">{"•".repeat(8)}</span>
             ) : (
-              <div className="user_Field_pw_edit"> 
-                <input 
-                  type="password" 
-                  className="user_Input_pw" 
+              <div className="user_Field_pw_edit">
+                <input
+                  type="password"
+                  className="user_Input_pw"
                   placeholder="기존 비밀번호를 입력해주세요"
                   value={currentPassword}
                   onChange={handleInputChange}
@@ -96,7 +109,6 @@ export default function MemberInfo() {
                   <span className="user_pw_c">확인</span>
                 </button>
 
-                {/* pwError가 true일 때만 인라인 메시지 렌더링 */}
                 {pwError && (
                   <div className="user_pw_c_fail">
                     <span className="pw_fail_text">* 비밀번호를 다시 입력해주세요</span>
@@ -112,7 +124,6 @@ export default function MemberInfo() {
         <div className="user_Field_btn_con">
           <div className="user_Field_btn">
             <button type="button" className="user_btn_home" onClick={() => navigate("/")}>홈</button>
-            {/* <button type="button" className="user_btn_ch">회원정보 수정</button> */}
             <button type="button" className="user_btn_ch" onClick={handleEditModeOpen}>
               회원정보 수정
             </button>
