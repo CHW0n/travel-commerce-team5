@@ -1,0 +1,156 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+
+.admin-container {
+    width: min(1392px, calc(100% - 48px));
+    margin: 0 auto;
+    background-color: #F5F5F5;
+    min-height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+/* nav */
+.nav{
+    width: 100%;
+height: 64px;
+top: 111px;
+display: flex;
+align-items: center;
+opacity: 1;
+
+}
+
+.nav_container{
+    display: flex;
+    align-items: center;
+height: 32px;
+gap: 8px;
+opacity: 1;
+
+}
+
+.nav_container img{
+    height: 24px
+}
+
+.nav_container span{
+    font-weight: 600;
+}
+
+.User_Module {
+    width: 1392;
+    height: 1007;
+    top: 175px;
+    left: 168px;
+    border-radius: 12px;
+    padding-top: 30px;
+    padding-right: 24px;
+    padding-bottom: 60px;
+    padding-left: 24px;
+    gap: 50px;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 11px 23px -5px rgba(197, 197, 197, 0.25);
+}
+
+/* 관리자 */
+.user_content {
+    width: 100%;
+    padding: 0 34px;
+    box-sizing: border-box;
+}
+
+.user_Divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(210, 210, 210, 1);
+    margin-bottom: 20px;
+}
+
+/* 드롭다운 및 검색, 검색 아이콘 */
+.Table_header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+    padding: 0 34px;
+    box-sizing: border-box;
+}
+
+.admin-select {
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    opacity: 1;
+    border-width: 1px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(203, 203, 203, 1);
+    color: rgba(99, 99, 99, 1);
+    padding-left: 8px;
+    appearance: none;
+    padding-right: 30px;
+    background-image: url('/images/dropdown_icon.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) center;
+    background-size: 24px;
+}
+
+
+.admin-input {
+    position: relative;
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    border-width: 1px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(203, 203, 203, 1);
+    opacity: 1;
+    color: rgba(99, 99, 99, 1);
+    padding-left: 8px;
+
+}
+
+.search_ic img {
+    width: 24px !important;
+    height: 24px !important;
+    object-fit: contain;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block;
+
+}
+
+/* 2. 테이블 레이아웃 고정 */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-top: 20px;
+    border: 1px solid rgba(230, 230, 230, 1)
+}
+
+/* 3. 테이블 글자 정렬 및 간격 */
+.admin-table th,
+.admin-table td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid #EEEEEE;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-table th {
+    background-color: #FAFAFA !important;
+    font-weight: bold;
+}
+
+.table-container {
+    padding: 0 34px;
+}
