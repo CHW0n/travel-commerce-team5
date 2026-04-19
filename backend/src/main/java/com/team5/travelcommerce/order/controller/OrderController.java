@@ -1,30 +1,45 @@
 package com.team5.travelcommerce.order.controller;
 
 import com.team5.travelcommerce.order.dto.response.OrderResponse;
+import com.team5.travelcommerce.order.dto.response.OrderSummaryResponse;
 import com.team5.travelcommerce.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/my-orders")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class OrderController {
 
     private final OrderService orderService;
 
-
-    @GetMapping("/count")
+    @GetMapping("/api/my-orders/count")
     public long countOrders() {
         return orderService.countOrders();
     }
 
-
-    @GetMapping("/list")
+    @GetMapping("/api/my-orders/list")
     public List<OrderResponse> getOrderList() {
         return orderService.getOrderList();
+    }
+
+    @GetMapping("/api/orders")
+    public ResponseEntity<List<OrderSummaryResponse>> getMyOrders() {
+        List<OrderResponse> orders = orderService.getOrderList();
+
+        List<OrderSummaryResponse> responses = orders.stream()
+                .map(order -> OrderSummaryResponse.builder()
+                        .orderId(Long.parseLong(order.getId()))
+                        .productTitle(order.getTitle())
+                        .useDate(order.getDateText())
+                        .totalPrice(order.getTotalPrice())
+                        .build())
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(responses);
     }
 }
