@@ -1,63 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './PaymentTable.css';
 
 const PaymentTable = () => {
+    const [orders, setOrders] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/my-orders/list') 
+            .then(res => {
+                setOrders(res.data);
+            })
+            .catch(err => {
+                console.error("데이터를 불러오는데 실패했습니다.", err);
+            });
+    }, []);
+
     return (
-        <div className="payment-container">
-            <nav className='nav'>
-                <div className='nav_container'>
-                    <img src='/images/User_02.png'></img>
-                    <span>마이페이지</span>
-                    <img src='/images/arrow_right.png'></img>
-                    <span className='payment-on'>결제 내역</span>
-                </div>
-            </nav>
-            <div className="Payment_Module">
-                <div className="my_Tabs_Wrapper">
-                    <div className="tab_item active">결제 내역</div>
-                    <div className="tab_item">회원 정보</div>
-                </div>
-                <div className='Paylist_content'>
-                    <div className='user_header'>
-                        <h1>결제 내역</h1>
-                        <div className='user_Divider'></div>
-                    </div>
-                    <div className='Pay_Section'>
-                        <div className='product_Row'>
-                            <div className='product_info'>
-                                <img src='/images/Product_Image.png'></img>
-                                <div className="product_info_container">
-                                    <div className="product_title">경복궁</div>
-                                    <div className="product_date">2월 20일 (화)</div>
-                                    <div className="product_count">2명</div>
-                                </div>
-                            </div>
-                            <div className='paylist_etc'>
-                                <span>62,386원</span>
-                                <button>자세히 보기 <img src='/images/Search_01.png'></img></button>
+        <div className="payment_table_container">
+            {orders.length > 0 ? (
+                orders.map((order) => (
+                    <div className="product_info_container" key={order.id}>
+                        {/* 1. 이미지: productImageUrl 사용 */}
+                        <img 
+                            src={order.productImageUrl} 
+                            alt={order.title} 
+                            className="product_img"
+                        />
+                        
+                        <div className="product_text_info">
+                            {/* 2. 상품명: title */}
+                            <div className="product_title">{order.title}</div>
+                            
+                            {/* 3. 예약날짜: dateText 사용 */}
+                            <div className="product_date">예약일: {order.dateText}</div>
+                            
+                            {/* 4. 인원: people 사용 */}
+                            <div className="product_count">인원: {order.people}명</div>
+                            
+                            {/* 5. 총 가격: totalPrice 사용 (천단위 콤마 추가) */}
+                            <div className="product_price">
+                                결제금액: {order.totalPrice?.toLocaleString()}원
                             </div>
                         </div>
-                        <div className='user_Divider'></div>
                     </div>
-                    <div className='Pay_Section'>
-                        <div className='product_Row'>
-                            <div className='product_info'>
-                                <img src='/images/Product_Image.png'></img>
-                                <div className="product_info_container">
-                                    <div className="product_title">경복궁</div>
-                                    <div className="product_date">2월 20일 (화)</div>
-                                    <div className="product_count">2명</div>
-                                </div>
-                            </div>
-                            <div className='paylist_etc'>
-                                <span>62,386원</span>
-                                <button>자세히 보기 <img src='/images/Search_01.png'></img></button>
-                            </div>
-                        </div>
-                        <div className='user_Divider'></div>
-                    </div>
-                </div>
-            </div>
+                ))
+            ) : (
+                <div className="no_data">결제 내역이 없습니다.</div>
+            )}
         </div>
     );
 };
