@@ -1,0 +1,125 @@
+/* --- Withdraw_Section (Main Container) --- */
+.Withdraw_Section {
+    width: 1392px;
+    height: 840px;
+    background: #FFFFFF;
+    border-radius: 18px;
+    
+    margin: auto; 
+    padding: 100px 24px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    
+    box-sizing: border-box;
+    box-shadow: 0px 11px 23px -5px rgba(197, 197, 197, 0.25);
+    opacity: 1;
+  }
+
+  
+  /* --- 체크 아이콘 --- */
+  .check_icon_container {
+    width: 101px;
+    height: 86px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+  }
+  
+  .check_icon {
+    width: 101px;
+    height: 86px;
+    object-fit: contain;
+  }
+  
+  /* --- 타이틀 --- */
+  .Withdraw_Title_Box {
+    width: 130px;
+    height: 36px;
+  }
+  
+  .Withdraw_Title {
+    font-family: "Pretendard";
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -0.005em; /* -0.5% */
+    color: #000000;
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* --- 구분선 --- */
+  .Withdraw_Divider {
+    width: 375px;
+    height: 1px;
+    background: #D2D2D2;
+  }
+  
+  /* --- 설명 콘텐츠 (텍스트 2줄) --- */
+  .Withdraw_content {
+    width: 375px;
+    height: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .Withdraw_text_bold {
+    width: 152px;
+    height: 21px;
+    font-family: "Pretendard";
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 150%;
+    color: #000000;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .Withdraw_text_regular {
+    width: 185px;
+    height: 21px;
+    font-family: "Pretendard";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #000000;
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* --- 하단 버튼 영역 --- */
+  .Withdraw_btn_area {
+    width: 100%;
+    height: 68px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .Withdraw_home_btn {
+    width: 375px;
+    height: 48px;
+    padding: 13px 16px;
+    background: #3DB1FD;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    
+    /* 버튼 텍스트 스타일 */
+    font-family: "Pretendard";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

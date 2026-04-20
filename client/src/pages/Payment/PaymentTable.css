@@ -1,0 +1,176 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+
+
+.payment-container {
+    width: min(1392px, calc(100% - 48px));
+    margin: 0 auto;
+    background-color: #F5F5F5;
+    min-height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+
+/* nav */
+.nav {
+    width: 100%;
+    height: 64px;
+    top: 111px;
+    display: flex;
+    align-items: center;
+    opacity: 1;
+
+}
+
+.nav_container {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    gap: 8px;
+    opacity: 1;
+
+}
+
+.nav_container img {
+    height: 24px
+}
+
+.nav_container span {
+    font-weight: 400;
+}
+
+.nav_container span:nth-of-type(2) {
+    font-weight: 600;
+}
+
+
+.Payment_Module {
+    height: 1007;
+    top: 175px;
+    left: 168px;
+    border-radius: 12px;
+    padding-top: 30px;
+    padding-right: 24px;
+    padding-bottom: 60px;
+    padding-left: 24px;
+    gap: 50px;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 11px 23px -5px rgba(197, 197, 197, 0.25);
+}
+
+
+/* tab */
+.my_Tabs_Wrapper {
+    display: flex;
+    width: 100%;
+    height: 55px;
+    border-bottom: 2px solid #EEEEEE;
+    margin-bottom: 30px;
+}
+
+.tab_item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: #999999;
+    position: relative;
+}
+
+.tab_item.active {
+    color: #333333;
+    font-weight: 600;
+}
+
+.tab_item.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #5DA7EF;
+}
+
+.Paylist_content {
+    width: 100%;
+    padding: 0 34px;
+}
+
+.Paylist_content h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.product_Row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.product_info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.product_info img {
+    width: 135px;
+    height: 135px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.paylist_etc {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    align-items: center;
+}
+
+.paylist_etc span {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* 버튼 디자인 */
+.paylist_etc button {
+    display: flex;
+    align-items: center;
+    width: 142px;
+    height: 48px;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    justify-content: center;
+}
+
+
+.product_info_container{
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.product_title{
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.product_date,.product_count{
+    font-weight: 400;
+    font-size: 16px;
+}

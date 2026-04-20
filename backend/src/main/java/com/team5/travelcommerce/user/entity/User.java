@@ -56,6 +56,16 @@ public class User {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
+    public void changePassword(String newPasswordHash) {
+        this.passwordHash = newPasswordHash;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void withdraw() {
+        this.status = UserStatus.WITHDRAWN;
+        this.updatedAt = LocalDateTime.now();
+    }
+
     @Builder
     public User(
             String email,
