@@ -22,8 +22,17 @@ export async function fetchRegions() {
   return request("/api/regions");
 }
 
-export async function fetchProducts(region, page = 1, perPage = 16) {
-  const params = new URLSearchParams({ region, page: String(page), perPage: String(perPage) });
+export async function fetchProducts(region, page = 1, perPage = 16, date) {
+  const params = new URLSearchParams({
+    region,
+    page: String(page),
+    perPage: String(perPage),
+  });
+
+  if (date) {
+    params.set("date", date);
+  }
+
   return request(`/api/products?${params}`);
 }
 
