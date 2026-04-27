@@ -2,12 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../../api/client";
 import Header from "../../components/header/header";
-import LoginRequiredModal from "../../components/LoginRequiredModal/LoginRequiredModal";
 import "./MainPage.css";
 
 const REGIONS = ["서울", "부산", "제주", "강릉"];
 const REGION_TO_ID = { 서울: "seoul", 부산: "busan", 제주: "jeju", 강릉: "gangneung" };
-const PER_PAGE = 1000;
+const PER_PAGE = 16;
 
 function buildCalendarRows(year, month) {
   const firstDayOfWeek = new Date(year, month, 1).getDay();
@@ -34,37 +33,25 @@ function formatDisplayDate(year, month, day) {
   return `${year}년 ${month + 1}월 ${day}일`;
 }
 
-function formatApiDate(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
-
 export default function MainPage() {
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-  const [isPastDateModalOpen, setIsPastDateModalOpen] = useState(false);
-  const [searchValidationMessage, setSearchValidationMessage] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("어디로 가세요?");
-  const [appliedRegionId, setAppliedRegionId] = useState("");
+  const [selectedRegionId, setSelectedRegionId] = useState("seoul");
   const [selectedDate, setSelectedDate] = useState("언제 가세요?");
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [selectedCalendarDate, setSelectedCalendarDate] = useState(null);
-  const [appliedCalendarDate, setAppliedCalendarDate] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const [totalPages, setTotalPages] = useState(1);
   const dropdownRef = useRef(null);
   const datePickerRef = useRef(null);
   const calendarRows = buildCalendarRows(viewYear, viewMonth);
-  const maxPage = Math.max(1, totalPages);
+  const maxPage = 2;
 
   function handlePrevMonth() {
     setViewMonth((prevMonth) => {
@@ -88,13 +75,6 @@ export default function MainPage() {
 
   function handleSelectDay(day) {
     const nextDate = new Date(viewYear, viewMonth, day);
-    nextDate.setHours(0, 0, 0, 0);
-
-    if (nextDate < today) {
-      setIsPastDateModalOpen(true);
-      return;
-    }
-
     setSelectedCalendarDate(nextDate);
     setSelectedDate(formatDisplayDate(viewYear, viewMonth, day));
   }
@@ -111,15 +91,14 @@ export default function MainPage() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetchProducts(appliedRegionId, page, PER_PAGE)
+    fetchProducts(selectedRegionId, page, PER_PAGE)
       .then((data) => {
-        setProducts(data.products || data.content || []);
-        setTotalCount(data.totalCount || data.totalElements || 0);
-        setTotalPages(data.totalPages || 1);
+        setProducts(data.products);
+        setTotalCount(data.totalCount);
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, [appliedRegionId, page]);
+  }, [selectedRegionId, page]);
 
   useEffect(() => {
     function handleOutsideClick(event) {
@@ -168,23 +147,10 @@ export default function MainPage() {
               className="Search_Form"
               onSubmit={(e) => {
                 e.preventDefault();
-                const hasSelectedRegion = REGIONS.includes(selectedRegion);
-                const hasSelectedDate = Boolean(selectedCalendarDate);
-
-                if (!hasSelectedRegion && hasSelectedDate) {
-                  setSearchValidationMessage("지역을 선택해야 합니다.");
-                  return;
+                if (REGIONS.includes(selectedRegion)) {
+                  setSelectedRegionId(REGION_TO_ID[selectedRegion]);
+                  setPage(1);
                 }
-
-                if (hasSelectedRegion && !hasSelectedDate) {
-                  setSearchValidationMessage("날짜를 선택해야 합니다.");
-                  return;
-                }
-
-                const nextRegionId = REGIONS.includes(selectedRegion) ? REGION_TO_ID[selectedRegion] : "";
-                setAppliedRegionId(nextRegionId);
-                setAppliedCalendarDate(selectedCalendarDate);
-                setPage(1);
               }}
             >
               <label className="Search_Field" htmlFor="region" ref={dropdownRef}>
@@ -324,18 +290,15 @@ export default function MainPage() {
               <div className="Card_grid">
                 {products.map((tour, index) => (
                   <Link
-                    key={tour.productId || tour.id}
-                    to={`/products/${tour.productId || tour.id}`}
-                    state={{
-                      baseDate: appliedCalendarDate ? formatApiDate(appliedCalendarDate) : null,
-                    }}
+                    key={tour.id}
+                    to={`/products/${tour.id}`}
                     className="Card_item"
                     style={{ display: "block" }}
                   >
                     <article>
                       <div className="media">
                         <img
-                          src={tour.imageUrl || tour.imagePath}
+                          src={tour.imagePath}
                           alt={tour.title}
                           className="Card_image"
                           loading="lazy"
@@ -384,7 +347,7 @@ export default function MainPage() {
                   </div>
 
                   <div className="Page_Number">
-                    {Array.from({ length: maxPage }, (_, index) => index + 1).map((p) => (
+                    {[1, 2, 3, 4].map((p) => (
                       <button
                         key={p}
                         type="button"
@@ -424,22 +387,6 @@ export default function MainPage() {
           )}
         </section>
       </main>
-      <LoginRequiredModal
-        open={isPastDateModalOpen}
-        onClose={() => setIsPastDateModalOpen(false)}
-        title="알림"
-        description="오늘보다 이전 날짜는 선택할 수 없습니다. 오늘 이후 날짜를 선택해주세요."
-        cancelText="닫기"
-        confirmText="확인"
-      />
-      <LoginRequiredModal
-        open={Boolean(searchValidationMessage)}
-        onClose={() => setSearchValidationMessage("")}
-        title="알림"
-        description={searchValidationMessage}
-        cancelText="닫기"
-        confirmText="확인"
-      />
     </div>
   );
 }

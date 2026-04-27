@@ -6,19 +6,13 @@ export default function SignUpCompletePage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-   const nickname = location.state?.nickname || "회원";
+  const nickname =location.state?.nickname || localStorage.getItem("nickname") || "회원";
 
   return (
     <div className="SignUpCompletePage">
       <Header />
 
       <main className="SignUpCompletePage_Content">
-        <div className="SignUpCompletePage_Breadcrumb">
-          <span>회원가입</span>
-          <span className="Breadcrumb_Arrow">›</span>
-          <strong>회원가입 완료</strong>
-        </div>
-
         <section className="SignUpComplete_Section">
           <div className="Complete_Icon">
             <img

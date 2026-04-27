@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { checkEmail, checkNickname, signupUser } from "../../api/client";
 import Header from "../../components/header/header";
 import "./SignUpPage.css";
 import dropdownIcon from "/icon/dropdown_icon.png";
@@ -31,9 +32,6 @@ export default function SignUpPage() {
     privacy: false,
   });
 
-  const usedNicknames = ["관리자", "admin", "tester", "otrip"];
-  const usedEmails = ["test@test.com", "admin@otrip.com"];
-
   const isEmailFormatValid = useMemo(() => {
     if (!email.trim()) return true;
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -52,7 +50,7 @@ export default function SignUpPage() {
   const isAllAgreed =
     agreements.service && agreements.finance && agreements.privacy;
 
-  function handleNicknameCheck() {
+  async function handleNicknameCheck() {
     const value = nickname.trim();
 
     if (!value) {
@@ -61,12 +59,18 @@ export default function SignUpPage() {
       return;
     }
 
-    const isAvailable = !usedNicknames.includes(value.toLowerCase());
-    setNicknameChecked(true);
-    setNicknameAvailable(isAvailable);
+    try {
+      const result = await checkNickname(value);
+      setNicknameChecked(true);
+      setNicknameAvailable(result.available);
+    } catch (error) {
+      alert(error.message);
+      setNicknameChecked(true);
+      setNicknameAvailable(false);
+    }
   }
 
-  function handleEmailCheck() {
+  async function handleEmailCheck() {
     const value = email.trim();
 
     if (!value || !isEmailFormatValid) {
@@ -75,9 +79,15 @@ export default function SignUpPage() {
       return;
     }
 
-    const isAvailable = !usedEmails.includes(value.toLowerCase());
-    setEmailChecked(true);
-    setEmailAvailable(isAvailable);
+    try {
+      const result = await checkEmail(value);
+      setEmailChecked(true);
+      setEmailAvailable(result.available);
+    } catch (error) {
+      alert(error.message);
+      setEmailChecked(true);
+      setEmailAvailable(false);
+    }
   }
 
   function handleToggleAllAgreements() {
@@ -103,7 +113,7 @@ export default function SignUpPage() {
     }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (!name.trim()) {
@@ -161,13 +171,22 @@ export default function SignUpPage() {
       return;
     }
 
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("nickname", nickname);
-    navigate("/signup/complete",  {
-      state: {
-        nickname,
-      },
-    });
+    try {
+      const user = await signupUser({
+        email: email.trim(),
+        password,
+        name: name.trim(),
+        nickname: nickname.trim(),
+      });
+
+      navigate("/signup/complete", {
+        state: {
+          nickname: user.nickname,
+        },
+      });
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   return (
@@ -175,7 +194,6 @@ export default function SignUpPage() {
       <Header />
 
       <main className="SignUpPage_Content">
-        <div className="SignUpPage_Breadcrumb">회원가입</div>
 
         <section className="SignUp_Section">
           <div className="SignUp_Title">회원가입</div>
@@ -247,6 +265,12 @@ export default function SignUpPage() {
                     <p className="user_fail_text">사용 중인 닉네임입니다.</p>
                   </div>
                 )}
+
+                {nicknameChecked && nicknameAvailable === true && (
+                  <div className="SignUp_user_success">
+                    <p className="user_success_text">사용 가능한 닉네임입니다.</p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -300,6 +324,16 @@ export default function SignUpPage() {
                     <div className="SignUp_email_fail">
                       <p className="email_fail_text">
                         이미 사용 중인 이메일입니다.
+                      </p>
+                    </div>
+                  )}
+
+                {emailChecked &&
+                  emailAvailable === true &&
+                  isEmailFormatValid && (
+                    <div className="SignUp_email_success">
+                      <p className="email_success_text">
+                        사용 가능한 이메일입니다.
                       </p>
                     </div>
                   )}
@@ -382,8 +416,16 @@ export default function SignUpPage() {
                     className="Required_all"
                     onClick={handleToggleAllAgreements}
                   >
-                    <span className={`check_circle_icon ${isAllAgreed ? "checked" : ""}`}>
-                      <img src={dropdownIcon} alt="" className="check_dropdown_img" />
+                    <span
+                      className={`check_circle_icon ${
+                        isAllAgreed ? "checked" : ""
+                      }`}
+                    >
+                      <img
+                        src={dropdownIcon}
+                        alt=""
+                        className="check_dropdown_img"
+                      />
                     </span>
                     <span className="Required_all_text">모두 동의합니다</span>
                   </button>
@@ -397,8 +439,16 @@ export default function SignUpPage() {
                             className="Required_ic_check_off"
                             onClick={() => handleToggleAgreement("service")}
                           >
-                            <span className={`check_circle_icon ${agreements.service ? "checked" : ""}`}>
-                              <img src={dropdownIcon} alt="" className="check_dropdown_img" />
+                            <span
+                              className={`check_circle_icon ${
+                                agreements.service ? "checked" : ""
+                              }`}
+                            >
+                              <img
+                                src={dropdownIcon}
+                                alt=""
+                                className="check_dropdown_img"
+                              />
                             </span>
                           </button>
 
@@ -412,7 +462,9 @@ export default function SignUpPage() {
 
                           <button
                             type="button"
-                            className={`accordion_arrow ${openTerms.service ? "open" : ""}`}
+                            className={`accordion_arrow ${
+                              openTerms.service ? "open" : ""
+                            }`}
                             onClick={() => handleToggleOpen("service")}
                           />
                         </div>
@@ -422,19 +474,34 @@ export default function SignUpPage() {
                         <div className="Required_item_content">
                           <p>제1조 (목적)</p>
                           <p>
-                            본 약관은 [서비스명](이하 "회사")이 제공하는 모바일 및 웹 서비스의 이용 조건 및 절차,
-                            이용자와 회사 간의 권리, 의무 및 책임 사항을 규정함을 목적으로 합니다.
+                            본 약관은 [서비스명](이하 "회사")이 제공하는 모바일 및 웹
+                            서비스의 이용 조건 및 절차, 이용자와 회사 간의 권리,
+                            의무 및 책임 사항을 규정함을 목적으로 합니다.
                           </p>
 
                           <p>제2조 (용어의 정의)</p>
-                          <p>"서비스"라 함은 회사가 운영하는 플랫폼 내에서 제공하는 모든 기능을 의미합니다.</p>
-                          <p>"이용자"란 본 약관에 동의하고 서비스를 이용하는 회원 및 비회원을 말합니다.</p>
+                          <p>
+                            "서비스"라 함은 회사가 운영하는 플랫폼 내에서 제공하는
+                            모든 기능을 의미합니다.
+                          </p>
+                          <p>
+                            "이용자"란 본 약관에 동의하고 서비스를 이용하는 회원 및
+                            비회원을 말합니다.
+                          </p>
 
                           <p>제3조 (서비스의 제공 및 변경)</p>
                           <p>회사는 이용자에게 다음과 같은 서비스를 제공합니다.</p>
-                          <p>[핵심 기능 명시, 예: 실시간 메시징 및 데이터 연동 서비스]</p>
-                          <p>기타 회사가 추가로 개발하거나 제휴 계약을 통해 제공하는 서비스</p>
-                          <p>회사는 서비스의 기술적 사양 변경이 필요한 경우 공지사항을 통해 사전에 고지합니다.</p>
+                          <p>
+                            [핵심 기능 명시, 예: 실시간 메시징 및 데이터 연동 서비스]
+                          </p>
+                          <p>
+                            기타 회사가 추가로 개발하거나 제휴 계약을 통해 제공하는
+                            서비스
+                          </p>
+                          <p>
+                            회사는 서비스의 기술적 사양 변경이 필요한 경우 공지사항을
+                            통해 사전에 고지합니다.
+                          </p>
                         </div>
                       )}
                     </div>
@@ -447,8 +514,16 @@ export default function SignUpPage() {
                             className="Required_ic_check_off"
                             onClick={() => handleToggleAgreement("finance")}
                           >
-                            <span className={`check_circle_icon ${agreements.finance ? "checked" : ""}`}>
-                              <img src={dropdownIcon} alt="" className="check_dropdown_img" />
+                            <span
+                              className={`check_circle_icon ${
+                                agreements.finance ? "checked" : ""
+                              }`}
+                            >
+                              <img
+                                src={dropdownIcon}
+                                alt=""
+                                className="check_dropdown_img"
+                              />
                             </span>
                           </button>
 
@@ -462,7 +537,9 @@ export default function SignUpPage() {
 
                           <button
                             type="button"
-                            className={`accordion_arrow ${openTerms.finance ? "open" : ""}`}
+                            className={`accordion_arrow ${
+                              openTerms.finance ? "open" : ""
+                            }`}
                             onClick={() => handleToggleOpen("finance")}
                           />
                         </div>
@@ -472,27 +549,32 @@ export default function SignUpPage() {
                         <div className="Required_item_content">
                           <p>제1조 (목적)</p>
                           <p>
-                            본 약관은 이용자가 회사가 제공하는 전자금융서비스를 안전하고 편리하게
-                            이용할 수 있도록 금융거래의 기초가 되는 사항을 정함을 목적으로 합니다.
+                            본 약관은 이용자가 회사가 제공하는 전자금융서비스를
+                            안전하고 편리하게 이용할 수 있도록 금융거래의 기초가 되는
+                            사항을 정함을 목적으로 합니다.
                           </p>
 
                           <p>제2조 (거래 내용의 확인)</p>
                           <p>
-                            회사는 이용자의 관리 화면을 통해 이용자의 거래 내용을 확인할 수 있도록 하며,
-                            이용자의 요청이 있을 경우 전자적 장치를 통해 즉시 확인 가능하도록 합니다.
+                            회사는 이용자의 관리 화면을 통해 이용자의 거래 내용을
+                            확인할 수 있도록 하며, 이용자의 요청이 있을 경우 전자적
+                            장치를 통해 즉시 확인 가능하도록 합니다.
                           </p>
 
                           <p>제3조 (오류의 정정)</p>
                           <p>
-                            이용자는 전자금융거래에 오류가 있음을 알았을 때 회사에 정정을 요구할 수 있습니다.
+                            이용자는 전자금융거래에 오류가 있음을 알았을 때 회사에
+                            정정을 요구할 수 있습니다.
                           </p>
                           <p>
-                            회사는 오류 정정 요구를 받은 날로부터 2주 이내에 그 결과를 이용자에게 알립니다.
+                            회사는 오류 정정 요구를 받은 날로부터 2주 이내에 그 결과를
+                            이용자에게 알립니다.
                           </p>
 
                           <p>제4조 (거래 기록의 보존)</p>
                           <p>
-                            회사는 전자금융거래법 등 관련 법령에 따라 다음의 기록을 5년간 보존합니다.
+                            회사는 전자금융거래법 등 관련 법령에 따라 다음의 기록을
+                            5년간 보존합니다.
                           </p>
                           <p>거래의 종류 및 금액, 거래 상대방에 관한 정보</p>
                           <p>전자적 장치의 접속 기록 및 거래 승인 번호</p>
@@ -508,8 +590,16 @@ export default function SignUpPage() {
                             className="Required_ic_check_off"
                             onClick={() => handleToggleAgreement("privacy")}
                           >
-                            <span className={`check_circle_icon ${agreements.privacy ? "checked" : ""}`}>
-                              <img src={dropdownIcon} alt="" className="check_dropdown_img" />
+                            <span
+                              className={`check_circle_icon ${
+                                agreements.privacy ? "checked" : ""
+                              }`}
+                            >
+                              <img
+                                src={dropdownIcon}
+                                alt=""
+                                className="check_dropdown_img"
+                              />
                             </span>
                           </button>
 
@@ -523,7 +613,9 @@ export default function SignUpPage() {
 
                           <button
                             type="button"
-                            className={`accordion_arrow ${openTerms.privacy ? "open" : ""}`}
+                            className={`accordion_arrow ${
+                              openTerms.privacy ? "open" : ""
+                            }`}
                             onClick={() => handleToggleOpen("privacy")}
                           />
                         </div>
@@ -532,13 +624,15 @@ export default function SignUpPage() {
                       {openTerms.privacy && (
                         <div className="Required_item_content">
                           <p>
-                            OH TRIP은 관련 법령에 따라 이용자의 개인정보를 보호하고 관련 고충을
-                            신속하게 처리하기 위해 다음과 같은 처리 방침을 수립·공개합니다.
+                            OH TRIP은 관련 법령에 따라 이용자의 개인정보를 보호하고
+                            관련 고충을 신속하게 처리하기 위해 다음과 같은 처리 방침을
+                            수립·공개합니다.
                           </p>
 
                           <p>1. 개인정보의 수집 및 이용 목적</p>
                           <p>
-                            회사는 다음의 목적을 위해 개인정보를 수집하며, 목적 외의 용도로는 사용하지 않습니다.
+                            회사는 다음의 목적을 위해 개인정보를 수집하며, 목적 외의
+                            용도로는 사용하지 않습니다.
                           </p>
                           <p>회원 가입 의사 확인, 본인 식별, 회원 탈퇴 의사 확인</p>
                           <p>서비스 제공에 따른 본인 인증 및 서비스 부정 이용 방지</p>
@@ -550,10 +644,12 @@ export default function SignUpPage() {
 
                           <p>3. 개인정보의 보유 및 이용 기간</p>
                           <p>
-                            원칙적으로 개인정보 수집 및 이용 목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다.
+                            원칙적으로 개인정보 수집 및 이용 목적이 달성된 후에는 해당
+                            정보를 지체 없이 파기합니다.
                           </p>
                           <p>
-                            단, 관련 법령(상법, 전자상거래법 등)에 따라 보존할 필요가 있는 경우 해당 기간 동안 보관합니다.
+                            단, 관련 법령(상법, 전자상거래법 등)에 따라 보존할 필요가
+                            있는 경우 해당 기간 동안 보관합니다.
                           </p>
                         </div>
                       )}

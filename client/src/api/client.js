@@ -2,6 +2,7 @@
 
 async function request(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
+
   const res = await fetch(url, {
     headers: {
       "Content-Type": "application/json",
@@ -11,12 +12,22 @@ async function request(endpoint, options = {}) {
   });
 
   if (!res.ok) {
-    const error = await res.json().catch(() => ({ error: res.statusText }));
-    throw new Error(error.error || `HTTP ${res.status}`);
+    const error = await res.json().catch(() => ({
+      message: res.statusText,
+    }));
+
+    throw new Error(error.message || error.error || `HTTP ${res.status}`);
+  }
+
+  if (res.status === 204) {
+    return null;
   }
 
   return res.json();
 }
+
+
+// Region / Product API
 
 export async function fetchRegions() {
   return request("/api/regions");
@@ -40,6 +51,9 @@ export async function fetchProductDetail(productId) {
   return request(`/api/products/${encodeURIComponent(productId)}`);
 }
 
+
+// Order API
+
 export async function createOrder(payload) {
   return request("/api/orders", {
     method: "POST",
@@ -49,4 +63,67 @@ export async function createOrder(payload) {
 
 export async function fetchOrders() {
   return request("/api/orders");
+}
+
+
+// User API
+
+export async function signupUser(payload) {
+  return request("/api/users/signup", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function loginUser(payload) {
+  return request("/api/users/login", {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function logoutUser() {
+  return request("/api/users/logout", {
+    method: "POST",
+    credentials: "include",
+  });
+}
+
+export async function checkEmail(email) {
+  const params = new URLSearchParams({
+    email,
+  });
+
+  return request(`/api/users/check-email?${params}`);
+}
+
+export async function checkNickname(nickname) {
+  const params = new URLSearchParams({
+    nickname,
+  });
+
+  return request(`/api/users/check-nickname?${params}`);
+}
+
+export async function fetchMyInfo() {
+  return request("/api/users/me", {
+    method: "GET",
+    credentials: "include",
+  });
+}
+
+export async function changePassword(payload) {
+  return request("/api/users/password", {
+    method: "PATCH",
+    credentials: "include",
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function withdrawUser() {
+  return request("/api/users/withdraw", {
+    method: "PATCH",
+    credentials: "include",
+  });
 }
