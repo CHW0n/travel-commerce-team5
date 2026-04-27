@@ -6,7 +6,7 @@ export default function SignUpCompletePage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-   const nickname = location.state?.nickname || "회원";
+  const nickname =location.state?.nickname || localStorage.getItem("nickname") || "회원";
 
   return (
     <div className="SignUpCompletePage">
