@@ -194,7 +194,6 @@ export default function SignUpPage() {
       <Header />
 
       <main className="SignUpPage_Content">
-        <div className="SignUpPage_Breadcrumb">회원가입</div>
 
         <section className="SignUp_Section">
           <div className="SignUp_Title">회원가입</div>
