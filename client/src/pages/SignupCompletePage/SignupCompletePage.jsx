@@ -13,12 +13,6 @@ export default function SignUpCompletePage() {
       <Header />
 
       <main className="SignUpCompletePage_Content">
-        <div className="SignUpCompletePage_Breadcrumb">
-          <span>회원가입</span>
-          <span className="Breadcrumb_Arrow">›</span>
-          <strong>회원가입 완료</strong>
-        </div>
-
         <section className="SignUpComplete_Section">
           <div className="Complete_Icon">
             <img
