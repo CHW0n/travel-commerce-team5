@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { loginUser } from "../../api/client";
 import Header from "../../components/header/header";
 import "./LoginPage.css";
 
@@ -12,8 +13,9 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
@@ -21,8 +23,24 @@ export default function LoginPage() {
       return;
     }
 
-    localStorage.setItem("isLoggedIn", "true");
-    navigate(from, { replace: true });
+    try {
+      setIsSubmitting(true);
+
+      const data = await loginUser({
+        email: email.trim(),
+        password,
+      });
+
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("nickname", data.user.nickname);
+
+      navigate(from, { replace: true });
+    } catch (error) {
+      alert(error.message || "로그인에 실패했습니다.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -50,6 +68,7 @@ export default function LoginPage() {
                       placeholder="이메일을 입력해 주세요"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      autoComplete="email"
                     />
                   </div>
                 </div>
@@ -71,24 +90,31 @@ export default function LoginPage() {
                       placeholder="비밀번호를 입력해 주세요"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      autoComplete="current-password"
                     />
                     <button
-                        type="button"
-                        className="Password_Toggle_Btn"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                        >
-                        {showPassword ? "숨기기" : "보기"}
-                        </button>
+                      type="button"
+                      className="Password_Toggle_Btn"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                    >
+                      {showPassword ? "숨기기" : "보기"}
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="Login_FieldRow_Contact">
-              <button type="submit" className="Login_btn">
+              <button
+                type="submit"
+                className="Login_btn"
+                disabled={isSubmitting}
+              >
                 <div className="Login_btn_ct">
                   <div className="Login_btn_box">
-                    <span className="Login_btn_text">로그인</span>
+                    <span className="Login_btn_text">
+                      {isSubmitting ? "로그인 중..." : "로그인"}
+                    </span>
                   </div>
                 </div>
               </button>
