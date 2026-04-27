@@ -1,0 +1,159 @@
+.SignUpCompletePage {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.SignUpCompletePage_Content {
+  min-height: calc(100vh - 80px);
+  padding: 40px 0 80px;
+  box-sizing: border-box;
+  background: #f5f5f5;
+}
+
+.SignUpCompletePage_Breadcrumb {
+  width: 1728px;
+  height: 64px;
+  margin: 0 auto;
+  padding: 16px 56px 16px 170px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #111113;
+  background: transparent;
+}
+
+.Breadcrumb_Arrow {
+  color: #111113;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.SignUpCompletePage_Breadcrumb strong {
+  font-weight: 700;
+}
+
+.SignUpComplete_Section {
+  width: 1392px;
+  height: 840px;
+  margin: 0 auto;
+  padding: 100px 24px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 11px 23px -5px rgba(197, 197, 197, 0.25);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Complete_Icon {
+  width: 101px;
+  height: 86px;
+  margin-top: 106px;
+  margin-bottom: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Complete_Check_Img {
+  width: 101px;
+  height: 86px;
+  object-fit: contain;
+  display: block;
+}
+
+.Complete_Title {
+  width: 130px;
+  height: 36px;
+  margin: 0 0 40px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: -0.005em;
+  color: #000000;
+  text-align: center;
+}
+
+.Complete_Divider {
+  width: 375px;
+  height: 1px;
+  background: #d9d9d9;
+  margin-bottom: 40px;
+}
+
+.Complete_Text {
+  width: 171px;
+  min-height: 42px;
+  margin: 0 0 40px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  line-height: 150%;
+  text-align: center;
+  color: #000000;
+}
+
+.Complete_Text strong {
+  font-weight: 700;
+}
+
+.Complete_Login_Button {
+  width: 375px;
+  height: 48px;
+  padding: 13px 16px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  background: #3db1fd;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+@media (max-width: 1440px) {
+  .SignUpCompletePage_Breadcrumb,
+  .SignUpComplete_Section {
+    width: calc(100% - 48px);
+  }
+}
+
+@media (max-width: 768px) {
+  .SignUpCompletePage_Content {
+    padding: 32px 0 60px;
+  }
+
+  .SignUpComplete_Section {
+    width: calc(100% - 32px);
+    height: 600px;
+    padding: 80px 16px;
+  }
+
+  .Complete_Icon {
+    margin-top: 40px;
+  }
+
+  .Complete_Divider,
+  .Complete_Login_Button {
+    width: 100%;
+    max-width: 375px;
+  }
+}
