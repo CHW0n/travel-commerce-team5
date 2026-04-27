@@ -1,0 +1,105 @@
+.Header {
+  width: 100%;
+  height: 80px;
+  margin: 0 auto;
+  padding: 16px 60px;
+  box-sizing: border-box;
+  background: var(--white);
+  border-bottom: 0;
+}
+
+.Header .page {
+  width: 100%;
+  margin: 0;
+}
+
+.Header_Row {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Header_logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ohtrip-logo-icon2 {
+  width: 140px;
+  height: 29.97px;
+  display: block;
+}
+
+.logo_img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.Frame_56 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.Header_LoginButton,
+.Header_SignupButton {
+  border: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.Header_LoginButton {
+  background: transparent;
+  color: #3da9fc;
+}
+
+.Header_SignupButton {
+  min-width: 114px;
+  height: 43px;
+  padding: 8px 24px;
+  border-radius: 999px;
+  background: #4aa8f6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .Header_Row {
+    height: 52px;
+  }
+
+  .Header_logo {
+    transform: scale(0.9);
+    transform-origin: left center;
+  }
+
+  .Header {
+    padding: 16px 20px;
+  }
+
+  .Frame_56 {
+    gap: 16px;
+  }
+
+  .Header_LoginButton,
+  .Header_SignupButton {
+    font-size: 16px;
+  }
+
+  .Header_SignupButton {
+    min-width: 96px;
+    height: 40px;
+    padding: 8px 18px;
+  }
+}
