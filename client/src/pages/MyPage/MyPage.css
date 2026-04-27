@@ -423,44 +423,14 @@
 
 
 
-
-
-
-
-
-.MyPage .MyPage_Btn {
-  width: 120px;
-  height: 48px;
-  padding: 8px 16px;
-  gap: 10px;
-  border-radius: 8px;
-  border: 0;
-  background: #3DB1FD;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.MyPage .MyPage_Btn_Text {
-  font-family: "Pretendard", sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 32px;
-  letter-spacing: 0%;
-  text-align: center;
-  color: #FFFFFF;
+.MyPage {
+  padding-bottom: 40px;
 }
 
 .MyPage .Nav {
-  width: min(1392px, calc(100% - 48px));
-
+  width: min(1392px, calc(100% - 208px));
   margin: 31px auto 0 auto; 
-  
   height: 64px;
-
-  /* padding: 16px 24px;  */
-  
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -509,7 +479,7 @@
 }
 
 .MyPage .User_Module {
-  width: min(1392px, calc(100% - 48px));
+  width: min(1392px, calc(100% - 208px));  /* 104px * 2 */
   min-height: 676px;
   height: auto;
   margin: 0 auto;
@@ -523,7 +493,7 @@
   flex-direction: column;
 }
 
-.MyPage .my_Tabs_Wrapper {
+.MyPage .My_Tabs_Wrapper {
   width: 100%;
   /* height: 55px; */
   display: flex;
