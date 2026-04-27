@@ -39,9 +39,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    @Column(nullable = false)
-    private String phone;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;
@@ -72,7 +69,6 @@ public class User {
             String passwordHash,
             String name,
             String nickname,
-            String phone,
             UserRole role,
             UserStatus status,
             LocalDateTime createdAt,
@@ -82,7 +78,6 @@ public class User {
         this.passwordHash = passwordHash;
         this.name = name;
         this.nickname = nickname;
-        this.phone = phone;
         this.role = role;
         this.status = status;
         this.createdAt = createdAt;
