@@ -1,5 +1,7 @@
 package com.team5.travelcommerce.global.exception;
 
+import com.team5.travelcommerce.global.BusinessException;
+import com.team5.travelcommerce.global.ErrorCode;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Map<String, String>> handleBusinessException(BusinessException e) {
+        ErrorCode errorCode = e.getErrorCode();
+
+        return ResponseEntity
+                .status(errorCode.getStatus())
+                .body(Map.of("message", errorCode.getMessage()));
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationException(
