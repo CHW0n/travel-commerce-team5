@@ -9,7 +9,6 @@ public record UserResponse(
         String email,
         String name,
         String nickname,
-        String phone,
         UserRole role,
         UserStatus status
 ) {
@@ -19,7 +18,6 @@ public record UserResponse(
                 user.getEmail(),
                 user.getName(),
                 user.getNickname(),
-                user.getPhone(),
                 user.getRole(),
                 user.getStatus()
         );

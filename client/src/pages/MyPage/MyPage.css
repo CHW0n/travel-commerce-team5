@@ -506,21 +506,6 @@
   display: flex;
 }
 
-/* .MyPage .tab_pay,
-.MyPage .tab_user {
-  width: 50%;
-  height: 54px;
-  padding: 16px 16px 0 16px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;  
-  text-decoration: none;
-  color: #222222;
-  overflow: hidden;  
-} */
-
 .MyPage .tab_pay,
 .MyPage .tab_user {
   flex: 1; 
