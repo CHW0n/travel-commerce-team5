@@ -5,7 +5,7 @@ import PaymentPage from "../pages/PaymentPage/PaymentPage";
 import CompletePage from "../pages/CompletePage/CompletePage";
 import MyPage from "../pages/MyPage/MyPage";
 import AdminPage from "../pages/AdminPage/AdminPage"; 
-import PaymentTable from '../pages/Payment/PaymentTable';
+// import PaymentTable from '../pages/Payment/PaymentTable';
 import PaymentList from '../pages/MyPage/tabs/PaymentList';
 import MemberInfo from "../pages/MyPage/tabs/MemberInfo";
 import EditPassword from "../pages/MyPage/tabs/EditPassword";
@@ -28,7 +28,7 @@ export default function AppRouter() {
       <Route path="/complete" element={<CompletePage />} />
 
       <Route path="/admin" element={<AdminPage />} />
-      <Route path="/payment-test" element={<PaymentTable />} />
+      {/* <Route path="/payment-test" element={<PaymentTable />} /> */}
       <Route path="/mypage" element={<MyPage />}>
         <Route index element={<Navigate to="orders" replace />} />
         <Route path="orders" element={<PaymentList />} />  {/* /mypage/orders */}

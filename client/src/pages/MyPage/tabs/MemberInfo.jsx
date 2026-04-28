@@ -13,7 +13,7 @@ export default function MemberInfo() {
   useEffect(() => {
     api.get("/users/me")
       .then((res) => setUser(res.data))
-      .catch((err) => console.error("회원 정보 조회 실패", err));
+      .catch(() => navigate("/login"));
   }, []);
 
   const handleEditModeOpen = () => {

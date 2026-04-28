@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import api from "../../api/axios";
 import "./Header.css";
 
 export default function Header() {
@@ -14,9 +15,11 @@ export default function Header() {
   const isSignupCompletePage = location.pathname === "/signup/complete";
 
   function handleLogout() {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("nickname");
-    navigate("/");
+    api.post("/users/logout").finally(() => {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("nickname");
+      navigate("/");
+    });
   }
 
   return (
