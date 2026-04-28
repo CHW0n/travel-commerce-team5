@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import api from "../../../api/axios";
+import { fetchMyInfo, changePassword, withdrawUser } from "../../../api/client";
 import "./MemberInfo.css";
 
 export default function EditPassword() {
@@ -17,8 +17,8 @@ export default function EditPassword() {
   const currentPassword = location.state?.currentPassword;
 
   useEffect(() => {
-    api.get("/users/me")
-      .then((res) => setUser(res.data))
+    fetchMyInfo()
+      .then((data) => setUser(data))
       .catch(() => navigate("/login"));
   }, []);
 
@@ -38,10 +38,7 @@ export default function EditPassword() {
     }
 
     try {
-      await api.patch("/users/password", {
-        currentPassword,
-        newPassword,
-      });
+      await changePassword({ currentPassword, newPassword });
       navigate("/mypage/profile");
     } catch (err) {
       console.error("비밀번호 변경 실패", err);
@@ -50,7 +47,7 @@ export default function EditPassword() {
 
   const handleWithdraw = async () => {
     try {
-      await api.patch("/users/withdraw");
+      await withdrawUser();
       navigate("/mypage/profile/withdraw-complete");
     } catch (err) {
       console.error("회원 탈퇴 실패", err);
