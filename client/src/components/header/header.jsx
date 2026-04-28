@@ -14,12 +14,14 @@ export default function Header() {
 
   const isSignupCompletePage = location.pathname === "/signup/complete";
 
-  function handleLogout() {
-    logoutUser().finally(() => {
+  async function handleLogout() {
+    try {
+      await logoutUser();
+    } finally {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("nickname");
       navigate("/");
-    });
+    }
   }
 
   return (
