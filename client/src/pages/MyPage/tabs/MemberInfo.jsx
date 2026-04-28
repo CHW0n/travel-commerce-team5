@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../../api/axios";
+import { fetchMyInfo, verifyPassword } from "../../../api/client";
 import "./MemberInfo.css";
 
 export default function MemberInfo() {
@@ -11,8 +11,8 @@ export default function MemberInfo() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get("/users/me")
-      .then((res) => setUser(res.data))
+    fetchMyInfo()
+      .then((data) => setUser(data))
       .catch(() => navigate("/login"));
   }, []);
 
@@ -22,11 +22,8 @@ export default function MemberInfo() {
 
   const handleVerify = async () => {
     try {
-      const res = await api.post(
-        "/users/verify-password",
-        { password: currentPassword }
-      );
-      if (res.data.matched) {
+      const res = await verifyPassword(currentPassword);
+      if (res.matched) {
         setPwError(false);
         navigate("/mypage/profile/edit", { state: { currentPassword } });
       } else {

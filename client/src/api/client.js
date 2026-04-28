@@ -113,6 +113,14 @@ export async function fetchMyInfo() {
   });
 }
 
+export async function verifyPassword(password) {
+  return request("/api/users/verify-password", {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify({ password }),
+  });
+}
+
 export async function changePassword(payload) {
   return request("/api/users/password", {
     method: "PATCH",
