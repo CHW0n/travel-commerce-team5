@@ -1,5 +1,7 @@
 package com.team5.travelcommerce.user.controller;
 
+import com.team5.travelcommerce.global.BusinessException;
+import com.team5.travelcommerce.global.ErrorCode;
 import com.team5.travelcommerce.user.dto.request.ChangePasswordRequest;
 import com.team5.travelcommerce.user.dto.request.LoginRequest;
 import com.team5.travelcommerce.user.dto.request.SignupRequest;
@@ -89,39 +91,46 @@ public class UserController {
     }
 
     // 회원 정보 조회
-    // TODO: 세션 연동 후 @RequestParam 제거하고 세션에서 userId 추출로 교체
     @GetMapping("/me")
-    public ResponseEntity<UserResponse> getUser(@RequestParam Long userId) {
+    public ResponseEntity<UserResponse> getUser(HttpSession session) {
+        Long userId = getLoginUserId(session);
         return ResponseEntity.ok(userService.getUser(userId));
     }
 
     // 현재 비밀번호 확인
-    // TODO: 세션 연동 후 @RequestParam 제거하고 세션에서 userId 추출로 교체
     @PostMapping("/verify-password")
     public ResponseEntity<VerifyPasswordResponse> verifyPassword(
-            @RequestParam Long userId,
+            HttpSession session,
             @Valid @RequestBody VerifyPasswordRequest request
     ) {
+        Long userId = getLoginUserId(session);
         boolean matched = userService.verifyPassword(userId, request.password());
         return ResponseEntity.ok(new VerifyPasswordResponse(matched));
     }
 
     // 비밀번호 변경
-    // TODO: 세션 연동 후 @RequestParam 제거하고 세션에서 userId 추출로 교체
     @PatchMapping("/password")
     public ResponseEntity<MessageResponse> changePassword(
-            @RequestParam Long userId,
+            HttpSession session,
             @Valid @RequestBody ChangePasswordRequest request
     ) {
+        Long userId = getLoginUserId(session);
         userService.changePassword(userId, request.currentPassword(), request.newPassword());
         return ResponseEntity.ok(new MessageResponse("비밀번호가 변경되었습니다."));
     }
 
     // 회원 탈퇴
-    // TODO: 세션 연동 후 @RequestParam 제거하고 세션에서 userId 추출로 교체
     @PatchMapping("/withdraw")
-    public ResponseEntity<MessageResponse> withdraw(@RequestParam Long userId) {
+    public ResponseEntity<MessageResponse> withdraw(HttpSession session) {
+        Long userId = getLoginUserId(session);
         userService.withdraw(userId);
+        session.invalidate();
         return ResponseEntity.ok(new MessageResponse("회원 탈퇴가 완료되었습니다."));
+    }
+
+    private Long getLoginUserId(HttpSession session) {
+        Long userId = (Long) session.getAttribute("LOGIN_USER_ID");
+        if (userId == null) throw new BusinessException(ErrorCode.UNAUTHORIZED);
+        return userId;
     }
 }

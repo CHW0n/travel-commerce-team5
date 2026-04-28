@@ -1,0 +1,77 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+
+.Paylist_content {
+    width: 100%;
+    padding: 0 34px;
+}
+
+.Paylist_content h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.product_Row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.product_info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.product_info img {
+    width: 135px;
+    height: 135px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.paylist_etc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.paylist_etc span {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+}
+
+.paylist_etc button {
+    display: flex;
+    align-items: center;
+    width: 142px;
+    height: 48px;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    justify-content: center;
+}
+
+.product_info_container {
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product_title {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.product_date,
+.product_count {
+    font-weight: 400;
+    font-size: 16px;
+}

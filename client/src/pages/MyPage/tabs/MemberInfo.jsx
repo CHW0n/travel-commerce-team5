@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
 import "./MemberInfo.css";
 
-// TODO: 세션 연동 후 제거
-const TEMP_USER_ID = 2;
-
 export default function MemberInfo() {
   const [user, setUser] = useState(null);
   const [mode, setMode] = useState("view"); // "view" | "verifying"
@@ -14,9 +11,9 @@ export default function MemberInfo() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get(`/users/me?userId=${TEMP_USER_ID}`)
+    api.get("/users/me")
       .then((res) => setUser(res.data))
-      .catch((err) => console.error("회원 정보 조회 실패", err));
+      .catch(() => navigate("/login"));
   }, []);
 
   const handleEditModeOpen = () => {
@@ -26,7 +23,7 @@ export default function MemberInfo() {
   const handleVerify = async () => {
     try {
       const res = await api.post(
-        `/users/verify-password?userId=${TEMP_USER_ID}`,
+        "/users/verify-password",
         { password: currentPassword }
       );
       if (res.data.matched) {

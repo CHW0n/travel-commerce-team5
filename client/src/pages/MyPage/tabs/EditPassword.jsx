@@ -3,9 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import api from "../../../api/axios";
 import "./MemberInfo.css";
 
-// TODO: 세션 연동 후 제거
-const TEMP_USER_ID = 2;
-
 export default function EditPassword() {
   const [user, setUser] = useState(null);
   const [newPassword, setNewPassword] = useState("");
@@ -20,9 +17,9 @@ export default function EditPassword() {
   const currentPassword = location.state?.currentPassword;
 
   useEffect(() => {
-    api.get(`/users/me?userId=${TEMP_USER_ID}`)
+    api.get("/users/me")
       .then((res) => setUser(res.data))
-      .catch((err) => console.error("회원 정보 조회 실패", err));
+      .catch(() => navigate("/login"));
   }, []);
 
   const handleSave = async () => {
@@ -41,7 +38,7 @@ export default function EditPassword() {
     }
 
     try {
-      await api.patch(`/users/password?userId=${TEMP_USER_ID}`, {
+      await api.patch("/users/password", {
         currentPassword,
         newPassword,
       });
@@ -53,7 +50,7 @@ export default function EditPassword() {
 
   const handleWithdraw = async () => {
     try {
-      await api.patch(`/users/withdraw?userId=${TEMP_USER_ID}`);
+      await api.patch("/users/withdraw");
       navigate("/mypage/profile/withdraw-complete");
     } catch (err) {
       console.error("회원 탈퇴 실패", err);

@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { logoutUser } from "../../api/client";
 import "./Header.css";
 
 export default function Header() {
@@ -13,10 +14,14 @@ export default function Header() {
 
   const isSignupCompletePage = location.pathname === "/signup/complete";
 
-  function handleLogout() {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("nickname");
-    navigate("/");
+  async function handleLogout() {
+    try {
+      await logoutUser();
+    } finally {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("nickname");
+      navigate("/");
+    }
   }
 
   return (

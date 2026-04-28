@@ -39,7 +39,6 @@ class UserServiceTest {
                 .passwordHash(passwordHash)
                 .name("홍길동")
                 .nickname("gildong")
-                .phone("01012345678")
                 .role(UserRole.USER)
                 .status(UserStatus.ACTIVE)
                 .createdAt(LocalDateTime.now())

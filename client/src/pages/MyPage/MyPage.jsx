@@ -108,7 +108,8 @@
 //   );
 // }
 
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import Header from "../../components/header/header";
 import "./MyPage.css";
 
 export default function MyPage() {
@@ -117,37 +118,30 @@ export default function MyPage() {
 
   return (
     <div className="MyPage">
-      <header className="Header">
-        <div className="page Header_Row">
-          <Link to="/" className="Header_logo" aria-label="5trip 홈">
-            <span className="ohtrip-logo-icon2">
-              <img src="/icon/ohtrip-logo-icon2.png" alt="5TRIP" className="logo_img" />
-            </span>
-          </Link>
-          <button type="button" className="MyPage_Btn" aria-label="마이페이지">
-            <span className="MyPage_Btn_Text">마이페이지</span>
-          </button>
-        </div>
-      </header>
+      <Header />
 
       <nav className="Nav" aria-label="breadcrumb">
         <div className="Nav_container">
           <img src="/icon/User_02.png" alt="사용자" className="Nav_userIcon" />
           <span className="Nav_text">마이페이지</span>
           <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
-          {/* 경로에 따라 동적으로 표시 */}
-          <span className={`Nav_text ${!pathname.includes("edit") ? "active" : ""}`}>회원정보</span>
-          
-          {pathname.includes("edit") && (
+          {pathname.includes("orders") ? (
+            <span className="Nav_text active">결제 내역</span>
+          ) : (
             <>
-              <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
-              <span className="Nav_text active">회원정보 수정</span>
-            </>
-          )}
-          {pathname.includes("withdraw-complete") && (
-            <>
-              <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
-              <span className="Nav_text active">회원탈퇴 완료</span>
+              <span className={`Nav_text ${!pathname.includes("edit") ? "active" : ""}`}>회원정보</span>
+              {pathname.includes("edit") && (
+                <>
+                  <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
+                  <span className="Nav_text active">회원정보 수정</span>
+                </>
+              )}
+              {pathname.includes("withdraw-complete") && (
+                <>
+                  <img src="/icon/arrow_right.png" alt=">" className="Nav_arrowIcon" />
+                  <span className="Nav_text active">회원탈퇴 완료</span>
+                </>
+              )}
             </>
           )}
         </div>
@@ -155,7 +149,7 @@ export default function MyPage() {
 
       <main className="MyPage_Main">
         <div className="User_Module">
-          <div className="my_Tabs_Wrapper">
+          <div className="My_Tabs_Wrapper">
             <div className="my_Tabs">
               <NavLink
                 to="orders"
