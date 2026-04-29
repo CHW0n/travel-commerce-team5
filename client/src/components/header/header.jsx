@@ -10,6 +10,11 @@ export default function Header() {
   const isLoggedIn = checkLoggedIn();
   const nickname = localStorage.getItem("nickname") || "회원";
 
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+  const isAdmin = user?.role === "ADMIN";
+  const homePath = isAdmin ? "/admin" : "/";
+  const myPagePath = isAdmin ? "/admin" : "/mypage";
+
   const isAuthPage =
     location.pathname === "/login" || location.pathname === "/signup";
 
@@ -27,7 +32,7 @@ export default function Header() {
   return (
     <header className="Header">
       <div className="page Header_Row">
-        <Link to="/" className="Header_logo" aria-label="5trip 홈">
+        <Link to={homePath} className="Header_logo" aria-label="5trip 홈">
           <span className="ohtrip-logo-icon2">
             <img
               src="/icon/ohtrip-logo-icon2.png"
@@ -42,7 +47,7 @@ export default function Header() {
             <button
               type="button"
               className="Header_SignupButton"
-              onClick={() => navigate("/mypage")}
+              onClick={() => navigate(myPagePath)}
             >
               마이페이지
             </button>
@@ -71,7 +76,7 @@ export default function Header() {
               <button
                 type="button"
                 className="Header_SignupButton"
-                onClick={() => navigate("/mypage")}
+                onClick={() => navigate(myPagePath)}
               >
                 마이페이지
               </button>
