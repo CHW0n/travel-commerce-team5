@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class CreateOrderRequest {
     private Long productId;
+    private Long productDateId;
     private String title;
     private String dateText;
     private String productImageUrl;
