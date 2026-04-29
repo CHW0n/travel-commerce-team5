@@ -34,9 +34,9 @@ const AdminPage = () => {
   const currentData = users.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
   return (
-    <div className="admin-container">
+    <div>
       <Header />
-      
+      <div className="admin-container">
       <nav className="nav">
         <div className="nav_container">
           <img src="/images/Settings.png" alt="설정" />
@@ -151,6 +151,7 @@ const AdminPage = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
