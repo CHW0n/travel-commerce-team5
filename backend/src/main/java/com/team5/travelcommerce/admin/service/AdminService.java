@@ -1,34 +1,33 @@
 package com.team5.travelcommerce.admin.service;
 
+import com.team5.travelcommerce.admin.dto.response.AdminUserResponse;
+import com.team5.travelcommerce.user.repository.UserRepository; // 유저 리포지토리 연결
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class AdminService {
-    public List<Map<String, Object>> getAllUsers() {
-        // 프론트엔드 JSX의 컬럼명과 100% 일치시킵니다.
-        return List.of(
-                Map.of(
-                        "id", 1,
-                        "name", "김다은",
-                        "email", "daeun@gmail.com",
-                        "nickname", "에이스",
-                        "phone", "010-1234-5678",
-                        "userId", "daeun_admin",
-                        "date", "21.04.2026",
-                        "update", ""
-                ),
-                Map.of(
-                        "id", 2,
-                        "name", "최희원",
-                        "email", "heewon@gmail.com",
-                        "nickname", "팀장님",
-                        "phone", "010-9876-5432",
-                        "userId", "heewon_dev",
-                        "date", "21.04.2026",
-                        "update", "22.04.2026"
-                )
-        );
+
+    private final UserRepository userRepository;
+
+    public AdminService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public List<AdminUserResponse> getAllUsers() {
+        // DB에서 엔티티를 가져와 명세서 응답 모델(DTO)로 변환 [cite: 36, 94]
+        return userRepository.findAll().stream()
+                .map(user -> AdminUserResponse.builder()
+                        .userId(user.getId())
+                        .email(user.getEmail())
+                        .nickname(user.getNickname())
+                        .role(user.getRole().name()) // Enum일 경우 name() 사용
+                        .status(user.getStatus().name()) // [cite: 27]
+                        .build())
+                .collect(Collectors.toList());
     }
 }

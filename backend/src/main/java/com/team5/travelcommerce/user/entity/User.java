@@ -39,9 +39,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    @Column(nullable = false)
-    private String phone;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;
@@ -56,13 +53,22 @@ public class User {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
+    public void changePassword(String newPasswordHash) {
+        this.passwordHash = newPasswordHash;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void withdraw() {
+        this.status = UserStatus.WITHDRAWN;
+        this.updatedAt = LocalDateTime.now();
+    }
+
     @Builder
     public User(
             String email,
             String passwordHash,
             String name,
             String nickname,
-            String phone,
             UserRole role,
             UserStatus status,
             LocalDateTime createdAt,
@@ -72,7 +78,6 @@ public class User {
         this.passwordHash = passwordHash;
         this.name = name;
         this.nickname = nickname;
-        this.phone = phone;
         this.role = role;
         this.status = status;
         this.createdAt = createdAt;

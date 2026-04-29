@@ -103,3 +103,12 @@
     padding: 8px 18px;
   }
 }
+
+.Header_WelcomeText {
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #111113;
+  white-space: nowrap;
+}

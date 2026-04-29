@@ -26,6 +26,10 @@ export default function PaymentPage() {
   const totalPrice = stateTotalPrice ?? guests * pricePerPerson;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const [travelerFirstName, setTravelerFirstName] = useState("");
+  const [travelerLastName, setTravelerLastName] = useState("");
+  const [travelerPhone, setTravelerPhone] = useState("");
+  const [travelerEmail, setTravelerEmail] = useState("");
 
   useEffect(() => {
     if (!location.state?.title) {
@@ -38,6 +42,10 @@ export default function PaymentPage() {
       setSubmitError("예약 정보가 올바르지 않습니다. 다시 시도해주세요.");
       return;
     }
+    if (!travelerFirstName || !travelerLastName || !travelerPhone || !travelerEmail) {
+      setSubmitError("예약자 정보를 모두 입력해주세요.");
+      return;
+    }
     setIsSubmitting(true);
     setSubmitError(null);
     try {
@@ -48,6 +56,10 @@ export default function PaymentPage() {
         people: guests,
         unitPrice: pricePerPerson,
         totalPrice,
+        travelerFirstName,
+        travelerLastName,
+        travelerPhone,
+        travelerEmail,
         ...(productImageUrl ? { productImageUrl } : {}),
       });
       navigate("/complete", {
@@ -61,6 +73,10 @@ export default function PaymentPage() {
             unitPrice: created.unitPrice,
             totalPrice: created.totalPrice,
             productImageUrl: created.productImageUrl,
+            travelerFirstName: created.travelerFirstName,
+            travelerLastName: created.travelerLastName,
+            travelerPhone: created.travelerPhone,
+            travelerEmail: created.travelerEmail,
           },
         },
       });
@@ -145,14 +161,24 @@ export default function PaymentPage() {
             <div className="Field_FirstName">
               <div className="Label">이름</div>
               <div className="Input_Box">
-                <input className="Input_field" placeholder="예 : 김" />
+                <input
+                  className="Input_field"
+                  placeholder="예 : 김"
+                  value={travelerFirstName}
+                  onChange={(event) => setTravelerFirstName(event.target.value)}
+                />
               </div>
             </div>
 
             <div className="Field_LastName">
               <div className="Label">성</div>
               <div className="Input_Box">
-                <input className="Input_field" placeholder="예 : 다은" />
+                <input
+                  className="Input_field"
+                  placeholder="예 : 다은"
+                  value={travelerLastName}
+                  onChange={(event) => setTravelerLastName(event.target.value)}
+                />
               </div>
             </div>
           </div>
@@ -172,7 +198,12 @@ export default function PaymentPage() {
 
                 <span className="PhoneDivider" />
 
-                <input className="Input_field" placeholder="010 - xxxx - xxxx" />
+                <input
+                  className="Input_field"
+                  placeholder="010 - xxxx - xxxx"
+                  value={travelerPhone}
+                  onChange={(event) => setTravelerPhone(event.target.value)}
+                />
               </div>
             </div>
 
@@ -182,6 +213,8 @@ export default function PaymentPage() {
                 <input
                   className="Input_field"
                   placeholder="예약 확정 이메일 발송"
+                  value={travelerEmail}
+                  onChange={(event) => setTravelerEmail(event.target.value)}
                 />
               </div>
             </div>

@@ -1,21 +1,55 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { fetchProductDetail } from "../../api/client";
 import Header from "../../components/header/header";
 import LoginRequiredModal from "../../components/LoginRequiredModal/LoginRequiredModal";
 import { isLoggedIn } from "../../utils/auth";
 import "./ProductDetailPage.css";
 
-const today = new Date();
 const days = ["일", "월", "화", "수", "목", "금", "토"];
-const dates = Array.from({ length: 10 }, (_, i) => {
-  const date = new Date(today);
-  date.setDate(today.getDate() + i);
+
+function stripTime(value) {
+  const date = new Date(value);
+  date.setHours(0, 0, 0, 0);
   return date;
-});
+}
+
+function formatDateCard(date) {
+  return `${date.getMonth() + 1}월 ${date.getDate()}일 (${days[date.getDay()]})`;
+}
+
+function formatApiDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function buildGeneratedDateCards(baseDate, pricePerPerson, existingDates = []) {
+  const existingDateMap = new Map(
+    existingDates.map((item) => [formatApiDate(item.date), item]),
+  );
+
+  return Array.from({ length: 10 }, (_, index) => {
+    const date = new Date(baseDate);
+    date.setDate(baseDate.getDate() + index);
+    const normalizedDate = stripTime(date);
+    const key = formatApiDate(normalizedDate);
+    const existing = existingDateMap.get(key);
+
+    return {
+      productDateId: existing?.productDateId ?? key,
+      availableDate: existing?.availableDate ?? key,
+      status: existing?.status ?? "OPEN",
+      date: normalizedDate,
+      pricePerPerson,
+    };
+  });
+}
 
 export default function ProductDetailPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,9 +60,29 @@ export default function ProductDetailPage() {
   const [startIndex, setStartIndex] = useState(0);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const visibleCount = 7;
-  const visibleDates = dates.slice(startIndex, startIndex + visibleCount);
+  const availableDateCards = (product?.availableDates || [])
+    .map((item) => {
+      const date = stripTime(item.availableDate);
+      return {
+        ...item,
+        date,
+      };
+    });
+  const baseDate = location.state?.baseDate ? stripTime(location.state.baseDate) : null;
+  const filteredDateCards = (() => {
+    if (!baseDate) {
+      if (availableDateCards.length > 0) {
+        return availableDateCards.slice(0, 10);
+      }
+
+      return buildGeneratedDateCards(stripTime(new Date()), product?.pricePerPerson ?? 0);
+    }
+
+    return buildGeneratedDateCards(baseDate, product?.pricePerPerson ?? 0, availableDateCards);
+  })();
+  const visibleDates = filteredDateCards.slice(startIndex, startIndex + visibleCount);
   const canGoPrev = startIndex > 0;
-  const canGoNext = startIndex + visibleCount < dates.length;
+  const canGoNext = startIndex + visibleCount < filteredDateCards.length;
 
   useEffect(() => {
     if (!productId) {
@@ -44,6 +98,12 @@ export default function ProductDetailPage() {
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [productId]);
+
+  useEffect(() => {
+    setStartIndex(0);
+    setSelectedDate(null);
+    setDateError("");
+  }, [productId, location.state?.baseDate]);
 
   return (
     <div className="ProductDetailPage">
@@ -74,7 +134,7 @@ export default function ProductDetailPage() {
       <main>
         {/* 상세 전용 투어 섹션 (메인 .Tour_Section과 구분) */}
         <section className="Detail_Tour_Section">
-          <img className="Detail_Tour_Image" src={product.imagePath} alt={product.title} />
+          <img className="Detail_Tour_Image" src={product.imageUrl || product.imagePath} alt={product.title} />
 
           <div className="Detail_Tour_Info">
             {/* 첫 번째 Tour_Info */}
@@ -155,11 +215,11 @@ export default function ProductDetailPage() {
 
             {visibleDates.map((date, index) => (
               <div
-                key={startIndex + index}
-                className={selectedDate === dates[startIndex + index] ? "Date_Card_Selected" : "Date_Card"}
-                onClick={() => {setSelectedDate(dates[startIndex + index]); setDateError("");}}
+                key={date.productDateId || `${date.availableDate}-${index}`}
+                className={selectedDate?.productDateId === date.productDateId ? "Date_Card_Selected" : "Date_Card"}
+                onClick={() => {setSelectedDate(date); setDateError("");}}
               >
-                <span>{date.getMonth() + 1}월 {date.getDate()}일 ({days[date.getDay()]})</span>
+                <span>{formatDateCard(date.date)}</span>
                 <span>{product.pricePerPerson.toLocaleString()}원</span>
               </div>
             ))}
@@ -271,19 +331,18 @@ export default function ProductDetailPage() {
                   return;
                 }
 
-                const dateText = selectedDate
-                  ? `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일 (${days[selectedDate.getDay()]})`
-                  : "";
+                const dateText = selectedDate ? formatDateCard(selectedDate.date) : "";
 
                 navigate("/payment", {
                   state: {
-                    productId: product.id ?? productId,
+                    productId: product.productId ?? product.id ?? productId,
                     title: product.title,
                     dateText,
+                    productDateId: selectedDate?.productDateId,
                     guests,
                     pricePerPerson: product.pricePerPerson,
                     totalPrice: product.pricePerPerson * guests,
-                    productImageUrl: product.imagePath,
+                    productImageUrl: product.imageUrl || product.imagePath,
                     address: product.address,
                     satisfaction: product.satisfaction,
                     bookings: product.bookings,

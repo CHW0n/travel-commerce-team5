@@ -1,0 +1,586 @@
+.SignUpPage {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.SignUpPage_Content {
+  min-height: calc(100vh - 80px);
+  padding: 80px 0 80px;
+  box-sizing: border-box;
+  background: #f5f5f5;
+}
+
+.SignUp_Section {
+  width: 1392px;
+  margin: 0 auto;
+  padding: 100px 24px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 11px 23px -5px rgba(197, 197, 197, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.SignUp_Title {
+  width: 83px;
+  height: 36px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: -0.005em;
+  color: #000000;
+  text-align: center;
+}
+
+.SignUp_Divider {
+  width: 375px;
+  height: 1px;
+  background: #d2d2d2;
+}
+
+.SignUp_Form {
+  width: 1344px;
+  padding: 10px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.SignUp_FieldRow_name,
+.SignUp_FieldRow_user,
+.SignUp_FieldRow_email,
+.SignUp_FieldRow_pw,
+.SignUp_pw_2,
+.Required,
+.FieldRow_Contact {
+  width: 1344px;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.SignUp_Field_name,
+.SignUp_Field_user,
+.SignUp_Field_email,
+.SignUp_Field_pw,
+.SignUp_Field_pw2,
+.Required_Field,
+.Field_Email {
+  min-height: 100px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #ffffff;
+}
+
+.SignUp_Field_name,
+.SignUp_Field_pw,
+.SignUp_Field_pw2,
+.Required_Field,
+.Field_Email {
+  width: 395px;
+}
+
+.SignUp_Field_user,
+.SignUp_Field_email {
+  width: 394px;
+}
+
+.SignUp_Label_name,
+.SignUp_Label_user,
+.SignUp_Label_email,
+.SignUp_Label_pw,
+.SignUp_Label_pw2,
+.Required_title {
+  min-height: 24px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000000;
+}
+
+.SignUp_Label_name {
+  width: 28px;
+}
+
+.SignUp_Label_user,
+.SignUp_Label_email {
+  width: 42px;
+}
+
+.SignUp_Label_pw {
+  width: 56px;
+}
+
+.SignUp_Label_pw2 {
+  width: 90px;
+}
+
+.SignUp_Input_name,
+.SignUp_Input_pw,
+.SignUp_Input_pw2,
+.Input_Email {
+  width: 375px;
+}
+
+.SignUp_Input_field,
+.SignUp_Input_field2,
+.Input_field {
+  height: 48px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 13px 16px;
+  border: 1px solid rgba(17, 17, 19, 0.2);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.SignUp_Input_field,
+.SignUp_Input_field2 {
+  width: 375px;
+}
+
+.SignUp_Input_field_inner,
+.SignUp_Input_field2_inner,
+.Input_field_inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.Field_Input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #111113;
+}
+
+.Field_Input::placeholder {
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #9d9d9d;
+}
+
+.SignUp_Input_name {
+  width: 375px;
+}
+
+.SignUp_Input_name .SignUp_Input_field {
+  width: 375px;
+}
+
+.user_cont {
+  width: 374px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.Input_user {
+  width: 274px;
+  height: 48px;
+  flex: 0 0 274px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.Input_user .Input_field {
+  width: 274px;
+  height: 48px;
+}
+
+.user_field {
+  width: 92px;
+  height: 48px;
+  flex: 0 0 92px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid rgba(17, 17, 19, 0.2);
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.user_text {
+  width: 60px;
+  min-height: 24px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #222222;
+  text-align: center;
+}
+
+.email_field {
+  width: 374px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.SignUp_Input_email {
+  width: 260px;
+  height: 48px;
+  flex: 0 0 260px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.SignUp_Input_email .Input_field {
+  width: 260px;
+  height: 48px;
+}
+
+.SignUp_Input_field_button {
+  width: 106px;
+  height: 48px;
+  flex: 0 0 106px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid rgba(17, 17, 19, 0.2);
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.email_text {
+  width: 74px;
+  min-height: 24px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #222222;
+  text-align: center;
+}
+
+.SignUp_Input_pw,
+.SignUp_Input_pw2 {
+  width: 375px;
+}
+
+.SignUp_Input_pw .SignUp_Input_field,
+.SignUp_Input_pw2 .SignUp_Input_field2 {
+  width: 375px;
+}
+
+.SignUp_user_fail,
+.SignUp_email_fail,
+.SignUp_pw_fail,
+.SignUp_pw_fail2 {
+  width: 375px;
+  margin-top: 0;
+}
+
+.user_fail_text,
+.email_fail_text,
+.pw_fail_text,
+.pw_fail_text2 {
+  margin: 0;
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #f26b6b;
+}
+
+/* 약관 */
+.Required_Field {
+  min-height: auto;
+}
+
+.Required_box {
+  width: 375px;
+  border: 1px solid rgba(17, 17, 19, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.Required_all {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 12px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid rgba(17, 17, 19, 0.08);
+  background: #ffffff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.Required_ic_check_off {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check_circle_icon {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #9e9e9e;
+  border-radius: 50%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check_circle_icon.checked {
+  border-color: #3db1fd;
+  background: #3db1fd;
+}
+
+.check_circle_icon.checked .check_dropdown_img {
+  filter: brightness(0) invert(1);
+}
+
+.check_dropdown_img {
+  width: 9px;
+  height: 9px;
+  object-fit: contain;
+  display: block;
+}
+
+.Required_all_text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #111113;
+}
+
+.Required_content {
+  width: 100%;
+  background: #ffffff;
+}
+
+.Required_item {
+  border-bottom: 1px solid rgba(17, 17, 19, 0.08);
+}
+
+.Required_item:last-child {
+  border-bottom: none;
+}
+
+.Required_header {
+  min-height: 48px;
+  background: #ffffff;
+}
+
+.accordion_header {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 12px;
+  box-sizing: border-box;
+}
+
+.dropdown_icon {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: "Pretendard", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #111113;
+}
+
+.accordion_arrow {
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  padding: 0;
+  border: none;
+  border-right: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+  background: transparent;
+  transform: rotate(45deg);
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.accordion_arrow.open {
+  transform: rotate(225deg);
+}
+
+.Required_item_content {
+  padding: 12px;
+  background: #fafafa;
+  border-top: 1px solid rgba(17, 17, 19, 0.08);
+  font-family: "Pretendard", sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #555555;
+}
+
+.Required_item_content p {
+  margin: 0 0 8px;
+}
+
+.Required_item_content p:last-child {
+  margin-bottom: 0;
+}
+
+/* 회원가입 버튼 */
+.FieldRow_Contact {
+  min-height: auto;
+}
+
+.Field_Email {
+  min-height: auto;
+}
+
+.Input_field_submit {
+  width: 375px;
+  height: 48px;
+  border: none;
+  border-radius: 4px;
+  background: #3db1fd;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Field_submit_text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #ffffff;
+}
+
+.SignUp_To_Login {
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #111113;
+}
+
+.SignUp_To_Login a {
+  color: #3db1fd;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (max-width: 1440px) {
+  .SignUpPage_Breadcrumb,
+  .SignUp_Section {
+    width: calc(100% - 48px);
+  }
+
+  .SignUp_Form,
+  .SignUp_FieldRow_name,
+  .SignUp_FieldRow_user,
+  .SignUp_FieldRow_email,
+  .SignUp_FieldRow_pw,
+  .SignUp_pw_2,
+  .Required,
+  .FieldRow_Contact {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .SignUpPage_Content {
+    padding: 40px 0;
+  }
+
+  .SignUp_Section {
+    padding: 48px 20px;
+  }
+
+  .SignUp_Field_name,
+  .SignUp_Field_user,
+  .SignUp_Field_email,
+  .SignUp_Field_pw,
+  .SignUp_Field_pw2,
+  .Required_Field,
+  .Field_Email {
+    width: 100%;
+    padding: 0;
+  }
+
+  .SignUp_Divider,
+  .SignUp_Input_name,
+  .SignUp_Input_pw,
+  .SignUp_Input_pw2,
+  .Required_box,
+  .Input_field_submit,
+  .SignUp_user_fail,
+  .SignUp_email_fail,
+  .SignUp_pw_fail,
+  .SignUp_pw_fail2 {
+    width: 100%;
+  }
+
+  .SignUp_Input_field,
+  .SignUp_Input_field2 {
+    width: 100%;
+  }
+
+  .user_cont,
+  .email_field {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .Input_user,
+  .SignUp_Input_email,
+  .Input_user .Input_field,
+  .SignUp_Input_email .Input_field,
+  .user_field,
+  .SignUp_Input_field_button {
+    width: 100%;
+    flex: none;
+  }
+}
