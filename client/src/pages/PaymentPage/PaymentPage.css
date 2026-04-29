@@ -237,7 +237,7 @@
 
 /* 2열: 컨테이너 폭(1344)에서 양 끝 정렬 */
 .FieldRow_Name,
-.FieldRow_Contact {
+.Pay_FieldRow_Contact {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr; /* ✅ 두 칸이 컨테이너를 반반 사용 */
@@ -248,7 +248,7 @@
 .Field_FirstName,
 .Field_LastName,
 .Field_Phone,
-.Field_Email {
+.Pay_Field_Email {
   width: 100%;                    /* ✅ grid 안에서 꽉 채움 */
   display: flex;
   flex-direction: column;
@@ -259,14 +259,14 @@
 /* 화면 좁아지면 1열로 */
 @media (max-width: 900px) {
   .FieldRow_Name,
-  .FieldRow_Contact {
+  .Pay_FieldRow_Contact {
     grid-template-columns: 1fr;
     row-gap: 20px;
   }
 }
 
 /* 라벨 (피그마: 16 / 24 / 400) */
-.Label {
+.Pay_Label {
   font-family: Pretendard, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -290,7 +290,7 @@
 }
 
 /* input */
-.Input_field {
+.Pay_Input_field {
   width: 100%;
   border: none;
   outline: none;
@@ -301,7 +301,7 @@
   color: #111;
 }
 
-.Input_field::placeholder {
+.Pay_Input_field::placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
 
@@ -359,7 +359,7 @@
 }
 
 /* ✅ 핵심: 휴대폰 input이 남은 공간을 먹고 줄어들 수 있게 */
-.Input_Box.Input_Phone .Input_field {
+.Input_Box.Input_Phone .Pay_Input_field {
   flex: 1 1 auto;
   min-width: 0;
 }

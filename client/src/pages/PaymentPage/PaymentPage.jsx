@@ -167,10 +167,10 @@ export default function PaymentPage() {
         <div className="TravelerInfo_Form">
           <div className="FieldRow_Name">
             <div className="Field_FirstName">
-              <div className="Label">이름</div>
+              <div className="Pay_Label">이름</div>
               <div className="Input_Box">
                 <input
-                  className="Input_field"
+                  className="Pay_Input_field"
                   placeholder="예 : 김"
                   value={travelerFirstName}
                   onChange={(event) => setTravelerFirstName(event.target.value)}
@@ -179,10 +179,10 @@ export default function PaymentPage() {
             </div>
 
             <div className="Field_LastName">
-              <div className="Label">성</div>
+              <div className="Pay_Label">성</div>
               <div className="Input_Box">
                 <input
-                  className="Input_field"
+                  className="Pay_Input_field"
                   placeholder="예 : 다은"
                   value={travelerLastName}
                   onChange={(event) => setTravelerLastName(event.target.value)}
@@ -191,9 +191,9 @@ export default function PaymentPage() {
             </div>
           </div>
 
-          <div className="FieldRow_Contact">
+          <div className="Pay_FieldRow_Contact">
             <div className="Field_Phone">
-              <div className="Label">휴대폰 번호</div>
+              <div className="Pay_Label">휴대폰 번호</div>
 
               <div className="Input_Box Input_Phone">
                 <button type="button" className="CountryCode">
@@ -206,7 +206,7 @@ export default function PaymentPage() {
                 <span className="PhoneDivider" />
 
                 <input
-                  className="Input_field"
+                  className="Pay_Input_field"
                   placeholder="010 - xxxx - xxxx"
                   value={travelerPhone}
                   onChange={(event) => setTravelerPhone(event.target.value)}
@@ -214,11 +214,11 @@ export default function PaymentPage() {
               </div>
             </div>
 
-            <div className="Field_Email">
-              <div className="Label">이메일</div>
+            <div className="Pay_Field_Email">
+              <div className="Pay_Label">이메일</div>
               <div className="Input_Box">
                 <input
-                  className="Input_field"
+                  className="Pay_Input_field"
                   placeholder="예약 확정 이메일 발송"
                   value={travelerEmail}
                   onChange={(event) => setTravelerEmail(event.target.value)}
