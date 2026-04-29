@@ -1,15 +1,22 @@
 package com.team5.travelcommerce.order.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
-public record CreateOrderRequest(
-        @NotNull Long productId,
-        @NotNull Long productDateId,
-        @NotNull Integer people,
-        @NotBlank String travelerLastName,
-        @NotBlank String travelerFirstName,
-        @NotBlank String travelerPhone,
-        @NotBlank String travelerEmail
-) {
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateOrderRequest {
+    private Long productId;
+    private String title;
+    private String dateText;
+    private String productImageUrl;
+    private int people;
+    private int unitPrice;
+    private int totalPrice;
+    private String travelerFirstName;
+    private String travelerLastName;
+    private String travelerPhone;
+    private String travelerEmail;
 }

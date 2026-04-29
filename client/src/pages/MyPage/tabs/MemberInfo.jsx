@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchMyInfo, verifyPassword } from "../../../api/client";
 import "./MemberInfo.css";
 
 export default function MemberInfo() {
   const [user, setUser] = useState({
-    name: "김다은",
-    nickname: "디자이너다은",
-    email: "daeun@5trip.com"
+    name: "",
+    nickname: "",
+    email: ""
   }); 
   const [mode, setMode] = useState("view");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -14,13 +15,28 @@ export default function MemberInfo() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("테스트용 데이터로 UI 확인 중입니다.");
-  }, []);
+    fetchMyInfo()
+      .then((data) => setUser(data))
+      .catch(() => navigate("/login"));
+  }, [navigate]);
 
   const handleEditModeOpen = () => setMode("verifying");
 
-  const handleVerify = () => {
-    navigate("/mypage/profile/edit", { state: { currentPassword: "test" } });
+  const handleVerify = async () => {
+    try {
+      const res = await verifyPassword(currentPassword);
+      if (res.matched) {
+        setPwError(false);
+        navigate("/mypage/profile/edit", { state: { currentPassword } });
+      } else {
+        setPwError(true);
+        setCurrentPassword("");
+      }
+    } catch (err) {
+      console.error("비밀번호 확인 실패", err);
+      setPwError(true);
+      setCurrentPassword("");
+    }
   };
 
   const handleInputChange = (e) => {
@@ -62,6 +78,7 @@ export default function MemberInfo() {
             )}
           </div>
         </div>
+        {pwError && <p style={{ color: "red", fontSize: "12px", marginTop: "5px" }}>비밀번호가 일치하지 않습니다.</p>}
       </div>
 
       <div className="user_FieldRow_Contact">

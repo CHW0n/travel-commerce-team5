@@ -4,27 +4,17 @@ import com.team5.travelcommerce.order.domain.OrderStatus;
 import com.team5.travelcommerce.product.entity.Product;
 import com.team5.travelcommerce.product.entity.ProductDate;
 import com.team5.travelcommerce.user.entity.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor // Builder를 쓰기 위해 필요한 친구입니다.
+@Builder // 이제 .builder()를 사용할 수 있습니다!
 public class Order {
 
     @Id
@@ -83,4 +73,15 @@ public class Order {
 
     @Column(name = "ordered_at", nullable = false)
     private LocalDateTime orderedAt;
+
+    // 저장 직전에 현재 시간을 자동으로 넣어주는 꿀팁 메서드입니다.
+    @PrePersist
+    public void prePersist() {
+        if (this.orderedAt == null) {
+            this.orderedAt = LocalDateTime.now();
+        }
+        if (this.orderStatus == null) {
+            this.orderStatus = OrderStatus.COMPLETED; // 기본값 설정
+        }
+    }
 }
