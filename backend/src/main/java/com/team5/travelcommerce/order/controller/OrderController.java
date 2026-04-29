@@ -68,7 +68,9 @@ public class OrderController {
                         .orderId(Long.parseLong(order.getId()))
                         .productTitle(order.getTitle())
                         .useDate(order.getDateText())
+                        .people(order.getPeople())
                         .totalPrice((long) order.getTotalPrice())
+                        .productImageUrl(order.getProductImageUrl())
                         .build())
                 .collect(Collectors.toList());
 
