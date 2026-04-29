@@ -57,14 +57,24 @@ export async function fetchProductDetail(productId) {
 export async function createOrder(payload) {
   return request("/api/orders", {
     method: "POST",
+    credentials: "include",
     body: JSON.stringify(payload),
   });
 }
 
 export async function fetchOrders() {
-  return request("/api/orders");
+  return request("/api/orders", {
+    method: "GET",
+    credentials: "include",
+  });
 }
 
+export async function fetchOrderDetail(orderId) {
+  return request(`/api/orders/${encodeURIComponent(orderId)}`, {
+    method: "GET",
+    credentials: "include",
+  });
+}
 
 // User API
 
