@@ -1,0 +1,145 @@
+.Modal_Log_Backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(17, 24, 39, 0.52);
+  backdrop-filter: blur(3px);
+}
+
+.Modal_Log {
+  position: relative;
+  width: min(100%, 550px);
+  height: 217px;
+  padding: 20px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+  box-sizing: border-box;
+}
+
+.Modal_header {
+  width: 502px;
+  height: 77px;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Modal_title {
+  width: 502px;
+  height: 27px;
+  margin: 0;
+  color: #111111;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+}
+
+.Modal_des {
+  width: 502px;
+  height: 42px;
+  margin: 0;
+  color: #111111;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  white-space: pre-line;
+}
+
+.Modal_Log_btn {
+  position: absolute;
+  right: 28px;
+  bottom: 24px;
+  width: 494px;
+  height: 36px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.Modal_Log_btn_text {
+  height: 36px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.Modal_dialog {
+  width: 494px;
+  height: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+}
+
+.Modal_dialog_close {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #111111;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.Modal_Log_btn_ext {
+  width: 57px;
+  height: 36px;
+  padding: 8px 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #6d6d6d;
+}
+
+.Modal_Log_btn_login {
+  width: 77px;
+  height: 36px;
+  padding: 8px 20px;
+  border: 0;
+  background: #3da9fc;
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .Modal_Log {
+    width: min(100%, 550px);
+    height: auto;
+  }
+
+  .Modal_header,
+  .Modal_title,
+  .Modal_des,
+  .Modal_Log_btn {
+    width: 100%;
+  }
+
+  .Modal_header {
+    height: auto;
+    margin-top: 0;
+  }
+
+  .Modal_Log_btn {
+    position: static;
+    margin-top: 24px;
+  }
+
+  .Modal_dialog {
+    width: 100%;
+  }
+}
