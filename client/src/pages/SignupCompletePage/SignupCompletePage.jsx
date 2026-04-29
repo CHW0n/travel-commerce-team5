@@ -7,6 +7,7 @@ export default function SignUpCompletePage() {
   const location = useLocation();
 
   const nickname =location.state?.nickname || localStorage.getItem("nickname") || "회원";
+  const from = location.state?.from || "/";
 
   return (
     <div className="SignUpCompletePage">
@@ -35,7 +36,7 @@ export default function SignUpCompletePage() {
           <button
             type="button"
             className="Complete_Login_Button"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/login", { state: { from } })}
           >
             로그인
           </button>

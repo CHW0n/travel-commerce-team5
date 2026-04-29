@@ -149,8 +149,8 @@ export default function MainPage() {
                 e.preventDefault();
                 if (REGIONS.includes(selectedRegion)) {
                   setSelectedRegionId(REGION_TO_ID[selectedRegion]);
-                  setPage(1);
                 }
+                setPage(1);
               }}
             >
               <label className="Search_Field" htmlFor="region" ref={dropdownRef}>
@@ -290,15 +290,16 @@ export default function MainPage() {
               <div className="Card_grid">
                 {products.map((tour, index) => (
                   <Link
-                    key={tour.id}
-                    to={`/products/${tour.id}`}
+                    key={tour.productId ?? tour.id}
+                    to={`/products/${tour.productId ?? tour.id}`}
+                    state={selectedCalendarDate ? { baseDate: selectedCalendarDate.toISOString() } : undefined}
                     className="Card_item"
                     style={{ display: "block" }}
                   >
                     <article>
                       <div className="media">
                         <img
-                          src={tour.imagePath}
+                          src={tour.imageUrl || tour.imagePath}
                           alt={tour.title}
                           className="Card_image"
                           loading="lazy"
