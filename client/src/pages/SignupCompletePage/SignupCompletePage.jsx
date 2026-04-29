@@ -1,0 +1,47 @@
+import { useLocation, useNavigate } from "react-router-dom";
+import Header from "../../components/header/header";
+import "./SignUpCompletePage.css";
+
+export default function SignUpCompletePage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const nickname =location.state?.nickname || localStorage.getItem("nickname") || "회원";
+  const from = location.state?.from || "/";
+
+  return (
+    <div className="SignUpCompletePage">
+      <Header />
+
+      <main className="SignUpCompletePage_Content">
+        <section className="SignUpComplete_Section">
+          <div className="Complete_Icon">
+            <img
+                src="/icon/check_icon.png"
+                alt=""
+                className="Complete_Check_Img"
+            />
+          </div>
+
+          <h1 className="Complete_Title">회원가입 완료</h1>
+
+          <div className="Complete_Divider" />
+
+          <p className="Complete_Text">
+            {nickname}님의 회원가입이
+            <br />
+            성공적으로 완료되었습니다
+          </p>
+
+          <button
+            type="button"
+            className="Complete_Login_Button"
+            onClick={() => navigate("/login", { state: { from } })}
+          >
+            로그인
+          </button>
+        </section>
+      </main>
+    </div>
+  );
+}

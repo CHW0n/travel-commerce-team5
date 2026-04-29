@@ -1,34 +1,108 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { fetchProductDetail } from "../../api/client";
 import Header from "../../components/header/header";
 import LoginRequiredModal from "../../components/LoginRequiredModal/LoginRequiredModal";
 import { isLoggedIn } from "../../utils/auth";
 import "./ProductDetailPage.css";
 
-const today = new Date();
 const days = ["일", "월", "화", "수", "목", "금", "토"];
-const dates = Array.from({ length: 10 }, (_, i) => {
-  const date = new Date(today);
-  date.setDate(today.getDate() + i);
+
+function stripTime(value) {
+  const date = new Date(value);
+  date.setHours(0, 0, 0, 0);
   return date;
-});
+}
+
+function formatDateCard(date) {
+  return `${date.getMonth() + 1}월 ${date.getDate()}일 (${days[date.getDay()]})`;
+}
+
+function formatApiDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function buildGeneratedDateCards(baseDate, pricePerPerson, existingDates = []) {
+  const existingDateMap = new Map(
+    existingDates.map((item) => [formatApiDate(item.date), item])
+  );
+
+  return Array.from({ length: 10 }, (_, index) => {
+    const date = new Date(baseDate);
+    date.setDate(baseDate.getDate() + index);
+    const normalizedDate = stripTime(date);
+    const key = formatApiDate(normalizedDate);
+    const existing = existingDateMap.get(key);
+
+    return {
+      productDateId: existing?.productDateId ?? key,
+      availableDate: existing?.availableDate ?? key,
+      status: existing?.status ?? "OPEN",
+      date: normalizedDate,
+      pricePerPerson,
+    };
+  });
+}
 
 export default function ProductDetailPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { productId } = useParams();
+
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [dateError, setDateError] = useState("");
   const [guests, setGuests] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+
   const visibleCount = 7;
-  const visibleDates = dates.slice(startIndex, startIndex + visibleCount);
+
+  const availableDateCards = (product?.availableDates || []).map((item) => {
+    const date = stripTime(item.availableDate);
+    return {
+      ...item,
+      date,
+    };
+  });
+
+  const baseDate = location.state?.baseDate
+    ? stripTime(location.state.baseDate)
+    : null;
+
+  const filteredDateCards = (() => {
+    if (!baseDate) {
+      if (availableDateCards.length > 0) {
+        return availableDateCards.slice(0, 10);
+      }
+
+      return buildGeneratedDateCards(
+        stripTime(new Date()),
+        product?.pricePerPerson ?? 0
+      );
+    }
+
+    return buildGeneratedDateCards(
+      baseDate,
+      product?.pricePerPerson ?? 0,
+      availableDateCards
+    );
+  })();
+
+  const visibleDates = filteredDateCards.slice(
+    startIndex,
+    startIndex + visibleCount
+  );
+
   const canGoPrev = startIndex > 0;
-  const canGoNext = startIndex + visibleCount < dates.length;
+  const canGoNext = startIndex + visibleCount < filteredDateCards.length;
 
   useEffect(() => {
     if (!productId) {
@@ -39,18 +113,65 @@ export default function ProductDetailPage() {
 
     setLoading(true);
     setError(null);
+
     fetchProductDetail(productId)
       .then(setProduct)
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [productId]);
 
+  useEffect(() => {
+    setStartIndex(0);
+    setSelectedDate(null);
+    setDateError("");
+  }, [productId, location.state?.baseDate]);
+
+  const handleBookingClick = () => {
+    if (!selectedDate) {
+      setDateError("이용 날짜를 선택해주세요.");
+      return;
+    }
+
+    if (!isLoggedIn()) {
+      setLoginModalOpen(true);
+      return;
+    }
+
+    const dateText = formatDateCard(selectedDate.date);
+
+    navigate("/payment", {
+      state: {
+        productId: product.productId ?? product.id ?? productId,
+        title: product.title,
+        dateText,
+        productDateId: selectedDate?.productDateId,
+        guests,
+        pricePerPerson: product.pricePerPerson,
+        totalPrice: product.pricePerPerson * guests,
+        productImageUrl: product.imageUrl || product.imagePath,
+        address: product.address,
+        satisfaction: product.satisfaction,
+        bookings: product.bookings,
+        duration: product.duration,
+        languages: product.languages,
+      },
+    });
+  };
+
+  const handleLoginFromModal = () => {
+    setLoginModalOpen(false);
+
+    navigate("/login", {
+      state: {
+        from: `${location.pathname}${location.search}`,
+      },
+    });
+  };
+
   return (
     <div className="ProductDetailPage">
-      {/* ── Header ── */}
       <Header />
 
-      {/* ── Nav ── */}
       <nav className="Nav" aria-label="breadcrumb">
         <div className="Nav_container">
           <img className="Nav_homeIcon" src="/icon/Home_icon.png" alt="홈" />
@@ -65,245 +186,274 @@ export default function ProductDetailPage() {
           로딩 중...
         </main>
       )}
+
       {error && (
         <main style={{ padding: "40px", textAlign: "center", color: "#999" }}>
           {error}
         </main>
       )}
+
       {!loading && !error && product && (
-      <main>
-        {/* 상세 전용 투어 섹션 (메인 .Tour_Section과 구분) */}
-        <section className="Detail_Tour_Section">
-          <img className="Detail_Tour_Image" src={product.imagePath} alt={product.title} />
+        <main>
+          <section className="Detail_Tour_Section">
+            <img
+              className="Detail_Tour_Image"
+              src={product.imageUrl || product.imagePath}
+              alt={product.title}
+            />
 
-          <div className="Detail_Tour_Info">
-            {/* 첫 번째 Tour_Info */}
-            <div className="Tour_Info_Top">
+            <div className="Detail_Tour_Info">
+              <div className="Tour_Info_Top">
+                <div className="Tour_Detail_Top">
+                  <h1 className="Detail_Tour_Title">{product.title}</h1>
 
-              <div className="Tour_Detail_Top">
-                <h1 className="Detail_Tour_Title">{product.title}</h1>
-                <div className="Detail_Location_Row">
-                  <img className="Detail_Location_Icon" src="/icon/Location_Icon.png" alt="location" />
-                  <span className="Detail_Location_Text">{product.address}</span>
-                </div>
-              </div>
-
-              <div className="Detail_Tour_Price">
-                {product.pricePerPerson.toLocaleString()}원
-              </div>
-
-            </div>
-            {/* 두 번째 Tour_Info */}
-            <div className="Tour_Info_Bottom">
-              <div className="Tour_Detail_Bottom">
-                <div className="Tour_Text">
-                  <span className="Detail_Tour_Rating">
-                   ⭐️ {product.satisfaction} / {product.bookings.toLocaleString()}명 예약
-                  </span>
-                  <span className="Detail_Tour_Meta">소요시간: {product.duration}</span>
-                  <span className="Detail_language">{product.languages.join(", ")}</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
-        {/* Tour_Description_Section */}
-        <section className="Tour_Description_Section">
-          <h2 className="Description_Title">일정</h2>
-          <hr className="Detail_Divider" />
-          <div className="Description_Text">
-            {product.itinerary.map((item, index) => (
-              <p key={index}>{item}</p>
-            ))}
-          </div>
-        </section>
-        {/* Tour_Date_Section */}
-        <section className="Tour_Date_Section">
-          <h2 className="Date_Title">이용 날짜</h2>
-          <hr className="Detail_Divider" />
-          <div className="Date_Card_List">
-            {/* <button
-              className="Date_Nav_Btn"
-              onClick={() => setStartIndex(startIndex - 1)}
-              disabled={!canGoPrev}
-            >
-              <img src="/public/icon/back_ic.svg" alt="이전" />
-            </button> */}
-            <button
-              className="Date_Nav_Btn"
-              onClick={() => setStartIndex(startIndex - 1)}
-              disabled={!canGoPrev}
-            >
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="15.5" fill={canGoPrev ? "#3DB1FD" : "white"} stroke={canGoPrev ? "#3DB1FD" : "#D2D2D2"} filter="url(#shadow)"/>
-                <path 
-                  d="M17.6569 10.5L12 16.1569L17.6569 21.8137" 
-                  stroke={canGoPrev ? "white" : "#D2D2D2"}
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-                <defs>
-                  <filter id="shadow">
-                    <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.1"/>
-                  </filter>
-                </defs>
-              </svg>
-            </button>
-
-
-            {visibleDates.map((date, index) => (
-              <div
-                key={startIndex + index}
-                className={selectedDate === dates[startIndex + index] ? "Date_Card_Selected" : "Date_Card"}
-                onClick={() => {setSelectedDate(dates[startIndex + index]); setDateError("");}}
-              >
-                <span>{date.getMonth() + 1}월 {date.getDate()}일 ({days[date.getDay()]})</span>
-                <span>{product.pricePerPerson.toLocaleString()}원</span>
-              </div>
-            ))}
-
-            {/* <button
-              className="Date_Nav_Btn"
-              onClick={() => setStartIndex(startIndex + 1)}
-              disabled={!canGoNext}
-            >
-              <img src="/public/icon/next_ic.svg" alt="다음" />
-            </button> */}
-            <button
-              className="Date_Nav_Btn"
-              onClick={() => setStartIndex(startIndex + 1)}
-              disabled={!canGoNext}
-            >
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="15.5" transform="matrix(-1 0 0 1 32 0)" fill={canGoNext ? "#3DB1FD" : "white"} stroke={canGoNext ? "#3DB1FD" : "#D2D2D2"} filter="url(#shadow)"/>
-                <path 
-                  d="M14.3431 10.5L20 16.1569L14.3431 21.8137" 
-                  stroke={canGoNext ? "white" : "#D2D2D2"}
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-                <defs>
-                  <filter id="shadow">
-                    <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.1"/>
-                  </filter>
-                </defs>
-              </svg>
-            </button>
-          </div>
-
-          {dateError && (
-              <p style={{ marginTop: "12px", color: "#d32f2f", fontSize: "14px" }}>
-                {dateError}
-              </p>
-            )}
-        </section>
-        {/* Tour_People_Section */}
-        <section className="Tour_People_Section">
-          <h2 className="People_Title">인원수</h2>
-          <hr className="Detail_Divider" />
-          <div className="People_Row">
-
-            <div className="Detail_People_Control">
-              <span className="Detail_People_Label">총 인원</span>
-              <button
-                className="Btn_Minus"
-                onClick={() => setGuests(guests - 1)}
-                disabled={guests === 1}
-              >
-                {/* <img src="/public/icon/Btn_minus.png" alt="minus" /> */}
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clipPath="url(#clip0_138_1962)">
-                    <path 
-                      d="M10 16H22" 
-                      stroke={guests === 1 ? "#9E9E9E" : "#222222"}
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
+                  <div className="Detail_Location_Row">
+                    <img
+                      className="Detail_Location_Icon"
+                      src="/icon/Location_Icon.png"
+                      alt="location"
                     />
-                  </g>
+                    <span className="Detail_Location_Text">
+                      {product.address}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="Detail_Tour_Price">
+                  {product.pricePerPerson.toLocaleString()}원
+                </div>
+              </div>
+
+              <div className="Tour_Info_Bottom">
+                <div className="Tour_Detail_Bottom">
+                  <div className="Tour_Text">
+                    <span className="Detail_Tour_Rating">
+                      ⭐️ {product.satisfaction} /{" "}
+                      {product.bookings.toLocaleString()}명 예약
+                    </span>
+                    <span className="Detail_Tour_Meta">
+                      소요시간: {product.duration}
+                    </span>
+                    <span className="Detail_language">
+                      {product.languages.join(", ")}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="Tour_Description_Section">
+            <h2 className="Description_Title">일정</h2>
+            <hr className="Detail_Divider" />
+
+            <div className="Description_Text">
+              {product.itinerary.map((item, index) => (
+                <p key={index}>{item}</p>
+              ))}
+            </div>
+          </section>
+
+          <section className="Tour_Date_Section">
+            <h2 className="Date_Title">이용 날짜</h2>
+            <hr className="Detail_Divider" />
+
+            <div className="Date_Card_List">
+              <button
+                className="Date_Nav_Btn"
+                onClick={() => setStartIndex(startIndex - 1)}
+                disabled={!canGoPrev}
+              >
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="16"
+                    cy="16"
+                    r="15.5"
+                    fill={canGoPrev ? "#3DB1FD" : "white"}
+                    stroke={canGoPrev ? "#3DB1FD" : "#D2D2D2"}
+                    filter="url(#shadow)"
+                  />
+                  <path
+                    d="M17.6569 10.5L12 16.1569L17.6569 21.8137"
+                    stroke={canGoPrev ? "white" : "#D2D2D2"}
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                   <defs>
-                    <clipPath id="clip0_138_1962">
-                      <rect width="32" height="32" rx="6" fill="white"/>
-                    </clipPath>
+                    <filter id="shadow">
+                      <feDropShadow
+                        dx="0"
+                        dy="2"
+                        stdDeviation="2"
+                        floodOpacity="0.1"
+                      />
+                    </filter>
                   </defs>
                 </svg>
               </button>
-              <span className="Detail_People_Count">{guests}명</span>
+
+              {visibleDates.map((date, index) => (
+                <div
+                  key={date.productDateId || `${date.availableDate}-${index}`}
+                  className={
+                    selectedDate?.productDateId === date.productDateId
+                      ? "Date_Card_Selected"
+                      : "Date_Card"
+                  }
+                  onClick={() => {
+                    setSelectedDate(date);
+                    setDateError("");
+                  }}
+                >
+                  <span>{formatDateCard(date.date)}</span>
+                  <span>{product.pricePerPerson.toLocaleString()}원</span>
+                </div>
+              ))}
+
               <button
-                className="Btn_Plus"
-                onClick={() => setGuests(guests + 1)}
+                className="Date_Nav_Btn"
+                onClick={() => setStartIndex(startIndex + 1)}
+                disabled={!canGoNext}
               >
-                <img src="/icon/Btn_Plus.png" alt="plus" />
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    cx="16"
+                    cy="16"
+                    r="15.5"
+                    transform="matrix(-1 0 0 1 32 0)"
+                    fill={canGoNext ? "#3DB1FD" : "white"}
+                    stroke={canGoNext ? "#3DB1FD" : "#D2D2D2"}
+                    filter="url(#shadow)"
+                  />
+                  <path
+                    d="M14.3431 10.5L20 16.1569L14.3431 21.8137"
+                    stroke={canGoNext ? "white" : "#D2D2D2"}
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <defs>
+                    <filter id="shadow">
+                      <feDropShadow
+                        dx="0"
+                        dy="2"
+                        stdDeviation="2"
+                        floodOpacity="0.1"
+                      />
+                    </filter>
+                  </defs>
+                </svg>
               </button>
             </div>
 
-            <div className="People_Price">
-              {(product.pricePerPerson * guests).toLocaleString()}원
-            </div>
+            {dateError && (
+              <p
+                style={{
+                  marginTop: "12px",
+                  color: "#d32f2f",
+                  fontSize: "14px",
+                }}
+              >
+                {dateError}
+              </p>
+            )}
+          </section>
 
-          </div>
-        </section>
-        {/* Tour_Payment_Section */}
-        <section className="Tour_Payment_Section">
-          <div className="Tour_Payment_Row">
+          <section className="Tour_People_Section">
+            <h2 className="People_Title">인원수</h2>
+            <hr className="Detail_Divider" />
 
-            <div className="Detail_Payment_Info">
-              <span className="Payment_Title">결제 금액</span>
-              <div className="Detail_Payment">
-                <span className="Payment_Price">{(product.pricePerPerson * guests).toLocaleString()}</span>
-                <span className="Payment_Price_w">원</span>
+            <div className="People_Row">
+              <div className="Detail_People_Control">
+                <span className="Detail_People_Label">총 인원</span>
+
+                <button
+                  className="Btn_Minus"
+                  onClick={() => setGuests(guests - 1)}
+                  disabled={guests === 1}
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clipPath="url(#clip0_138_1962)">
+                      <path
+                        d="M10 16H22"
+                        stroke={guests === 1 ? "#9E9E9E" : "#222222"}
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_138_1962">
+                        <rect width="32" height="32" rx="6" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </button>
+
+                <span className="Detail_People_Count">{guests}명</span>
+
+                <button
+                  className="Btn_Plus"
+                  onClick={() => setGuests(guests + 1)}
+                >
+                  <img src="/icon/Btn_Plus.png" alt="plus" />
+                </button>
+              </div>
+
+              <div className="People_Price">
+                {(product.pricePerPerson * guests).toLocaleString()}원
               </div>
             </div>
+          </section>
 
-            <button
-              className="Detail_Btn_Booking"
-              onClick={() => {
-                if (!selectedDate) {
-                  setDateError("이용 날짜를 선택해주세요.");
-                  return;
-                }
+          <section className="Tour_Payment_Section">
+            <div className="Tour_Payment_Row">
+              <div className="Detail_Payment_Info">
+                <span className="Payment_Title">결제 금액</span>
 
-                if (!isLoggedIn()) {
-                  setIsLoginModalOpen(true);
-                  return;
-                }
+                <div className="Detail_Payment">
+                  <span className="Payment_Price">
+                    {(product.pricePerPerson * guests).toLocaleString()}
+                  </span>
+                  <span className="Payment_Price_w">원</span>
+                </div>
+              </div>
 
-                const dateText = selectedDate
-                  ? `${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일 (${days[selectedDate.getDay()]})`
-                  : "";
-
-                navigate("/payment", {
-                  state: {
-                    productId: product.id ?? productId,
-                    title: product.title,
-                    dateText,
-                    guests,
-                    pricePerPerson: product.pricePerPerson,
-                    totalPrice: product.pricePerPerson * guests,
-                    productImageUrl: product.imagePath,
-                    address: product.address,
-                    satisfaction: product.satisfaction,
-                    bookings: product.bookings,
-                    duration: product.duration,
-                    languages: product.languages,
-                  },
-                });
-              }}
-            >
-              예약하기
-            </button>
-
-          </div>
-        </section>
-        <LoginRequiredModal
-          open={isLoginModalOpen}
-          onClose={() => setIsLoginModalOpen(false)}
-        />
-      </main>
+              <button
+                className="Detail_Btn_Booking"
+                onClick={handleBookingClick}
+              >
+                예약하기
+              </button>
+            </div>
+          </section>
+        </main>
       )}
+
+      <LoginRequiredModal
+        open={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
+        onLogin={handleLoginFromModal}
+      />
     </div>
   );
 }

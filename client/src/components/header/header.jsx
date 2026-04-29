@@ -1,11 +1,38 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { logoutUser } from "../../api/client";
+import { clearLoginStorage, isLoggedIn as checkLoggedIn } from "../../utils/auth";
 import "./Header.css";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isLoggedIn = checkLoggedIn();
+  const nickname = localStorage.getItem("nickname") || "회원";
+
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+  const isAdmin = user?.role === "ADMIN";
+  const homePath = isAdmin ? "/admin" : "/";
+  const myPagePath = isAdmin ? "/admin" : "/mypage";
+
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/signup";
+
+  const isSignupCompletePage = location.pathname === "/signup/complete";
+
+  async function handleLogout() {
+    try {
+      await logoutUser();
+    } finally {
+      clearLoginStorage();
+      navigate("/");
+    }
+  }
+
   return (
     <header className="Header">
       <div className="page Header_Row">
-        <Link to="/" className="Header_logo" aria-label="5trip 홈">
+        <Link to={homePath} className="Header_logo" aria-label="5trip 홈">
           <span className="ohtrip-logo-icon2">
             <img
               src="/icon/ohtrip-logo-icon2.png"
@@ -16,12 +43,63 @@ export default function Header() {
         </Link>
 
         <div className="Frame_56" aria-label="사용자 메뉴">
-          <button type="button" className="Header_LoginButton">
-            로그인
-          </button>
-          <button type="button" className="Header_SignupButton">
-            회원가입
-          </button>
+          {isSignupCompletePage ? (
+            <button
+              type="button"
+              className="Header_SignupButton"
+              onClick={() => navigate(myPagePath)}
+            >
+              마이페이지
+            </button>
+          ) : isAuthPage ? (
+            <button
+              type="button"
+              className="Header_SignupButton"
+              onClick={() => navigate("/login")}
+            >
+              로그인
+            </button>
+          ) : isLoggedIn ? (
+            <>
+              <span className="Header_WelcomeText">
+                {nickname}님 반갑습니다
+              </span>
+
+              <button
+                type="button"
+                className="Header_SignupButton"
+                onClick={handleLogout}
+              >
+                로그아웃
+              </button>
+
+              <button
+                type="button"
+                className="Header_SignupButton"
+                onClick={() => navigate(myPagePath)}
+              >
+                마이페이지
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                type="button"
+                className="Header_LoginButton"
+                onClick={() => navigate("/login")}
+              >
+                로그인
+              </button>
+
+              <button
+                type="button"
+                className="Header_SignupButton"
+                onClick={() => navigate("/signup")}
+              >
+                회원가입
+              </button>
+            </>
+          )}
         </div>
       </div>
     </header>
