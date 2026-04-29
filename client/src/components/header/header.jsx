@@ -1,12 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logoutUser } from "../../api/client";
+import { clearLoginStorage, isLoggedIn as checkLoggedIn } from "../../utils/auth";
 import "./Header.css";
 
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const isLoggedIn = checkLoggedIn();
   const nickname = localStorage.getItem("nickname") || "회원";
 
   const isAuthPage =
@@ -18,8 +19,7 @@ export default function Header() {
     try {
       await logoutUser();
     } finally {
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("nickname");
+      clearLoginStorage();
       navigate("/");
     }
   }
