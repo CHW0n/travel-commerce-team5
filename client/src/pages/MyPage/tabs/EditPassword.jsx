@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchMyInfo, changePassword, withdrawUser } from "../../../api/client";
+import { clearLoginStorage } from "../../../utils/auth";
 import "./MemberInfo.css";
 
 export default function EditPassword() {
@@ -13,17 +14,18 @@ export default function EditPassword() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  // MemberInfo에서 비밀번호 확인 후 전달받은 현재 비밀번호
+
   const currentPassword = location.state?.currentPassword;
 
   useEffect(() => {
     fetchMyInfo()
       .then((data) => setUser(data))
       .catch(() => navigate("/login"));
-  }, []);
+  }, [navigate]);
 
   const handleSave = async () => {
-    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,32}$/;
+    const passwordRegex =
+      /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,32}$/;
 
     if (!passwordRegex.test(newPassword)) {
       setPwValidError(true);
@@ -48,7 +50,9 @@ export default function EditPassword() {
   const handleWithdraw = async () => {
     try {
       await withdrawUser();
-      navigate("/mypage/profile/withdraw-complete");
+      clearLoginStorage();
+      setIsModalOpen(false);
+      navigate("/mypage/profile/withdraw-complete", { replace: true });
     } catch (err) {
       console.error("회원 탈퇴 실패", err);
     }
@@ -111,7 +115,9 @@ export default function EditPassword() {
               />
               {pwValidError && (
                 <div className="user_pw_fail">
-                  <span className="pw_fail_text">* 비밀번호는 특수문자, 숫자가 포함된 8~32자 이내여야 합니다.</span>
+                  <span className="pw_fail_text">
+                    * 비밀번호는 특수문자, 숫자가 포함된 8~32자 이내여야 합니다.
+                  </span>
                 </div>
               )}
             </div>
@@ -136,7 +142,9 @@ export default function EditPassword() {
               />
               {pwMatchError && (
                 <div className="user_pw_fail2">
-                  <span className="pw_fail_text2">* 동일한 비밀번호를 입력해 주세요</span>
+                  <span className="pw_fail_text2">
+                    * 동일한 비밀번호를 입력해 주세요
+                  </span>
                 </div>
               )}
             </div>
@@ -145,13 +153,23 @@ export default function EditPassword() {
       </div>
 
       <div className="Withdraw_container">
-        <button type="button" className="Withdraw_btn" onClick={() => setIsModalOpen(true)}>회원탈퇴</button>
+        <button
+          type="button"
+          className="Withdraw_btn"
+          onClick={() => setIsModalOpen(true)}
+        >
+          회원탈퇴
+        </button>
       </div>
 
       <div className="user_FieldRow_Contact">
         <div className="user_Field_btn_con">
           <div className="user_Field_btn">
-            <button type="button" className="user_btn_home" onClick={() => navigate("/mypage/profile")}>
+            <button
+              type="button"
+              className="user_btn_home"
+              onClick={() => navigate("/mypage/profile")}
+            >
               취소
             </button>
             <button type="button" className="user_btn_ch" onClick={handleSave}>
@@ -165,8 +183,15 @@ export default function EditPassword() {
         <div className="Modal_Overlay">
           <div className="User_Modal_Log">
             <div className="User_Modal_dialog">
-              <button className="close_btn" onClick={() => setIsModalOpen(false)}>
-                <img src="/icon/Vector.png" alt="close" className="close_icon" />
+              <button
+                className="close_btn"
+                onClick={() => setIsModalOpen(false)}
+              >
+                <img
+                  src="/icon/Vector.png"
+                  alt="close"
+                  className="close_icon"
+                />
               </button>
             </div>
 
@@ -176,17 +201,26 @@ export default function EditPassword() {
               </div>
               <div className="User_Modal_des">
                 <p className="Desc_text_content">
-                  탈퇴하시면 예약 내역, 적립 포인트, 쿠폰 등 모든 혜택이 즉시 삭제되며 복구가 불가능합니다.<br />
-                  진행 중인 예약이 있다면 탈퇴 전 취소 처리 후 탈퇴를 진행해 주세요.
+                  탈퇴하시면 예약 내역, 적립 포인트, 쿠폰 등 모든 혜택이 즉시
+                  삭제되며 복구가 불가능합니다.
+                  <br />
+                  진행 중인 예약이 있다면 탈퇴 전 취소 처리 후 탈퇴를 진행해
+                  주세요.
                 </p>
               </div>
             </div>
 
             <div className="User_Modal_btn">
-              <button className="Modal_user_btn_ext" onClick={() => setIsModalOpen(false)}>
+              <button
+                className="Modal_user_btn_ext"
+                onClick={() => setIsModalOpen(false)}
+              >
                 <span className="btn_text_cancel">취소</span>
               </button>
-              <button className="Modal_user_btn_filled" onClick={handleWithdraw}>
+              <button
+                className="Modal_user_btn_filled"
+                onClick={handleWithdraw}
+              >
                 <span className="btn_text_confirm">탈퇴</span>
               </button>
             </div>
