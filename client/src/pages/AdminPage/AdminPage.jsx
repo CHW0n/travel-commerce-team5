@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchAdminUsers } from "../../api/client";
+import Header from "../../components/header/header";
 import "./AdminPage.css";
 
 const AdminPage = () => {
@@ -34,6 +35,8 @@ const AdminPage = () => {
 
   return (
     <div className="admin-container">
+      <Header />
+      
       <nav className="nav">
         <div className="nav_container">
           <img src="/images/Settings.png" alt="설정" />
