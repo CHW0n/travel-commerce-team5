@@ -7,6 +7,8 @@ public record OrderSummaryResponse(
         Long orderId,
         String productTitle,
         String useDate,
-        Long totalPrice // 타입 충돌 방지를 위해 Long으로 유지합니다.
+        Integer people,
+        Long totalPrice,
+        String productImageUrl
 ) {
 }
