@@ -20,6 +20,7 @@ export default function Header() {
     } finally {
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("nickname");
+      localStorage.removeItem("user");
       navigate("/");
     }
   }
