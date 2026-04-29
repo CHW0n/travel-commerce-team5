@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { fetchProductDetail } from "../../api/client";
 import Header from "../../components/header/header";
-import LoginRequiredModal from "../../components/LoginRequiredModal/LoginRequiredModal";
 import { isLoggedIn } from "../../utils/auth";
 import "./ProductDetailPage.css";
 
@@ -58,7 +57,6 @@ export default function ProductDetailPage() {
   const [dateError, setDateError] = useState("");
   const [guests, setGuests] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const visibleCount = 7;
   const availableDateCards = (product?.availableDates || [])
     .map((item) => {
@@ -327,7 +325,11 @@ export default function ProductDetailPage() {
                 }
 
                 if (!isLoggedIn()) {
-                  setIsLoginModalOpen(true);
+                  navigate("/login", {
+                    state: {
+                      from: `${location.pathname}${location.search}`,
+                    },
+                  });
                   return;
                 }
 
@@ -357,10 +359,6 @@ export default function ProductDetailPage() {
 
           </div>
         </section>
-        <LoginRequiredModal
-          open={isLoginModalOpen}
-          onClose={() => setIsLoginModalOpen(false)}
-        />
       </main>
       )}
     </div>

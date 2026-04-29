@@ -7,6 +7,7 @@ public record ProductSummaryResponse(
         String title,
         String imageUrl,
         String address,
+        Double satisfaction,
         Integer pricePerPerson
 ) {
 
@@ -16,6 +17,7 @@ public record ProductSummaryResponse(
                 product.getTitle(),
                 product.getImageUrl(),
                 product.getAddress(),
+                product.getSatisfaction(),
                 product.getPricePerPerson()
         );
     }

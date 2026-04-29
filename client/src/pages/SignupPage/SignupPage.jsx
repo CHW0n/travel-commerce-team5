@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { checkEmail, checkNickname, signupUser } from "../../api/client";
 import Header from "../../components/header/header";
 import "./SignUpPage.css";
@@ -7,6 +7,8 @@ import dropdownIcon from "/icon/dropdown_icon.png";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || "/";
 
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
@@ -182,6 +184,7 @@ export default function SignUpPage() {
       navigate("/signup/complete", {
         state: {
           nickname: user.nickname,
+          from,
         },
       });
     } catch (error) {

@@ -123,7 +123,7 @@ export default function LoginPage() {
 
           <div className="Login_to_SignUp">
             <div className="Login_to_SignUp_text">
-              아직 회원이 아니신가요? <Link to="/signup">회원가입</Link>
+              아직 회원이 아니신가요? <Link to="/signup" state={{ from }}>회원가입</Link>
             </div>
           </div>
         </section>
