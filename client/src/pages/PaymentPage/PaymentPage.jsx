@@ -32,10 +32,17 @@ export default function PaymentPage() {
   const [travelerEmail, setTravelerEmail] = useState("");
 
   useEffect(() => {
+    const isUserLoggedIn = sessionStorage.getItem("LOGIN_USER_ID");
+    if (!isUserLoggedIn) {
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/login", { replace: true, state: { from: location } });
+      return;
+    }
+
     if (!location.state?.title) {
       navigate("/", { replace: true });
     }
-  }, [location.state, navigate]);
+  }, [location.state, navigate, location]);
 
   const handlePayment = async () => {
     if (!productId || !title || !dateText) {
@@ -89,10 +96,8 @@ export default function PaymentPage() {
 
   return (
     <div className="PaymentPage">
-      {/* ================= Header ================= */}
       <Header />
 
-      {/* ================= Nav ================= */}
       <div className="Nav">
           <div className="Nav_container">
             <img src="/icon/Home_icon.png" alt="홈" className="Nav_homeIcon" />
@@ -106,7 +111,6 @@ export default function PaymentPage() {
         </div>
       </div>
 
-      {/* ================= Tour Section ================= */}
       <div className="Pay_Tour_Section">
         <img
           className="Tour_Image"
@@ -150,13 +154,11 @@ export default function PaymentPage() {
         </div>
       </div>
       
-      {/* ================= TravelerInfo Section ================= */}
       <div className="TravelerInfo_Section">
         <div className="TravelerInfo_Title">여행자 정보 입력</div>
         <div className="Divider" />
 
         <div className="TravelerInfo_Form">
-          {/* 이름 */}
           <div className="FieldRow_Name">
             <div className="Field_FirstName">
               <div className="Label">이름</div>
@@ -183,7 +185,6 @@ export default function PaymentPage() {
             </div>
           </div>
 
-          {/* 연락처 */}
           <div className="FieldRow_Contact">
             <div className="Field_Phone">
               <div className="Label">휴대폰 번호</div>
@@ -221,7 +222,6 @@ export default function PaymentPage() {
           </div>
         </div>
 
-        {/* ================= Booking People Summary ================= */}
         <div className="Booking_People_Summary">
             <div className="Summary_Title">인원수</div>
             <div className="Divider" />
@@ -242,7 +242,6 @@ export default function PaymentPage() {
           </div>
         </div>  
 
-      {/* ================= Payment Summary Section ================= */}
       <div className="Payment_Summary_Section">
         <div className="Payment_Info">
           <div className="Total_Label">결제 금액</div>
