@@ -145,3 +145,12 @@ export async function withdrawUser() {
     credentials: "include",
   });
 }
+
+// Admin API
+
+export async function fetchAdminUsers() {
+  return request("/api/admin/users", {
+    method: "GET",
+    credentials: "include",
+  });
+}
