@@ -44,7 +44,7 @@ public class OrderService {
                 .externalProductId(String.valueOf(request.getProductId()))
                 .productTitleSnapshot(request.getTitle())
                 .productImageSnapshot(request.getProductImageUrl())
-                .useDate(LocalDate.parse(request.getDateText()))
+                .useDate(productDate.getAvailableDate())
                 .people(request.getPeople())
                 .unitPrice(request.getUnitPrice())
                 .totalPrice(request.getTotalPrice())
