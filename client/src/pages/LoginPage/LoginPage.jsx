@@ -35,6 +35,11 @@ export default function LoginPage() {
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("nickname", data.user.nickname);
 
+      if (data.user.role === "ADMIN" && from === "/") {
+        navigate("/admin", { replace: true });
+        return;
+      }
+
       navigate(from, { replace: true });
     } catch (error) {
       alert(error.message || "로그인에 실패했습니다.");
