@@ -30,8 +30,10 @@ public class OrderService {
     public OrderResponse createOrder(Long userId, CreateOrderRequest request) {
         Product product = entityManager.getReference(Product.class, request.getProductId());
 
-        // 지금은 임시로 1L을 쓰고 있지만, 가능하면 request에서 productDateId를 받아 쓰는 게 좋습니다.
-        ProductDate productDate = entityManager.getReference(ProductDate.class, 1L);
+        ProductDate productDate = entityManager.getReference(
+                ProductDate.class,
+                request.getProductDateId()
+        );
 
         User user = entityManager.getReference(User.class, userId);
 
