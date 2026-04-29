@@ -33,10 +33,17 @@ function formatDisplayDate(year, month, day) {
   return `${year}년 ${month + 1}월 ${day}일`;
 }
 
+function stripTime(date) {
+  const nextDate = new Date(date);
+  nextDate.setHours(0, 0, 0, 0);
+  return nextDate;
+}
+
 export default function MainPage() {
   const today = new Date();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const [isPastDateModalOpen, setIsPastDateModalOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState("어디로 가세요?");
   const [selectedRegionId, setSelectedRegionId] = useState("seoul");
   const [selectedDate, setSelectedDate] = useState("언제 가세요?");
@@ -75,8 +82,20 @@ export default function MainPage() {
 
   function handleSelectDay(day) {
     const nextDate = new Date(viewYear, viewMonth, day);
+    const todayDate = stripTime(new Date());
+
+    if (stripTime(nextDate) < todayDate) {
+      setIsPastDateModalOpen(true);
+      return;
+    }
+
     setSelectedCalendarDate(nextDate);
     setSelectedDate(formatDisplayDate(viewYear, viewMonth, day));
+  }
+
+  function isPastCalendarDay(day) {
+    if (!day) return false;
+    return stripTime(new Date(viewYear, viewMonth, day)) < stripTime(new Date());
   }
 
   function isSelectedDay(day) {
@@ -240,6 +259,7 @@ export default function MainPage() {
                                 className={[
                                   dayIndex === 0 || dayIndex === 6 ? "is-weekend" : "",
                                   day && isSelectedDay(day) ? "is-selected" : "",
+                                  day && isPastCalendarDay(day) ? "is-past" : "",
                                 ]
                                   .filter(Boolean)
                                   .join(" ")}
@@ -388,6 +408,28 @@ export default function MainPage() {
           )}
         </section>
       </main>
+
+      {isPastDateModalOpen && (
+        <div
+          className="PastDateModal_Backdrop"
+          role="presentation"
+          onClick={() => setIsPastDateModalOpen(false)}
+        >
+          <div
+            className="PastDateModal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="past-date-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h2 id="past-date-modal-title">날짜 선택 불가</h2>
+            <p>이전 날짜는 선택할 수 없습니다.</p>
+            <button type="button" onClick={() => setIsPastDateModalOpen(false)}>
+              확인
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
