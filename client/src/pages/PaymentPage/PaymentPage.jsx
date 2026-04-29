@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createOrder } from "../../api/client";
+import { isLoggedIn } from "../../utils/auth";
 import "./PaymentPage.css";
 import Header from "../../components/header/header";
 
@@ -32,17 +33,20 @@ export default function PaymentPage() {
   const [travelerEmail, setTravelerEmail] = useState("");
 
   useEffect(() => {
-    const isUserLoggedIn = sessionStorage.getItem("LOGIN_USER_ID");
-    if (!isUserLoggedIn) {
-      alert("로그인이 필요한 서비스입니다.");
-      navigate("/login", { replace: true, state: { from: location } });
+    if (!isLoggedIn()) {
+      navigate("/login", {
+        replace: true,
+        state: {
+          from: productId ? `/products/${productId}` : "/",
+        },
+      });
       return;
     }
-
+  
     if (!location.state?.title) {
       navigate("/", { replace: true });
     }
-  }, [location.state, navigate, location]);
+  }, [location.state, navigate, productId]);
 
   const handlePayment = async () => {
     if (!productId || !title || !dateText) {
