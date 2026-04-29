@@ -11,6 +11,7 @@ export default function PaymentPage() {
 
   const {
     productId = "",
+    productDateId = null,
     title = "",
     dateText = "",
     guests = 1,
@@ -62,6 +63,7 @@ export default function PaymentPage() {
     try {
       const created = await createOrder({
         productId,
+        productDateId,
         title,
         dateText,
         people: guests,
