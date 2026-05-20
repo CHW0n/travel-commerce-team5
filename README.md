@@ -1,241 +1,231 @@
-# 5TRIP - 여행 상품 서비스
-https://d3jlgy3lzjx5vb.cloudfront.net/
+# O-TRIP
 
-# 1. 프로젝트 소개
+회원 기반 여행 상품 예약 서비스입니다.  
+사용자는 지역과 날짜를 기준으로 여행 상품을 조회하고, 로그인 후 상품을 예약할 수 있습니다.  
+마이페이지에서는 주문 내역과 회원 정보를 관리할 수 있으며, 관리자는 회원 목록을 조회할 수 있습니다.
 
-5TRIP은 사용자가 국내의 다양한 여행 상품을 탐색하고 예약 및 결제를 진행할 수 있는 여행 상품 웹 서비스입니다.
+## 프로젝트 소개
 
-사용자는 지역별(서울, 부산, 제주, 강릉) 여행 상품을 확인하고 상품 상세 정보를 통해 일정과 가격을 확인한 뒤 결제를 진행할 수 있습니다.
-결제 이후 주문 정보는 마이페이지에서 확인할 수 있습니다.
+기존 JSON mock 데이터 기반 여행 상품 서비스에  
+회원 인증, 상품 날짜 필터링, 주문 생성, 마이페이지, 관리자 기능을 추가한 풀스택 프로젝트입니다.
 
-시스템은 React 기반 프론트엔드와 Node.js API 서버를 연결한 웹 서비스로 구현됐으며,
-AWS 인프라(S3, CloudFront, EC2)를 이용하여 실제 서비스 형태로 배포됐습니다.
-
-# 2. 프로젝트 구조
-
-```
-travel-service
-│
-├─ client                # React Frontend
-│  ├─ src
-│  │  ├─ api             # 서버 API 호출 로직
-│  │  ├─ components      # 공통 UI 컴포넌트
-│  │  ├─ context         # Context API 전역 상태 관리
-│  │  ├─ pages           # 페이지 컴포넌트
-│  │  ├─ router          # 라우팅 설정
-│  │  └─ tests           # 프론트 테스트 코드
-│  │
-│  ├─ public             # 정적 리소스 (이미지, 아이콘)
-│  ├─ App.jsx            # 루트 컴포넌트
-│  └─ main.jsx           # React 앱 진입점
-│
-├─ server                # Node.js + Express Backend
-│  ├─ controllers        # API 비즈니스 로직
-│  ├─ routes             # API 라우팅
-│  │  ├─ regions.js
-│  │  ├─ products.js
-│  │  └─ order.js
-│  │
-│  ├─ data               # JSON 기반 데이터 저장
-│  │  ├─ regions.json
-│  │  ├─ orders.json
-│  │  └─ products
-│  │      ├─ seoul.json
-│  │      ├─ busan.json
-│  │      ├─ jeju.json
-│  │      └─ gangneung.json
-│  │
-│  ├─ tests              # API 테스트 코드
-│  └─ server.js          # Express 서버 실행
-│
-└─ README.md
-```
-
-# 3. 역할 분담
-김다은(팀장)
-- 노션 회의 내용 정리 및 작성 
-- 프로젝트 설계 및 기획 문서 작성 
-- 로고 디자인 및 스토리보드 제작 
-- 1차 UI 구현
-- 발표자로 ppt 작성  
-- 컴포넌트 시스템 구조 정리 및 클래스 정의
-
-정윤서 
-- 메인/마이페이지 UI 구현 및 레이아웃 설계
-- 상품/주문 리스트 렌더링 구조 구성
-- 로딩·에러·빈 상태 처리 및 페이지네이션 UI 적용
-- 반응형 그리드(4열→2열→1열) 최적화
-
-조아영
-- API 통신 로직 및 데이터 구성 
-- 상품 상세 페이지 퍼블 및 프론트 
-- 주문 결제 로직 구현 
-- 상품 검색 및 필터 기능 구현
-
-최희원
-- 팀 깃허브 세팅 및 리드미 작성 
-- 프로젝트 세팅 - 결제 진행 페이지 퍼블 및 프론트 
-- 결제 완료 페이지 퍼블 및 프론트 
-- 최종 테스트 자동화 및 기능 검증 
-- 배포 
+Spring Boot와 MySQL을 기반으로 실제 DB를 연동하고,  
+세션 기반 인증을 적용하여 회원 전용 기능과 관리자 권한 기능을 구현했습니다.
 
 
-# 4. 주요 기능
+## 팀원 및 역할
+팀 역할분담: 도메인 중심의 기능 분담
 
-### 1️⃣ 여행 상품 조회
+- 각 팀원이 담당 도메인의 프론트엔드 화면과 백엔드 API를 함께 구현
 
-* 지역 및 날짜 기반 여행 상품 목록 조회(검색 필터링)
-* 상품 카드 UI 제공
-* 상품 상세 페이지 이동
+- 공통 인증, API 연동, 배포 환경은 팀장 중심으로 통합 관리
+  
+| 이름  | 역할                                              |
+| --- | ----------------------------------------------- |
+| 최희원(팀장) | User 도메인, 도메인 설계 및 기술 설계, API 명세서 작성, 로그인/회원가입/중복검사, 세션 연동, 배포    |
+| 김다은 | Order/Admin 도메인, 마이페이지, 관리자 페이지, 주문 기능          |
+| 정윤서 | Product 도메인, 상품 목록/상세, 날짜 필터링                   |
+| 조아영 | User 도메인, 회원 정보 수정, 비밀번호 검증, BCrypt, 예외 처리, 테스트 |
 
-### 2️⃣ 상품 상세 페이지
+## 주요 기능
 
-* 여행 일정 및 가격 정보 확인
-* 날짜 선택 기능
-* 예약 진행
+### User
 
-### 3️⃣ 결제 기능
+- 회원가입
+- 로그인 / 로그아웃
+- 이메일, 닉네임 중복 검사
+- 회원 정보 조회 및 수정
+- 비밀번호 변경
+- 회원 탈퇴
 
-* 결제 페이지 구현
-* 예약 정보 기반 주문 생성
-* 결제 완료 페이지 제공
+### Product
 
-### 4️⃣ 마이페이지
+- 지역별 여행 상품 조회
+- 상품 상세 조회
+- 상품별 이용 가능 날짜 조회
+- 지역/날짜 기반 상품 필터링
+- 외부 API 기반 상품 데이터 가공
 
-* 결제 완료된 주문 확인
-* Context API 기반 주문 상태 관리
-* LocalStorage를 통한 주문 데이터 유지
+### Order
 
+- 상품 예약 생성
+- 이용 날짜 및 인원수 저장
+- 예약자 정보 저장
+- 주문 내역 조회
+- 주문 상세 조회
 
-# 5. 기술 스택
+### Admin
+
+- 관리자 권한 확인
+- 전체 회원 목록 조회
+
+## 기술 스택
 
 ### Frontend
 
-* React
-* React Router
-* Context API
-* CSS
+- React
+- Vite
+- React Router
+- Axios
 
 ### Backend
 
-* Node.js
-* Express
-* REST API
+- Spring Boot
+- Spring MVC
+- Spring Data JPA
+- Spring Security
+- BCrypt
 
-# 6. API
+### Database
 
-API는 React 클라이언트와 Express 기반 서버 간 REST API 통신 구조로 구현.
+- MySQL
 
-클라이언트는 지역 조회, 상품 조회, 주문 생성 등의 기능을 API를 통해 처리합니다.
+### Deployment
 
-### API 구조
+- AWS S3
+- AWS CloudFront
+- AWS EC2
+- AWS RDS MySQL
 
-```
-Client (React)
-      ↓
-HTTP / JSON
-      ↓
-Express API Server
-      ↓
-JSON Data (regions, products, orders)
-```
+## 도메인 설계
 
-### Endpoint 요약
-
-| Method | Endpoint                   | 설명                  |
-| ------ | -------------------------- | ------------------- |
-| GET    | `/api/regions`             | 서비스에서 제공하는 지역 목록 조회 |
-| GET    | `/api/products`            | 지역별 여행 상품 목록 조회     |
-| GET    | `/api/products/:productId` | 특정 여행 상품 상세 조회      |
-| GET    | `/api/orders`              | 전체 주문 목록 조회         |
-| POST   | `/api/orders`              | 여행 상품 주문 생성         |
-
-
-### 상품 조회 예시
-
-```
-GET /api/products?region=seoul&page=1&perPage=16
-```
-
-Response
-
-```json
-{
-  "products": [...],
-  "totalCount": 20
-}
-```
-
-
-### 주문 생성 예시
-
-```
-POST /api/orders
-```
-
-Request Body
-
-```json
-{
-  "productId": "seoul-2",
-  "title": "간데메공원",
-  "dateText": "3월 17일 (화)",
-  "people": 2,
-  "unitPrice": 24000,
-  "totalPrice": 120000
-}
-```
-
-
-# 7. 배포 (AWS)
-
-프론트엔드와 백엔드를 분리하여 AWS 기반으로 배포.
-
-React 정적 파일은 S3 + CloudFront로 제공하고, API 서버는 EC2에서 Node.js + Express로 실행됩니다.
-
-## AWS Services
-
-### S3
-
-* React 빌드 결과물 정적 호스팅
-* `index.html`, `assets`, 이미지 파일 저장
-
-### CloudFront
-
-* HTTPS 제공
-* CDN 캐싱을 통한 빠른 콘텐츠 전달
-* `/api/*` 요청을 EC2 서버로 라우팅
-
-### EC2
-
-* Node.js + Express 기반 API 서버 실행
-* 상품 조회 및 주문 API 처리
-
-### PM2
-
-* Node 서버 프로세스 관리
-* 서버 중단 시 자동 재시작
-
-
-## Deployment Result
-
-| 구분          | 주소               |
-| ----------- | ---------------- |
-| Frontend    | CloudFront 배포 주소 |
-| Backend API | EC2 서버 (`:4000`) |
-
-
-## Request Flow
+서비스는 기능 책임에 따라 다음 4개 도메인으로 구분했습니다.
 
 ```text
-User
-   ↓
-CloudFront (HTTPS / CDN)
-   ↓
-S3 (React Static Hosting)
+User    : 회원가입, 로그인, 회원 정보 관리, 회원 탈퇴
+Product : 여행 상품 조회, 지역/날짜 필터링, 상품 상세 조회
+Order   : 상품 예약, 주문 생성, 주문 내역 관리
+Admin   : 관리자 권한 기반 회원 조회
+````
 
-CloudFront (/api/*)
-   ↓
-EC2 (Node.js + Express API Server)
+## ERD 구조
+
+주요 테이블은 다음과 같습니다.
+
+```text
+users
+regions
+products
+product_dates
+orders
 ```
+
+테이블 관계는 다음과 같습니다.
+
+```text
+User 1 : N Order
+Region 1 : N Product
+Product 1 : N ProductDate
+ProductDate 1 : N Order
+```
+
+관리자 계정은 별도 테이블을 두지 않고 `users.role` 값으로 구분했습니다.
+
+```text
+USER  : 일반 사용자
+ADMIN : 관리자
+```
+
+회원 탈퇴는 실제 삭제가 아닌 소프트 삭제 방식으로 처리했습니다.
+
+```text
+ACTIVE → WITHDRAWN
+```
+
+## 인증 방식
+
+세션 기반 인증 방식을 사용했습니다.
+
+로그인 성공 시 서버에서 세션을 생성하고,
+이후 요청에서는 세션 정보를 통해 로그인 상태와 사용자 권한을 확인합니다.
+
+세션에는 다음 정보를 저장합니다.
+
+```text
+user_id
+role
+```
+
+관리자 페이지 접근 시에는 `role = ADMIN` 여부를 확인하여 접근을 제한했습니다.
+
+## 주요 API
+
+### User API
+
+| Method | URL                   | 설명       |
+| ------ | --------------------- | -------- |
+| POST   | `/api/users/signup`   | 회원가입     |
+| POST   | `/api/users/login`    | 로그인      |
+| POST   | `/api/users/logout`   | 로그아웃     |
+| GET    | `/api/users/me`       | 내 정보 조회  |
+| PATCH  | `/api/users/me`       | 회원 정보 수정 |
+| PATCH  | `/api/users/withdraw` | 회원 탈퇴    |
+
+### Product API
+
+| Method | URL                         | 설명       |
+| ------ | --------------------------- | -------- |
+| GET    | `/api/regions`              | 지역 목록 조회 |
+| GET    | `/api/products`             | 상품 목록 조회 |
+| GET    | `/api/products/{productId}` | 상품 상세 조회 |
+
+상품 목록은 지역과 날짜 조건으로 필터링할 수 있습니다.
+
+```http
+GET /api/products?region=seoul&date=2026-03-24&page=1&size=16
+```
+
+### Order API
+
+| Method | URL                     | 설명         |
+| ------ | ----------------------- | ---------- |
+| POST   | `/api/orders`           | 주문 생성      |
+| GET    | `/api/orders`           | 내 주문 목록 조회 |
+| GET    | `/api/orders/{orderId}` | 주문 상세 조회   |
+
+### Admin API
+
+| Method | URL                         | 설명          |
+| ------ | --------------------------- | ----------- |
+| GET    | `/api/admin/users`          | 전체 회원 목록 조회 |
+| GET    | `/api/admin/users/{userId}` | 회원 상세 조회    |
+
+## 화면 구성
+
+* 로그인 / 회원가입
+* 메인 상품 목록
+* 상품 상세 및 예약
+* 결제 진행
+* 마이페이지 주문 내역
+* 마이페이지 회원 정보 수정
+* 관리자 회원 관리 페이지
+
+## 배포
+
+프론트엔드는 React 빌드 파일을 S3에 업로드하고 CloudFront로 배포했습니다.
+백엔드는 EC2에서 Spring Boot 애플리케이션을 실행했으며,
+데이터베이스는 Amazon RDS MySQL을 사용했습니다.
+
+```text
+Frontend : S3 + CloudFront
+Backend  : EC2
+Database : RDS MySQL
+```
+
+## 트러블슈팅
+
+### 상품 목록 API 응답 구조 불일치
+
+프론트엔드에서 기대한 응답 구조와 백엔드 응답 구조가 달라 상품 목록이 출력되지 않는 문제가 있었습니다.
+응답 구조를 확인한 뒤 데이터 매핑 로직을 수정하여 해결했습니다.
+
+### 사용자 인증 상태 관리
+
+로그인 후 페이지 이동이나 새로고침 시 인증 상태 반영이 불안정한 문제가 있었습니다.
+세션 확인 API를 통해 로그인 상태를 다시 동기화하도록 수정했습니다.
+
+### Vite 프록시 설정 문제
+
+로컬 개발 환경에서 API 요청 시 CORS 오류가 발생했습니다.
+Vite 프록시 설정을 통해 백엔드 서버로 요청이 전달되도록 수정했습니다.
 
